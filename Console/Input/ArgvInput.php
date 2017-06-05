@@ -65,7 +65,7 @@ class ArgvInput
 
 		$this->tokens = $argv;
 		$this->parse();
-		var_dump($this);
+		var_dump($this->tokens);
 	}
 
 	private function parse()
