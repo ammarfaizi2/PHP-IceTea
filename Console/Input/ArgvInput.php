@@ -57,13 +57,15 @@ class ArgvInput
 		/* strip the application name */
 		array_shift($argv);
 
-		$this->command = $argv[0];
+
+		$this->command = isset($argv[0]) ? $argv[0] : null;
 
 		/* strip the command name */
 		array_shift($argv);
 
 		$this->tokens = $argv;
 		$this->parse();
+		var_dump($this);
 	}
 
 	private function parse()
@@ -84,8 +86,8 @@ class ArgvInput
 	private function parseSelectionTokens()
 	{
 		foreach ($this->tokens as $v) {
-			if (substr($v, 0, 2) === "-") {
-				$this->optional[] = substr($v, 2);
+			if (substr($v, 0, 1) === "-") {
+				$this->optional[] = substr($v, 1);
 			}
 		}
 	}
