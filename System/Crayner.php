@@ -12,6 +12,6 @@ class Crayner
 {
 	public function __construct()
 	{
-		
+	
 	}
 }

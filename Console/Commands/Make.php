@@ -16,6 +16,6 @@ class Make implements Command
 	 */
 	public function prepare($command)
 	{
-		
+		$this->command = $command;
 	}
 }

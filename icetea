@@ -2,3 +2,11 @@
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
+
+$app	= new Console\IceTea();
+$input  = new Console\Input\ArgvInput();
+$loader = new Console\ConsoleLoader($input);
+
+
+$app->run($input, $loader);
+die($app->status);
