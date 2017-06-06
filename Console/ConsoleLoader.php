@@ -38,6 +38,8 @@ class ConsoleLoader
 		} catch (InvalidArgumentException $e) {
 			print Message::error($e->getMessage(), "InvalidArgumentException", $e->getFile(), $e->getLine());
 			die;
+		} catch (\Exception $e) {
+			print Message::error($e->getMessage(), "\\Exception", $e->getFile(), $e->getLine());
 		}
 		$argvIn->command	= $argvIn->command[0];
 		$this->command		= ucfirst(strtolower($argvIn->command));

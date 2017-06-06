@@ -75,18 +75,20 @@ class ArgvInput
 
     private function parseOptionalTokens()
     {
-        foreach ($this->tokens as $v) {
+        foreach ($this->tokens as $k => $v) {
             if (substr($v, 0, 2) === "--") {
                 $this->optional[] = substr($v, 2);
+                unset($this->tokens[$k]);
             }
         }
     }
 
     private function parseSelectionTokens()
     {
-        foreach ($this->tokens as $v) {
+        foreach ($this->tokens as $k => $v) {
             if (substr($v, 0, 1) === "-") {
                 $this->optional[] = substr($v, 1);
+                unset($this->tokens[$k]);
             }
         }
     }

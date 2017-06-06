@@ -3,6 +3,13 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+defined("STDIN") or define("STDIN", fopen("php://stdin", "r"));
+
+define("APP_DIR", __DIR__ . '/App');
+define("SYSTEM_DIR", __DIR__ . '/System');
+define("PUBLIC_DIR", __DIR__ . '/public');
+define("TEMPLATE_DIR", __DIR__ . '/Console/template');
+
 $app	= new Console\IceTea();
 $input  = new Console\Input\ArgvInput();
 $loader = new Console\ConsoleLoader($input);

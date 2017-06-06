@@ -2,27 +2,23 @@
 
 namespace System\Crayner\Contracts\Console;
 
+
 interface Command
 {
-    /**
-     *
-     * @var	string
-     */
-    private $command;
-
-    /**
-     *
-     * @var	string
-     */
-    private $commandResult;
-
     /**
      * Prepare a command.
      *
      * @param	string	$command
      * @return	$this
      */
-    public function prepare($command);
+    public function prepare($selection, $optional, $command);
+
+    /**
+     * Get argument.
+     *
+     * @param   array   $argument
+     */
+    public function argument($argument);
 
     /**
      * Execute command.
