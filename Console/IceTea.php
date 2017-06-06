@@ -3,6 +3,7 @@
 namespace Console;
 
 use Console\ConsoleLoader;
+use Console\Color\Message;
 use Console\Input\ArgvInput;
 
 class IceTea
@@ -26,7 +27,7 @@ class IceTea
     	$ex->argument($input->tokens);
     	$ex->execute();
     	$output = $ex->showResult();
-
+        print Message::{$output['type']}($msg);
     	unset($ex);
     }
 }
