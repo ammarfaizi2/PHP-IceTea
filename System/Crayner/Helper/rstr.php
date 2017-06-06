@@ -4,11 +4,6 @@
  * @author	Ammar Faizi	<ammarfaizi2@gmail.com>
  */
 
-
-/**
- *
- * @param
- */
 if (!function_exists("rstr")) {
     /**
      *

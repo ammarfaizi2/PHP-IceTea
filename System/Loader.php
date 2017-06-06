@@ -18,6 +18,9 @@ class Loader
     public function view(string $view, array $__variables = null, bool $realpath = false)
     {
         $file = __DIR__ . '/../App/Views/' . ($realpath ? $view : $view . '.tpl.php');
+        if (!file_exists($file)) {
+            throw new \Exception("View not found ! File : {$view}", 400);
+        }
         if (is_array($__variables)) {
             foreach ($__variables as $key => $value) {
                 $$key = $value;
