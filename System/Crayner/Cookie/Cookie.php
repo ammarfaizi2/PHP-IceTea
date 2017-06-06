@@ -3,12 +3,32 @@
 namespace System\Crayner\Cookie;
 
 use System\Crayner\Hub\Singleton;
+use System\Crayner\Input\InputUtilities;
 use System\Crayner\Contracts\Cookie\CookieTable;
+
+/**
+ * @author Ammar Faizi	<ammarfaizi2@gmail.com>
+ */
 
 class Cookie implements CookieTable
 {
+	/**
+	 * Use Singleton trait.
+	 */
 	use Singleton;
 
+	/**
+	 * @var string
+	 */
+	private $toString;
+
+	/**
+	 *
+	 * Constructor.
+	 *
+	 *
+	 *
+	 */
 	public function __construct()
 	{
 
@@ -28,6 +48,12 @@ class Cookie implements CookieTable
      */
 	public function make(string $name, string $value, int $minute = null, string $path = "/",string $domain = null, bool $secure = false, bool $httpOnly = true)
 	{
+		$this->toString = $value;
+		$this->func		= function($value) use ($name, $minute, $path, $domain, $secure, $httpOnly){
+			setcookie($name, $value, time()+($minute * 60), $path, $domain, $secure, $httpOnly);
+			echo __METHOD__;
+		};
+		return new InputUtilities($this->toString, $this->func);
 	}
 
 	/**
@@ -38,6 +64,8 @@ class Cookie implements CookieTable
 	 */
 	public function get(string $name)
 	{
+		$this->toString = isset($_COOKIE[$name]) ? $_COOKIE[$name] : "";
+		return new InputUtilities($this->toString);
 	}
 
 	/**
@@ -48,5 +76,21 @@ class Cookie implements CookieTable
 	 */
 	public function delete(string $name)
 	{
+		$this->func = function() use($name){
+			setcookie($name, null, 0);
+		};
+		return new CookieFlush($this->func);
 	}
+
+
+	public function __toString()
+	{
+		if (isset($this->func)) {
+			$b = $this->func;
+			$b($this->toString);
+		}
+		return $this->toString;
+	}
+
+	
 }

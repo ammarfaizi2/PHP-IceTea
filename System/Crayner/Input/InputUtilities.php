@@ -16,16 +16,23 @@ class InputUtilities implements InputBinding
 	 */
 	private $toString;
 
+    /**
+     * @var object
+     */
+    private $func;
+
 	/**
 	 *
 	 * Constructor.
 	 *
 	 *
+	 * @param string	$toString
 	 *
 	 */
-	public function __construct($toString)
+	public function __construct(string $toString, $func = null)
 	{
 		$this->toString = $toString;
+        $this->func     = $func;
 	}
 
   	/**
@@ -64,6 +71,18 @@ class InputUtilities implements InputBinding
 
     public function __toString()
     {
+        if ($this->func !== null) {
+            $b = $this->func;
+            $b($this->toString);
+        }
     	return $this->toString;
+    }
+
+    public function __destruct()
+    {
+        if ($this->func !== null) {
+            $b = $this->func;
+            $b($this->toString);
+        }
     }
 }
