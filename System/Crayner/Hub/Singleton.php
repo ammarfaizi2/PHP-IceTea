@@ -9,7 +9,7 @@ namespace System\Crayner\Hub;
 trait Singleton
 {
 	protected static $instance;
-	public function getInstance()
+	public static function getInstance()
 	{
 		if (self::$instance === null) {
 			self::$instance = new self;
