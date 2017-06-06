@@ -27,7 +27,7 @@ class IceTea
     	$ex->argument($input->tokens);
     	$ex->execute();
     	$output = $ex->showResult();
-        print Message::{$output['type']}($msg);
+        print Message::{$output['type']}($output['msg'], (isset($output['title']) ? isset($output['title']) : null));
     	unset($ex);
     }
 }

@@ -44,11 +44,19 @@ class Make implements Command
 
     private function parseSelection()
     {
-    	var_dump($this->optional);
     	if (is_array($this->selection)) {
 	    	foreach ($this->selection as $v) {
 	    		if ($v === "f") {
 	    			$this->force = true;
+	    		} else {
+	    			try {
+						throw new InvalidArgumentException("Invalid -".$v." argument!", 400);
+					} catch (InvalidArgumentException $e) {
+						print Message::error($e->getMessage(), "InvalidArgumentException", $e->getFile(), $e->getLine());
+						die;
+					} catch (\Exception $e) {
+						print Message::error($e->getMessage(), "\\Exception", $e->getFile(), $e->getLine());
+					}
 	    		}
 	    	}
 	    }
@@ -113,5 +121,6 @@ class Make implements Command
 
     public function showResult()
     {
+    	return $this->result;
     }
 }

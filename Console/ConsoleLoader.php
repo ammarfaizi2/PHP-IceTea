@@ -45,6 +45,5 @@ class ConsoleLoader
 		$this->command		= ucfirst(strtolower($argvIn->command));
 		$this->selection	= $argvIn->selection;
 		$this->optional		= $argvIn->optional;
-		var_dump($this->optional);
 	}
 }
