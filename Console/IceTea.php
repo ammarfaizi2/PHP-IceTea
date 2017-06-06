@@ -22,7 +22,7 @@ class IceTea
     	}
     	
     	$ex = new $commandClass();
-    	$ex->prepare($loader->selection, $loader->optional, $loader->extendCommand);
+    	$ex->prepare($loader->optional, $loader->selection, $loader->extendCommand);
     	$ex->argument($input->tokens);
     	$ex->execute();
     	$output = $ex->showResult();
