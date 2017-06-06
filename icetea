@@ -10,6 +10,12 @@ define("SYSTEM_DIR", __DIR__ . '/System');
 define("PUBLIC_DIR", __DIR__ . '/public');
 define("TEMPLATE_DIR", __DIR__ . '/Console/template');
 
+/**
+|
+|	IceTea PHP Framework by Ammar Faizi
+|
+*/
+
 $app	= new Console\IceTea();
 $input  = new Console\Input\ArgvInput();
 $loader = new Console\ConsoleLoader($input);
