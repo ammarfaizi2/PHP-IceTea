@@ -24,7 +24,7 @@ class DB extends DatabaseFactory
      *
      */
     public function __construct()
-    {   
+    {
         $this->showErrorQuery = Configer::errorQuery();
         try {
             $conf = Configer::database();
@@ -32,7 +32,6 @@ class DB extends DatabaseFactory
                     \PDO::ATTR_PERSISTENT => false
                 ));
         } catch (\PDOException $e) {
-
         }
     }
 
