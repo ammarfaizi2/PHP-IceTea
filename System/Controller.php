@@ -11,10 +11,10 @@ use System\Crayner\Hub\Singleton;
 
 class Controller
 {
-	use Singleton;
-	
-	public function __construct()
-	{
-		$this->load = new Loader();
-	}
+    use Singleton;
+    
+    public function __construct()
+    {
+        $this->load = new Loader();
+    }
 }

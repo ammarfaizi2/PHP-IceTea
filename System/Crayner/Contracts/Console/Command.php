@@ -2,7 +2,6 @@
 
 namespace System\Crayner\Contracts\Console;
 
-
 interface Command
 {
     /**

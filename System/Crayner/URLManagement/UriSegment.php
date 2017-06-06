@@ -8,7 +8,7 @@ namespace System\Crayner\URLManagement;
 
 class UriSegment
 {
-	/**
+    /**
      *   @param  string  $router
      *   @return array
      */
