@@ -2,15 +2,14 @@
 
 namespace System\Crayner\Input;
 
+use System\Crayner\Input\InputUtilities;
 use System\Crayner\Contracts\Input\PostGate;
-use System\Crayner\Contracts\Input\InputBinding;
-use System\Crayner\WhiteHat\Encryption\Teacrypt\Teacrypt;
 
 /**
  * @author Ammar Faizi	<ammarfaizi2@gmail.com>
  */
 
-class InputHandler implements InputBinding, PostGate
+class InputHandler implements PostGate
 {
     /**
      * @var array
@@ -45,7 +44,7 @@ class InputHandler implements InputBinding, PostGate
     public function phpInput()
     {
         $this->toString = $this->phpInput;
-        return $this;
+        return new InputUtilities($this->toString);
     }
 
     /**
@@ -55,33 +54,10 @@ class InputHandler implements InputBinding, PostGate
     public function post(string $key)
     {
         $this->toString = isset($this->purePost[$key]) ? $this->purePost[$key] : "";
-        return $this;
+        return new InputUtilities($this->toString);
     }
 
-    /**
-     * @param	int	$cat
-     * @return  InputHandler
-     */
-    public function escape(int $cat = 0)
-    {
-        if ($cat === 5) {
-            $this->toString = addcslashes($this->toString, "A..z");
-        } else {
-            $this->toString = addslashes($this->toString);
-        }
-        return $this;
-    }
-
-    /**
-     * @param  string	$key
-     * @return InputHandler
-     */
-    public function encrypt($key)
-    {
-        $this->toString = Teacrypt::encrypt($this->toString, $key);
-        return $this;
-    }
-
+   
     public function __toString()
     {
         return $this->toString;
