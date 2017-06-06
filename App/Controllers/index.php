@@ -16,7 +16,8 @@ class index extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->helper("rstr");        
+        $this->load->helper("rstr");
+        $this->load->helper("teacrypt");
     }
 
     /**
@@ -26,7 +27,6 @@ class index extends Controller
      */
     public function index()
     {
-        $this->load->view("welcome");
-        DB::insert("data", array("no"=>1, "buku"=>rstr()));
+        print teacrypt("123123");
     }
 }

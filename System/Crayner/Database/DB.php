@@ -38,7 +38,7 @@ class DB extends DatabaseFactory
 
     /**
      *
-     *
+     * Insert
      *
      * @param   string  $table
      * @param   array   $value
@@ -54,19 +54,29 @@ class DB extends DatabaseFactory
         }
         $fields = rtrim($fields, ",") . ")";
         $bound  = rtrim($bound, ",") . ")";
-        $query  = "INSERT INTO {$table} {$fields} VALUES {z$bound};";
+        $query  = "INSERT INTO {$table} {$fields} VALUES {$bound};";
         $self   = self::getInstance();
         $st     = $self->pdo->prepare($query);
         $exec   = $st->execute($value);
-        if ($self->showErrorQuery) {
+        $error  = $st->errorInfo();
+        if ($error[1] and $self->showErrorQuery) {
             var_dump(array(
                     "Error" => $st->errorInfo()
                 ));
         }
+        $st = $self = null;
         return $exec;
     }
 
     public function __destruct()
+    {
+        $this->pdo = null;
+    }
+
+    /**
+     * @todo Close PDO Connection.
+     */
+    public function close()
     {
         $this->pdo = null;
     }
