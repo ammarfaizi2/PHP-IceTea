@@ -77,4 +77,12 @@ class Configer
     {
         return self::getInstance()->config['default_route'];
     }
+
+    /**
+     * @return  bool
+     */
+    public static function errorQuery()
+    {
+        return self::getInstance()->config['error_handler']['show_error_query'];
+    }
 }

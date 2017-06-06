@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Crayner\Builder;
+namespace System\Crayner\Builder\Database;
 
 use System\Crayner\Contracts\Database\DatabaseRule;
 
