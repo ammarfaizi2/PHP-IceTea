@@ -27,6 +27,6 @@ class index extends Controller
      */
     public function index()
     {
-        print teacrypt("123123");
+        var_dump($this->input->post("asd")->escape());
     }
 }
