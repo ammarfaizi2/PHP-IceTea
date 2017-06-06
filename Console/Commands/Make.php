@@ -2,6 +2,8 @@
 
 namespace Console\Commands;
 
+defined("TEMPLATE_DIR") or die("Error ! TEMPLATE_DIR not defined !");
+
 use Console\Color\Message;	
 use System\Crayner\Contracts\Console\Command;
 use Console\Exception\InvalidArgumentException;
