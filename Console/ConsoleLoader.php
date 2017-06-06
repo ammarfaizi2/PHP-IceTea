@@ -2,7 +2,9 @@
 
 namespace Console;
 
+use Console\Color\Message;	
 use Console\Input\ArgvInput;
+use Console\Exception\InvalidArgumentException;
 
 /**
  * @author	Ammar Faizi	<ammarfaizi2@gmail.com>
@@ -16,12 +18,28 @@ class ConsoleLoader
 	 */
 	public $extendCommand;
 	
+	/**
+	 *
+	 * @param	Console\Input\ArgvInput	$argvIn
+	 * @throws	Console\Exception\InvalidArgumentException
+	 */
 	public function __construct(ArgvInput $argvIn)
 	{
 		$argvIn->command	= explode(":", $argvIn->command);
-		if (count($argvIn) == 2) {
-			$
+		try {
+			if (count($argvIn->command) == 2) {
+				$this->extendCommand = $argvIn->command[1];
+			} else
+			if (count($argvIn->command) == 1) {
+				$this->extendCommand = null;
+			} else {
+				throw new InvalidArgumentException("Invalid command " .implode(":", $argvIn->command), 400);
+			}	
+		} catch (InvalidArgumentException $e) {
+			print Message::error($e->getMessage(), "InvalidArgumentException", $e->getFile(), $e->getLine());
+			die;
 		}
+		$argvIn->command	= $argvIn->command[0];
 		$this->command		= ucfirst(strtolower($argvIn->command));
 		$this->selection	= $argvIn->selection;
 		$this->optional		= $argvIn->optional;

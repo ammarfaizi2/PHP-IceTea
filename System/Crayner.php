@@ -10,8 +10,7 @@ namespace System;
 
 class Crayner
 {
-	public function __construct()
-	{
-	
-	}
+    public function __construct()
+    {
+    }
 }

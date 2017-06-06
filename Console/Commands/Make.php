@@ -10,12 +10,12 @@ use System\Crayner\Contracts\Console\Command;
 
 class Make implements Command
 {
-	/**
-	 *
-	 *
-	 */
-	public function prepare($command)
-	{
-		$this->command = $command;
-	}
+    /**
+     *
+     *
+     */
+    public function prepare($command)
+    {
+        $this->command = $command;
+    }
 }

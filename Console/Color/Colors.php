@@ -57,7 +57,7 @@ class Colors
 
     /**
      *
-     *  
+     *
      *
      * @param   string  $string
      * @param   string  $foreground_color
