@@ -2,6 +2,10 @@
 
 namespace System\Crayner\Contracts\Input;
 
+/**
+ * @author Ammar Faizi	<ammarfaizi2@gmail.com>
+ */
+
 interface InputBinding
 {
     /**

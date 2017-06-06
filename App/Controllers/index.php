@@ -27,6 +27,6 @@ class index extends Controller
      */
     public function index()
     {
-        var_dump($this->input->post("asd")->escape());
+        
     }
 }

@@ -46,7 +46,7 @@ class InputUtilities implements InputBinding
      * @param  string	$key
      * @return InputUtilities
      */
-    public function encrypt(string $key)
+    public function encrypt(string $key = "icetea")
     {
         $this->toString = empty($this->toString) ? '' : Teacrypt::encrypt($this->toString, $key);
         return $this;
