@@ -54,7 +54,10 @@ class Configer
 		return self::getInstance()->config['router']['router_file'];
 	}
 
-	public static function automatic_route()
+	/**
+	 * @return	string
+	 */
+	public static function automaticRoute()
 	{
 		return self::getInstance()->config['router']['automatic_route'];
 	}
@@ -65,5 +68,13 @@ class Configer
 	public static function defaultMethod()
 	{
 		return self::getInstance()->config['default_method'];
+	}
+
+	/**
+	 * @return	string
+	 */
+	public static function defaultRoute()
+	{
+		return self::getInstance()->config['default_route'];
 	}
 }

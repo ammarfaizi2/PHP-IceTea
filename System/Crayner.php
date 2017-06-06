@@ -58,8 +58,9 @@ class Crayner
      */
     public function run()
     {
-    	if (Configer::automatic_route()) {
-    		$this->secondSegment = empty($this->secondSegment) ? Configer::default_method() : $this->secondSegment;
+    	if (Configer::automaticRoute()) {
+    		$this->firstSegment		= empty($this->firstSegment) ? Configer::defaultRoute() : $this->firstSegment;
+    		$this->secondSegment 	= empty($this->secondSegment) ? Configer::defaultMethod() : $this->secondSegment;
     		$class = "App\\Controllers\\{$this->firstSegment}";
     		if (class_exists($class) and $class = new $class() and is_callable(array($class, $this->secondSegment))) {
     			$class->{$this->secondSegment}();

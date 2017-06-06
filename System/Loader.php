@@ -15,9 +15,9 @@ class Loader
 	 * @param	string	$view
 	 * @param	string	$__variables
 	 */
-	public function view($view, array $__variables = null)
+	public function view(string $view, array $__variables = null, bool $realpath = false)
 	{
-		$file = __DIR__ . '/../App/Views/' . $view . '.tpl.php';
+		$file = __DIR__ . '/../App/Views/' . ($realpath ? $view : $view . '.tpl.php');
 		if (is_array($__variables)) {
 			foreach ($__variables as $key => $value) {
 				$$key = $value;
@@ -32,11 +32,22 @@ class Loader
 	 *
 	 * @param	int	$code
 	 */
-	public function error($code)
+	public function error(int $code)
 	{
 		http_response_code($code);
 		$this->view("errors/{$code}");
 		die;
 	}
 
+	/**
+	 *
+	 * Load helper file.
+	 *
+	 * @param	string	$helper
+	 * @param	bool	$realpath
+	 */ 
+	public function helper(string $helper, $realpath = false)
+	{
+		require __DIR__ . '/Crayner/Helper/'. ($realpath ? $helper : $helper .'.php');
+	}
 }
