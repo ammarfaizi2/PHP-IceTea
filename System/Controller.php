@@ -3,7 +3,7 @@
 namespace System;
 
 use System\Loader;
-use Crayner\Hub\Singleton;
+use System\Crayner\Hub\Singleton;
 
 /**
  * @author	Ammar Faizi	<ammarfaizi2@gmail.com>

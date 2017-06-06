@@ -10,12 +10,12 @@ class Loader
 {
 	/**
 	 *
-	 * Load View.
+	 * Load view.
 	 *
 	 * @param	string	$view
 	 * @param	string	$__variables
 	 */
-	public function view($view, $__variables)
+	public function view($view, array $__variables = null)
 	{
 		$file = __DIR__ . '/../App/Views/' . $view . '.tpl.php';
 		if (is_array($__variables)) {
@@ -24,6 +24,19 @@ class Loader
 			}
 		}
 		require realpath($file);
+	}
+
+	/**
+	 *
+	 * Load error page. 
+	 *
+	 * @param	int	$code
+	 */
+	public function error($code)
+	{
+		http_response_code($code);
+		$this->view("errors/{$code}");
+		die;
 	}
 
 }
