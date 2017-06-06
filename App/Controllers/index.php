@@ -15,6 +15,7 @@ class index extends Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->helper("rstr");
     }
 
     /**
@@ -24,6 +25,7 @@ class index extends Controller
      */
     public function index()
     {
+        echo rstr();
         $this->load->view("welcome");
     }
 }

@@ -23,8 +23,8 @@ if (!function_exists("rstr")) {
             $list = $concatation;
             $len  = strlen($list) - 1;
         } else {
-            $list    = "1234567890QWERTYUIOPASDFGHJKLXCVBNMqwertyuiopasdfghjklzxcvbnm____".$list;
-            $len    = 64 + strlen($concatation);
+            $len  = 64 + strlen($list);
+            $list = "1234567890QWERTYUIOPASDFGHJKLXCVBNMqwertyuiopasdfghjklzxcvbnm____".$list;
         }
         $return = "";
 
