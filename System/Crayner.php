@@ -51,6 +51,11 @@ class Crayner
     	$this->optionalSegment	= array_diff($this->segments, array('', $this->firstSegment, $this->secondSegment));
     }
 
+    /**
+     *
+     * Here we go...
+     *
+     */
     public function run()
     {
     	if (Configer::automatic_route()) {
