@@ -51,7 +51,6 @@ class Cookie implements CookieTable
 		$this->toString = $value;
 		$this->func		= function($value) use ($name, $minute, $path, $domain, $secure, $httpOnly){
 			setcookie($name, $value, time()+($minute * 60), $path, $domain, $secure, $httpOnly);
-			echo __METHOD__;
 		};
 		return new InputUtilities($this->toString, $this->func);
 	}
@@ -78,6 +77,7 @@ class Cookie implements CookieTable
 	{
 		$this->func = function() use($name){
 			setcookie($name, null, 0);
+			return $name;
 		};
 		return new CookieFlush($this->func);
 	}
