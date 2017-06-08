@@ -3,9 +3,10 @@
 namespace App\Controllers;
 
 
-use App\Models\Login;
 use System\Controller;
-use System\Crayner\Cookie\Cookie;
+
+use App\Models\Login;
+use App\Controllers\login as loginpage;
 
 class index extends Controller
 {
@@ -18,9 +19,7 @@ class index extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->helper("rstr");
-        $this->load->helper("teacrypt");
-        $this->cookie = Cookie::getInstance();
+        $this->login = new Login();
     }
 
     /**
@@ -30,5 +29,10 @@ class index extends Controller
      */
     public function index()
     {
+        if ($this->login->loginStatus()) {
+            (new home())->index();
+        } else {
+            (new loginpage())->index();
+        }
     }
 }

@@ -18,6 +18,19 @@ class DB extends DatabaseFactory
 
     /**
      *
+     * Override singleton
+     *
+     */
+    public static function getInstance()
+    {
+        if (self::$instance === null || !((self::$instance)->pdo  instanceof \PDO)) {
+            self::$instance = new self;
+        }
+        return self::$instance;
+    }
+
+    /**
+     *
      * Constructor.
      *
      *
@@ -67,6 +80,21 @@ class DB extends DatabaseFactory
         return $exec;
     }
 
+    /**
+     *
+     * Insert
+     *
+     * @param   string  $statement
+     * @return  \PDO
+     */
+    public static function prepare(string $statement)
+    {
+        $self   = self::getInstance();
+        $st     = $self->pdo->prepare($statement);
+        $self   = null;
+        return $st;
+    }
+
     public function __destruct()
     {
         $this->pdo = null;
@@ -75,8 +103,9 @@ class DB extends DatabaseFactory
     /**
      * @todo Close PDO Connection.
      */
-    public function close()
+    public static function close()
     {
-        $this->pdo = null;
+        $self   = self::getInstance();
+        $self->pdo = null;
     }
 }

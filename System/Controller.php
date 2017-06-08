@@ -3,6 +3,8 @@
 namespace System;
 
 use System\Loader;
+use System\Crayner\Set\Set;
+use System\Crayner\Get\Get;
 use System\Crayner\Hub\Singleton;
 use System\Crayner\Input\InputHandler;
 
@@ -18,5 +20,7 @@ class Controller
     {
         $this->load  = new Loader();
         $this->input = new InputHandler();
+        $this->set   = new Set();
+        $this->get   = new Get();
     }
 }
