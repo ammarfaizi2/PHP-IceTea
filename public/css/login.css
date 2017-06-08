@@ -1,0 +1,41 @@
+body{
+	font-family: Helvetica;
+}
+.maincg{
+	border: 2px solid #000;
+	max-width: 27%;
+	border-radius: 1.5%;
+	margin-top: 7%;
+	padding-bottom: 3%;
+	background-color:#9F243E;
+	color:white;	
+}
+h1{
+	font-weight: bold;
+	font-size: 36px;
+}
+.frcg{
+	margin-top: 10%;
+}
+.pcg{
+	margin-top: 4%;
+}
+label{
+	font-weight: bold;
+}
+.btcg{
+	margin-top: 7%;
+}
+#sbmt{
+	cursor: pointer;
+}
+.rcg{
+	margin-top: 10%;
+}
+.rgp{
+	color:white;
+	text-decoration:none;
+}
+.rgp:hover{
+	text-decoration:underline;
+}
