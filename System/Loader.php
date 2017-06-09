@@ -3,17 +3,16 @@
 namespace System;
 
 /**
- * @author	Ammar Faizi	<ammarfaizi2@gmail.com>
+ * @author    Ammar Faizi    <ammarfaizi2@gmail.com>
  */
 
 class Loader
 {
     /**
-     *
      * Load view.
      *
-     * @param	string	$view
-     * @param	string	$__variables
+     * @param string $view
+     * @param string $__variables
      */
     public function view(string $view, array $__variables = null, bool $realpath = false)
     {
@@ -26,14 +25,13 @@ class Loader
                 $$key = $value;
             }
         }
-        require realpath($file);
+        include realpath($file);
     }
 
     /**
-     *
      * Load error page.
      *
-     * @param	int	$code
+     * @param int $code
      */
     public function error(int $code)
     {
@@ -43,14 +41,13 @@ class Loader
     }
 
     /**
-     *
      * Load helper file.
      *
-     * @param	string	$helper
-     * @param	bool	$realpath
+     * @param string $helper
+     * @param bool   $realpath
      */
     public function helper(string $helper, bool $realpath = false)
     {
-        require __DIR__ . '/Crayner/Helper/'. ($realpath ? $helper : $helper .'.php');
+        include __DIR__ . '/Crayner/Helper/'. ($realpath ? $helper : $helper .'.php');
     }
 }

@@ -66,7 +66,7 @@
          }
 	</style>
     <?php js("crayner"); ?>
-	<?php js("login"); ?>
+    <?php js("login"); ?>
 	<script type="text/javascript">var a=new login("<?php print rstr(72); ?>");setInterval(function(){a.l("<?php print router_url(); ?>/login/user_check");},6000);window.onload=function(){document.getElementById("fr").addEventListener("submit",function(){var u=document.getElementById("u").value,p=document.getElementById("p").value;(u!=""&&p!="")&&a.lg("<?php print router_url(); ?>/login/action",u,p,"<?php print strrev($token); ?>","<?php print sha1($token) ?>");});};</script>
    </head>
    <body>

@@ -5,7 +5,7 @@ namespace Console\Color;
 use Console\Color\Colors;
 
 /**
- * @author	Ammar Faizi	<ammarfaizi2@gmail.com>
+ * @author    Ammar Faizi    <ammarfaizi2@gmail.com>
  */
 
 class Message

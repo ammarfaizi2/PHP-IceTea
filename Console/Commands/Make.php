@@ -7,14 +7,14 @@ use System\Crayner\Contracts\Console\Command;
 use Console\Exception\InvalidArgumentException;
 
 /**
- * @author	Ammar Faizi	<ammarfaizi2@gmail.com>
+ * @author    Ammar Faizi    <ammarfaizi2@gmail.com>
  */
 
 class Make implements Command
 {
     /**
      *
-     * @var	bool
+     * @var    bool
      */
     private $force = false;
 
@@ -93,28 +93,32 @@ class Make implements Command
     {
         $this->parseSelection();
         switch ($this->command) {
-            case 'controller':
-                    $this->makeFile("controller", APP_DIR . '/Controllers/' . $this->filename . '.php',
+        case 'controller':
+                $this->makeFile(
+                    "controller", APP_DIR . '/Controllers/' . $this->filename . '.php',
                     function ($str) {
                         return str_replace("~~~controller_name~~~", $this->filename, $str);
-                    });
-                break;
-            case 'model':
-                    $this->makeFile("model", APP_DIR . '/Models/' . $this->filename . '.php',
+                    }
+                );
+            break;
+        case 'model':
+                $this->makeFile(
+                    "model", APP_DIR . '/Models/' . $this->filename . '.php',
                     function ($str) {
                         return str_replace("~~~model_name~~~", $this->filename, $str);
-                    });
-                break;
-            default:
-                try {
-                    throw new InvalidArgumentException("Invalid make:{$this->command} !", 400);
-                } catch (InvalidArgumentException $e) {
-                    print Message::error($e->getMessage(), "InvalidArgumentException", $e->getFile(), $e->getLine());
-                    die;
-                } catch (\Exception $e) {
-                    print Message::error($e->getMessage(), "\\Exception", $e->getFile(), $e->getLine());
-                }
-                break;
+                    }
+                );
+            break;
+        default:
+            try {
+                throw new InvalidArgumentException("Invalid make:{$this->command} !", 400);
+            } catch (InvalidArgumentException $e) {
+                print Message::error($e->getMessage(), "InvalidArgumentException", $e->getFile(), $e->getLine());
+                die;
+            } catch (\Exception $e) {
+                print Message::error($e->getMessage(), "\\Exception", $e->getFile(), $e->getLine());
+            }
+            break;
         }
     }
 

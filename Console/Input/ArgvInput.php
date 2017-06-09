@@ -3,48 +3,46 @@
 namespace Console\Input;
 
 /**
- * @author	Ammar Faizi	<ammarfaizi2@gmail.com>
+ * @author    Ammar Faizi    <ammarfaizi2@gmail.com>
  */
 
 class ArgvInput
 {
     /**
      *
-     * @var	array
+     * @var    array
      */
     public $tokens;
 
     /**
      *
-     * @var	string
+     * @var    string
      */
     public $appName;
 
     /**
      *
-     * @var	array
+     * @var    array
      */
     public $optional;
 
     /**
      *
-     * @var	array
+     * @var    array
      */
     public $selection;
 
     /**
      *
-     * @var	string
+     * @var    string
      */
     public $command;
 
 
     /**
-     *
      * Constructor.
      *
-     * @param	array|null	$argv	An array of parameters from the CLI (in the argv format)
-     *
+     * @param array|null $argv An array of parameters from the CLI (in the argv format)
      */
     public function __construct(array $argv = null)
     {

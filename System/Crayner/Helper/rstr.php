@@ -1,16 +1,16 @@
 <?php
 
 /**
- * @author	Ammar Faizi	<ammarfaizi2@gmail.com>
+ * @author    Ammar Faizi    <ammarfaizi2@gmail.com>
  */
 
 if (!function_exists("rstr")) {
     /**
      *
-     * @param	int		$n
-     * @param	string	$list
-     * @param	bool	$pure
-     * @return	string
+     * @param    int    $n
+     * @param    string $list
+     * @param    bool   $pure
+     * @return    string
      */
     function rstr(int $n = 32, string $list = "", bool $pure = false)
     {

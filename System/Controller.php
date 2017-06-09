@@ -9,7 +9,7 @@ use System\Crayner\Hub\Singleton;
 use System\Crayner\Input\InputHandler;
 
 /**
- * @author	Ammar Faizi	<ammarfaizi2@gmail.com>
+ * @author    Ammar Faizi    <ammarfaizi2@gmail.com>
  */
 
 class Controller

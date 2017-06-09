@@ -6,7 +6,7 @@ use System\Crayner\Input\InputUtilities;
 use System\Crayner\Contracts\Input\PostGate;
 
 /**
- * @author Ammar Faizi	<ammarfaizi2@gmail.com>
+ * @author Ammar Faizi    <ammarfaizi2@gmail.com>
  */
 
 class InputHandler implements PostGate
@@ -27,10 +27,7 @@ class InputHandler implements PostGate
     private $toString;
 
     /**
-     *
      * Constructor.
-     *
-     *
      */
     public function __construct()
     {
@@ -48,7 +45,7 @@ class InputHandler implements PostGate
     }
 
     /**
-     * @param  string	$key
+     * @param  string $key
      * @return InputHandler
      */
     public function post(string $key)

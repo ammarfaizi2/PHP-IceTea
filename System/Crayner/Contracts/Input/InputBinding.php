@@ -3,23 +3,23 @@
 namespace System\Crayner\Contracts\Input;
 
 /**
- * @author Ammar Faizi	<ammarfaizi2@gmail.com>
+ * @author Ammar Faizi    <ammarfaizi2@gmail.com>
  */
 
 interface InputBinding
 {
     /**
-     * @param int	$cat
+     * @param int $cat
      */
     public function escape(int $cat);
 
     /**
-     * @param string	$key
+     * @param string $key
      */
     public function encrypt(string $key);
 
     /**
-     * @param string	$ley
+     * @param string $ley
      */
     public function decrypt(string $key);
 }

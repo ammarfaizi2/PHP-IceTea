@@ -7,7 +7,7 @@ use System\Crayner\Hub\Singleton;
 use System\Exception\MethodNotAllowedHttpException;
 
 /**
- * @author	Ammar Faizi	<ammarfaizi2@gmail.com>
+ * @author    Ammar Faizi    <ammarfaizi2@gmail.com>
  */
 
 class Router
@@ -18,28 +18,24 @@ class Router
     use Singleton;
 
     /**
-     *
      * Uri Segments
      *
-     * @var	array
-     *
+     * @var array
      */
     private $segments;
 
     /**
-     *
      * Routes
      *
      * @var array
-     *
      */
     private $routes;
 
     /**
      *
      *
-     * @param 	array	$segments
-     * @return	self
+     * @param     array $segments
+     * @return    self
      */
     public static function getInstance(array $segments = null)
     {
@@ -51,11 +47,9 @@ class Router
 
 
     /**
-     *
      * Constructor.
      *
-     * @param array	$segments
-     *
+     * @param array $segments
      */
     public function __construct(array $segments)
     {
@@ -63,12 +57,11 @@ class Router
     }
 
     /**
-     *
      * Set Route.
      *
-     * @param string			$route
-     * @param string|Closure	$action
-     * @param string			$type
+     * @param string         $route
+     * @param string|Closure $action
+     * @param string         $type
      */
     private function setRoute(string $route, $action, string $type = "GET")
     {
@@ -78,7 +71,6 @@ class Router
     /**
      *
      * @todo Run Router.
-     *
      */
     public function run()
     {
@@ -112,11 +104,10 @@ class Router
     }
 
     /**
-     *
      * Set GET Route.
      *
-     * @param string			$route
-     * @param string|Closure	$action
+     * @param string         $route
+     * @param string|Closure $action
      */
     public static function get(string $route, $action)
     {
@@ -125,11 +116,10 @@ class Router
 
 
     /**
-     *
      * Set POST Route.
      *
-     * @param string			$route
-     * @param string|Closure	$action
+     * @param string         $route
+     * @param string|Closure $action
      */
     public static function post(string $route, $action)
     {

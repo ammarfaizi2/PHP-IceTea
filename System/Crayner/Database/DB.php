@@ -75,9 +75,11 @@ class DB extends DatabaseFactory
         $this->showErrorQuery = Configer::errorQuery();
         try {
             $conf = Configer::database();
-            $this->pdo = new \PDO($conf['driver'].":host=".$conf['host'].";port=".$conf['port'].";dbname=".$conf['dbname'], $conf['user'], $conf['pass'], array(
+            $this->pdo = new \PDO(
+                $conf['driver'].":host=".$conf['host'].";port=".$conf['port'].";dbname=".$conf['dbname'], $conf['user'], $conf['pass'], array(
                     \PDO::ATTR_PERSISTENT => false
-                ));
+                )
+            );
             $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (\PDOException $e) {
             var_dump($e->getMessage());
@@ -85,12 +87,11 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Execute Override
      *
-     * @param   string  $statement
-     * @param   array   $data
-     * @return  \PDO
+     * @param  string $statement
+     * @param  array  $data
+     * @return \PDO
      */
     protected static function _execute(string $statement, array $data)
     {
@@ -104,20 +105,21 @@ class DB extends DatabaseFactory
 
         $error  = $make->errorInfo();
         if ($error[1] and $self->showErrorQuery) {
-            var_dump(array(
+            var_dump(
+                array(
                     "Error" => $make->errorInfo()
-                ));
+                )
+            );
         }
 
         return $make;
     }
 
     /**
-     *
      * Make Query Statement
      *
-     * @param   string  $statement
-     * @return  string
+     * @param  string $statement
+     * @return string
      */
     protected static function makeStatement(string $statement)
     {
@@ -132,11 +134,10 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Make Insert Parameter
      *
-     * @param   array  $data
-     * @return  array
+     * @param  array $data
+     * @return array
      */
     protected static function makeInsertParameter(array $data)
     {
@@ -148,12 +149,11 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Make Multiple Insert Parameter
      *
-     * @param   string  $table
-     * @param   array  $data
-     * @return  array
+     * @param  string $table
+     * @param  array  $data
+     * @return array
      */
     protected static function makeMultipleInsert(string $table, array $data)
     {
@@ -177,11 +177,10 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Make Update Parameter
      *
-     * @param   array  $data
-     * @return  array
+     * @param  array $data
+     * @return array
      */
     protected static function makeUpdateParameter(array $data)
     {
@@ -195,10 +194,9 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Make Select Query
      *
-     * @return  string
+     * @return string
      */
     protected static function makeSelect()
     {
@@ -210,10 +208,9 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Empty All Option
      *
-     * @return  Instance
+     * @return Instance
      */
     protected static function makeEmpty()
     {
@@ -230,14 +227,13 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Make Where Statement Valid
      *
-     * @param   string $param
-     * @param   string $column
-     * @param   string $operator
-     * @param   string || int $value
-     * @return  Instance
+     * @param  string        $param
+     * @param  string        $column
+     * @param  string        $operator
+     * @param  string || int $value
+     * @return Instance
      */
     protected function makeWhere($param, $column, $operator, $value)
     {
@@ -251,14 +247,13 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Make Option Where Value
      *
-     * @param   string $param
-     * @param   string $column
-     * @param   string $operator
-     * @param   string || int $value
-     * @return  Instance
+     * @param  string        $param
+     * @param  string        $column
+     * @param  string        $operator
+     * @param  string || int $value
+     * @return Instance
      */
     protected function makeOptionWhere($param, $column, $operator, $value)
     {
@@ -268,12 +263,11 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Make Where Array
      *
-     * @param   array  $array
-     * @param   string $type
-     * @return  Instance
+     * @param  array  $array
+     * @param  string $type
+     * @return Instance
      */
     protected function makeArrayOfWhere($array, $type)
     {
@@ -306,10 +300,9 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Make String Where
      *
-     * @return  Instance
+     * @return Instance
      */
     protected function makeStringOfWhere($column, $operator = null, $value = null, $type)
     {
@@ -326,10 +319,9 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Check Where
      *
-     * @return  Instance
+     * @return Instance
      */
     protected static function whereExecute($column, $operator, $value, $type)
     {
@@ -347,11 +339,10 @@ class DB extends DatabaseFactory
 
 
     /**
-     *
      * Set Table
      *
-     * @param   string   $table
-     * @return  Instance
+     * @param  string $table
+     * @return Instance
      */
     public static function table(string $table)
     {
@@ -362,11 +353,10 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Insert & Multiple Insert
      *
-     * @param   array   $data
-     * @return  boolean
+     * @param  array $data
+     * @return boolean
      */
     public static function insert(array $data)
     {
@@ -391,11 +381,10 @@ class DB extends DatabaseFactory
     }
    
     /**
-     *
      * Update Record
      *
-     * @param   array   $data
-     * @return  boolean
+     * @param  array $data
+     * @return boolean
      */
     public static function update(array $data)
     {
@@ -412,10 +401,9 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Delete Record
      *
-     * @return  boolean
+     * @return boolean
      */
     public static function delete()
     {
@@ -428,14 +416,13 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Join Option
      *
-     * @param   string   $table
-     * @param   string   $foreignKey1
-     * @param   string   $foreignKey2
-     * @param   string   $relation
-     * @return  boolean
+     * @param  string $table
+     * @param  string $foreignKey1
+     * @param  string $foreignKey2
+     * @param  string $relation
+     * @return boolean
      */
     public function join(string $table, string $foreignKey1, string $operator, string $foreignKey2, string $relation = "INNER")
     {
@@ -459,14 +446,13 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Where Option
      *
-     * @param   string   $column
-     * @param   string   $operator
-     * @param   string   $value
-     * @param   string   $type
-     * @return  Instance
+     * @param  string $column
+     * @param  string $operator
+     * @param  string $value
+     * @param  string $type
+     * @return Instance
      */
 
     public static function where($column, $operator = null, $value = null, $type = " AND ")
@@ -490,10 +476,9 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Limit Option
-     * @param   string || integer   $limit
-     * @param   string || integer   $offset
+     * @param   string || integer $limit
+     * @param   string || integer $offset
      * @return  Instance
      */
     public function limit($limit, $offset = null)
@@ -506,10 +491,9 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Order By Column Option
-     * @param   string || integer   $column
-     * @param   string || integer   $sort
+     * @param   string || integer $column
+     * @param   string || integer $sort
      * @return  Instance
      */
     public function orderBy(string $column, string $sort)
@@ -521,7 +505,6 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Select Option
      * @return  Instance
      */
@@ -534,7 +517,6 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Get All Record
      * @return  Array
      */
@@ -549,7 +531,6 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Get All Record Alias
      * @return  Array
      */
@@ -559,7 +540,6 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Get First Record
      * @return  Array
      */
@@ -574,7 +554,6 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Count Record
      * @return  Array
      */
@@ -589,7 +568,6 @@ class DB extends DatabaseFactory
     }
 
     /**
-     *
      * Get Last Insert ID
      * @return  Integer
      */
