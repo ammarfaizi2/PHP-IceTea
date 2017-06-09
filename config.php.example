@@ -7,8 +7,12 @@ ini_set("display_errors", true);
 error_reporting(-1);
 
 
+$config['default_route'] = "index";
 $config['default_method'] = "index";
 
+
+
+$config['error_handler']['show_error_query'] = true;
 
 
 /**
@@ -26,9 +30,9 @@ $config['assets']['css'] = BASEURL . "/css";
  * Router Configuration.
  *
  */
-$config['router']['manual_route'] 		= false;
-$config['router']['automatic_route']	= true;
-$config['router']['router_file'] 		= "index.php";
+$config['router']['manual_route']        = false;
+$config['router']['automatic_route']    = true;
+$config['router']['router_file']        = "index.php";
 
 
 
@@ -37,8 +41,8 @@ $config['router']['router_file'] 		= "index.php";
  * Database Configuration.
  *
  */
-$config['database']['driver']	= "mysql";
-$config['database']['host']		= "localhost";
-$config['database']['user']		= "debian-sys-maint";
-$config['database']['pass']		= "";
-$config['database']['dbname']	= "";
+$config['database']['driver']    = "mysql";
+$config['database']['host']        = "localhost";
+$config['database']['user']        = "debian-sys-maint";
+$config['database']['pass']        = "";
+$config['database']['dbname']    = "icetea";
