@@ -5,7 +5,7 @@
 composer install
 ```
 
-## Development
+## Start Development
 ```shell
 php icetea serve
 ```
