@@ -8,14 +8,8 @@ function view(string $view, array $var = null){
 
 
 /**
-|
-|	IceTea Web Routes
-|
-|
-|
-|
-|
-*/
+ *	IceTea Web Routes
+ */
 
 
 
