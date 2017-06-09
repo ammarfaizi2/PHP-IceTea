@@ -49,7 +49,7 @@ class Loader
      * @param	string	$helper
      * @param	bool	$realpath
      */
-    public function helper(string $helper, $realpath = false)
+    public function helper(string $helper, bool $realpath = false)
     {
         require __DIR__ . '/Crayner/Helper/'. ($realpath ? $helper : $helper .'.php');
     }
