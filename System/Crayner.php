@@ -60,8 +60,8 @@ class Crayner
     public function run()
     {
         if (Configer::manualRoute()) {
-            /* strip empty string */
-            array_shift($this->segments);
+            
+            $this->segments[0] = "/";
         
             $router = Router::getInstance($this->segments);
             Configer::loadRoutes();

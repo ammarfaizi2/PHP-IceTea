@@ -1,4 +1,27 @@
 <?php
 use System\Router as Route;
+use System\Controller;
 
-Route::get("aaaa", "");
+function view(string $view, array $var = null){
+	(new Controller())->load->view($view, $var);
+}
+
+
+/**
+|
+|	Web Routes
+|
+|
+|
+|
+|
+*/
+
+
+
+
+
+
+Route::get("/", function(){
+	view("welcome");
+});
