@@ -11,31 +11,31 @@ use System\Crayner\WhiteHat\Encryption\Teacrypt\Teacrypt;
 
 class InputUtilities implements InputBinding
 {
-	/**
-	 * @var string
-	 */
-	private $toString;
+    /**
+     * @var string
+     */
+    private $toString;
 
     /**
      * @var object
      */
     private $func;
 
-	/**
-	 *
-	 * Constructor.
-	 *
-	 *
-	 * @param string	$toString
-	 *
-	 */
-	public function __construct(string $toString, \Closure $func = null)
-	{
-		$this->toString = $toString;
+    /**
+     *
+     * Constructor.
+     *
+     *
+     * @param string	$toString
+     *
+     */
+    public function __construct(string $toString, \Closure $func = null)
+    {
+        $this->toString = $toString;
         $this->func     = $func;
-	}
+    }
 
-  	/**
+    /**
      * @param	int	$cat
      * @return  InputUtilities
      */
@@ -65,7 +65,7 @@ class InputUtilities implements InputBinding
      */
     public function decrypt(string $key)
     {
-    	$this->toString = empty($this->toString) ? '' : Teacrypt::decrypt($this->toString, $key);
+        $this->toString = empty($this->toString) ? '' : Teacrypt::decrypt($this->toString, $key);
         return $this;
     }
 
@@ -75,7 +75,7 @@ class InputUtilities implements InputBinding
             $b = $this->func;
             $b($this->toString);
         }
-    	return $this->toString;
+        return $this->toString;
     }
 
     public function __destruct()

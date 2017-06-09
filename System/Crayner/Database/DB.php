@@ -20,13 +20,13 @@ class DB extends DatabaseFactory
      */
     private $showErrorQuery;
 
-    protected $optionWhere     = [], 
-              $optionWhereData = [], 
-              $optionJoin      = [],
-              $optionOrder     = null,
-              $optionLimit     = null,
-              $optionSelect    = null,
-              $table_name      = null;
+    protected $optionWhere     = [];
+    protected $optionWhereData = [];
+    protected $optionJoin      = [];
+    protected $optionOrder     = null;
+    protected $optionLimit     = null;
+    protected $optionSelect    = null;
+    protected $table_name      = null;
 
     /**
      *
@@ -69,7 +69,7 @@ class DB extends DatabaseFactory
      * @param   array   $data
      * @return  \PDO
      */
-    protected static function _execute(string $statement, array $data) 
+    protected static function _execute(string $statement, array $data)
     {
         $self      = self::getInstance();
 
@@ -115,9 +115,9 @@ class DB extends DatabaseFactory
      * @param   array  $data
      * @return  array
      */
-    protected static function makeInsertParameter(array $data) 
+    protected static function makeInsertParameter(array $data)
     {
-        foreach($data as $field => $value) {
+        foreach ($data as $field => $value) {
             $newData[":{$field}"] = $value;
         }
 
@@ -132,11 +132,11 @@ class DB extends DatabaseFactory
      * @param   array  $data
      * @return  array
      */
-    protected static function makeMultipleInsert(string $table, array $data) 
+    protected static function makeMultipleInsert(string $table, array $data)
     {
         $insert_values = array();
 
-        foreach($data as $d) {
+        foreach ($data as $d) {
             $insert_values = array_merge($insert_values, array_values($d));
 
             $count = count($d);
@@ -160,10 +160,9 @@ class DB extends DatabaseFactory
      * @param   array  $data
      * @return  array
      */
-    protected static function makeUpdateParameter(array $data) 
+    protected static function makeUpdateParameter(array $data)
     {
-        
-        foreach($data as $field => $value) {
+        foreach ($data as $field => $value) {
             $newData[] = "{$field}=:{$field}";
         }
 
@@ -178,7 +177,7 @@ class DB extends DatabaseFactory
      *
      * @return  string
      */
-    protected static function makeSelect() 
+    protected static function makeSelect()
     {
         $self   = self::getInstance();
         $select = (!empty($self->optionSelect)) ? $self->optionSelect : "*";
@@ -193,12 +192,12 @@ class DB extends DatabaseFactory
      *
      * @return  Instance
      */
-    protected static function makeEmpty() 
+    protected static function makeEmpty()
     {
         $self  = self::getInstance();
 
         $self->optionWhere     = [];
-        $self->optionWhereData = []; 
+        $self->optionWhereData = [];
         $self->optionJoin      = [];
         $self->optionLimit     = null;
         $self->optionSelect    = null;
@@ -217,12 +216,13 @@ class DB extends DatabaseFactory
      * @param   string || int $value
      * @return  Instance
      */
-    protected function makeWhere($param, $column, $operator, $value) 
+    protected function makeWhere($param, $column, $operator, $value)
     {
-        if(empty($value)) 
+        if (empty($value)) {
             $where = "{$column}=:where_{$param}";
-        else 
+        } else {
             $where = "{$param} {$operator} :where_{$param}";
+        }
 
         return $where;
     }
@@ -237,7 +237,7 @@ class DB extends DatabaseFactory
      * @param   string || int $value
      * @return  Instance
      */
-    protected function makeOptionWhere($param, $column, $operator, $value) 
+    protected function makeOptionWhere($param, $column, $operator, $value)
     {
         $option = (empty($value)) ? $operator : $value;
 
@@ -252,12 +252,11 @@ class DB extends DatabaseFactory
      * @param   string $type
      * @return  Instance
      */
-    protected function makeArrayOfWhere($array, $type) 
+    protected function makeArrayOfWhere($array, $type)
     {
         $self = self::getInstance();
 
-        foreach($array as $a) {
-
+        foreach ($array as $a) {
             $make = [
                 'parameter' => str_replace(".", "_", $a[0]),
                 'column'    => $a[0],
@@ -278,7 +277,6 @@ class DB extends DatabaseFactory
             $self->optionWhereData = array_merge(
                 $self->optionWhereData, [":where_{$make['parameter']}" => $whereData]
             );
-
         }
 
         return $self;
@@ -290,7 +288,8 @@ class DB extends DatabaseFactory
      *
      * @return  Instance
      */
-    protected function makeStringOfWhere($column, $operator = null, $value = null, $type) {
+    protected function makeStringOfWhere($column, $operator = null, $value = null, $type)
+    {
         $self = self::getInstance();
 
         $param     = str_replace(".", "_", $column); // remove table seperator for parameter
@@ -309,18 +308,14 @@ class DB extends DatabaseFactory
      *
      * @return  Instance
      */
-    protected static function whereExecute($column, $operator, $value, $type) 
+    protected static function whereExecute($column, $operator, $value, $type)
     {
         $self      = self::getInstance();
 
-        if(is_array($column)) {
-
+        if (is_array($column)) {
             return $self->makeArrayOfWhere($column, $type);
-
-        }else {
-            
+        } else {
             return $self->makeStringOfWhere($column, $operator, $value, $type);
-
         }
 
         return $self;
@@ -335,7 +330,7 @@ class DB extends DatabaseFactory
      * @param   string   $table
      * @return  Instance
      */
-    public static function table(string $table) 
+    public static function table(string $table)
     {
         $self             = self::getInstance();
         $self->table_name = $table;
@@ -350,19 +345,16 @@ class DB extends DatabaseFactory
      * @param   array   $data
      * @return  boolean
      */
-    public static function insert(array $data) 
+    public static function insert(array $data)
     {
         $self  = self::getInstance();
         $table = $self->table_name;
 
-        if(isset($data[0])) {
-
+        if (isset($data[0])) {
             $make      = $self->makeMultipleInsert($table, $data);
             $statement = $make[0];
             $value     = $make[1];
-
-        }else {
-            
+        } else {
             $newData    = $self->makeInsertParameter($data);
             $column     = implode(",", array_keys($data));
             $paramValue = implode(",", array_keys($newData));
@@ -382,7 +374,7 @@ class DB extends DatabaseFactory
      * @param   array   $data
      * @return  boolean
      */
-    public static function update(array $data) 
+    public static function update(array $data)
     {
         $self      = self::getInstance();
 
@@ -402,7 +394,8 @@ class DB extends DatabaseFactory
      *
      * @return  boolean
      */
-    public static function delete() {
+    public static function delete()
+    {
         $self  = self::getInstance();
         $table = $self->table;
 
@@ -421,21 +414,21 @@ class DB extends DatabaseFactory
      * @param   string   $relation
      * @return  boolean
      */
-    public function join(string $table, string $foreignKey1, string $operator, string $foreignKey2, string $relation = "INNER") 
+    public function join(string $table, string $foreignKey1, string $operator, string $foreignKey2, string $relation = "INNER")
     {
         $self               = self::getInstance();
         $self->optionJoin[] = " {$relation} JOIN {$table} ON {$foreignKey1}{$operator}{$foreignKey2}";
         return $self;
     }
 
-    public function rightJoin(string $table, string $foreignKey1, string $operator, string $foreignKey2, string $relation = "RIGHT") 
+    public function rightJoin(string $table, string $foreignKey1, string $operator, string $foreignKey2, string $relation = "RIGHT")
     {
         $self               = self::getInstance();
         $self->optionJoin[] = " {$relation} JOIN {$table} ON {$foreignKey1}{$operator}{$foreignKey2}";
         return $self;
     }
 
-    public function leftJoin(string $table, string $foreignKey1, string $operator, string $foreignKey2, string $relation = "LEFT") 
+    public function leftJoin(string $table, string $foreignKey1, string $operator, string $foreignKey2, string $relation = "LEFT")
     {
         $self               = self::getInstance();
         $self->optionJoin[] = " {$relation} JOIN {$table} ON {$foreignKey1}{$operator}{$foreignKey2}";
@@ -453,24 +446,24 @@ class DB extends DatabaseFactory
      * @return  Instance
      */
 
-    public static function where($column, $operator = null, $value = null, $type = " AND ") 
-    {
-        return self::getInstance()->whereExecute($column, $operator, $value, $type);   
-    }
-
-    public static function orWhere($column, $operator = null, $value = null, $type = " OR ") 
+    public static function where($column, $operator = null, $value = null, $type = " AND ")
     {
         return self::getInstance()->whereExecute($column, $operator, $value, $type);
     }
 
-    public static function like($column, $value) 
+    public static function orWhere($column, $operator = null, $value = null, $type = " OR ")
     {
-        return self::getInstance()->where($column,'LIKE', $value);
+        return self::getInstance()->whereExecute($column, $operator, $value, $type);
     }
 
-    public static function orLike($column, $value) 
+    public static function like($column, $value)
     {
-        return self::getInstance()->orWhere($column,'LIKE', $value);
+        return self::getInstance()->where($column, 'LIKE', $value);
+    }
+
+    public static function orLike($column, $value)
+    {
+        return self::getInstance()->orWhere($column, 'LIKE', $value);
     }
 
     /**
@@ -480,7 +473,8 @@ class DB extends DatabaseFactory
      * @param   string || integer   $offset
      * @return  Instance
      */
-    public function limit($limit, $offset = null) {
+    public function limit($limit, $offset = null)
+    {
         $self              = self::getInstance();
         $offset            = (!empty($offset)) ? 'OFFSET '.$offset : null;
         $self->optionLimit = " LIMIT {$limit} ".$offset;
@@ -495,7 +489,8 @@ class DB extends DatabaseFactory
      * @param   string || integer   $sort
      * @return  Instance
      */
-    public function orderBy(string $column, string $sort) {
+    public function orderBy(string $column, string $sort)
+    {
         $self              = self::getInstance();
         $self->optionOrder = " ORDER BY {$column} {$sort}";
 
@@ -520,7 +515,7 @@ class DB extends DatabaseFactory
      * Get All Record
      * @return  Array
      */
-    public static function get() 
+    public static function get()
     {
         $self      = self::getInstance();
 
@@ -535,7 +530,8 @@ class DB extends DatabaseFactory
      * Get All Record Alias
      * @return  Array
      */
-    public static function all() {
+    public static function all()
+    {
         return self::getInstance()->get();
     }
 
@@ -544,7 +540,7 @@ class DB extends DatabaseFactory
      * Get First Record
      * @return  Array
      */
-    public static function first() 
+    public static function first()
     {
         $self      = self::getInstance();
 
@@ -559,7 +555,7 @@ class DB extends DatabaseFactory
      * Count Record
      * @return  Array
      */
-    public static function count() 
+    public static function count()
     {
         $self      = self::getInstance();
 
@@ -574,7 +570,8 @@ class DB extends DatabaseFactory
      * Get Last Insert ID
      * @return  Integer
      */
-    public function lastId() {
+    public function lastId()
+    {
         return $this->pdo->lastInsertId();
     }
 
