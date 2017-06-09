@@ -26,7 +26,7 @@ class Login extends Model
 
 	public function action(string $username, string $password)
 	{
-		$st = DB::prepare("SELECT `password`,`ukey` FROM `account_data` WHERE `username`=:user LIMIT 1;");
+		/*$st = DB::prepare("SELECT `password`,`ukey` FROM `account_data` WHERE `username`=:user LIMIT 1;");
 		$st->execute(array(":user" => $username));
 		if ($a = $st->fetch(\PDO::FETCH_NUM)){
 			if ($password === teadecrypt($a[0], strrev($a[1]))) {
@@ -35,7 +35,8 @@ class Login extends Model
 			}
 		}
 		DB::close();
-		return false;
+		return false;*/
+		var_dump(DB::table("account_data")->select("password","ukey")->first());
 	}
 
 	public function getUserCredentials(string $value, string $field = "username")
