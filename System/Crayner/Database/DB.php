@@ -6,6 +6,10 @@ use System\Crayner\Hub\Singleton;
 use System\Crayner\ConfigHandler\Configer;
 use System\Crayner\Builder\Database\DatabaseFactory;
 
+/**
+* @author arbiyanto <arbiyantowijaya17@gmail.com>
+*/
+
 class DB extends DatabaseFactory
 {
     use Singleton;
