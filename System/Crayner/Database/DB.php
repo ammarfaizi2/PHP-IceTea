@@ -7,8 +7,8 @@ use System\Crayner\ConfigHandler\Configer;
 use System\Crayner\Builder\Database\DatabaseFactory;
 
 /**
-* @author arbiyanto <arbiyantowijaya17@gmail.com>
-*/
+ * @author arbiyanto <arbiyantowijaya17@gmail.com>
+ */
 
 class DB extends DatabaseFactory
 {
