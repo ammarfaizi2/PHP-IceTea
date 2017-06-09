@@ -73,6 +73,7 @@ class Crayner
                     (new Controller())->load->error(404);
                 }
             }
+            die;
         }
         if (Configer::automaticRoute()) {
             $this->firstSegment        = empty($this->firstSegment) ? Configer::defaultRoute() : $this->firstSegment;
