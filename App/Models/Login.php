@@ -48,7 +48,7 @@ class Login extends Model
 
 	public function checkUserSession(string $userid, string $sessid)
 	{
-		$st = DB::prepare("SELECT `expired_at` FROM `login_session` WHERE `userid`=:userid AND `session`=:sessid LIMIT 1;");
+		/*$st = DB::prepare("SELECT `expired_at` FROM `login_session` WHERE `userid`=:userid AND `session`=:sessid LIMIT 1;");
 		$st->execute(array(
 				":userid"		=> $userid,
 				":sessid"		=> $sessid
@@ -67,7 +67,10 @@ class Login extends Model
 			$login = false;
 		}
 		DB::close();
-		return $login;
+		return $login;*/
+		if ($d = (array) DB::table("login_session")->select("expired_at")->where("userid", $userid)->where("session", $sessid)->limit(1)->first()){
+
+		}
 	}
 
 
