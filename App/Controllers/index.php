@@ -36,6 +36,6 @@ class index extends Controller
             (new loginpage())->index();
         }*/
 
-        print_r(DB::table('posts')->get());
+        var_dump(DB::table('posts')->get());
     }
 }
