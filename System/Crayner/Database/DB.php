@@ -200,12 +200,12 @@ class DB extends DatabaseFactory
     {
         $self  = self::getInstance();
 
-        $self->$optionWhere     = [];
-        $self->$optionWhereData = []; 
-        $self->$optionJoin      = [];
-        $self->$optionLimit     = null;
-        $self->$optionSelect    = null;
-        $self->$table_name      = null;
+        $self->optionWhere     = [];
+        $self->optionWhereData = []; 
+        $self->optionJoin      = [];
+        $self->optionLimit     = null;
+        $self->optionSelect    = null;
+        $self->table_name      = null;
 
         return $self;
     }
