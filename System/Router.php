@@ -88,18 +88,22 @@ class Router
 		foreach ($this->routes as $key => $value) {
 			foreach ($value as $route => $action) {
 				if ($route === $this->segments) {
-					if ($action instanceof Closure) {
-						$action();
-						return false;
+					if ($key !== $_SERVER['REQUEST_METHOD']) {
+						throw new \Exception("Method Not Allowed !", 1);
 					} else {
-						$action = explode("@", $action);
-						if (count($action) !== 2) {
-							throw new \Exception("Invalid route ". implode("@", $action), 1);
+						if ($action instanceof Closure) {
+							$action();
+							return false;
 						} else {
-							return array(
-									"controller" => $action[0],
-									"method"	 => $action[1]
-								);
+							$action = explode("@", $action);
+							if (count($action) !== 2) {
+								throw new \Exception("Invalid route ". implode("@", $action), 1);
+							} else {
+								return array(
+										"controller" => $action[0],
+										"method"	 => $action[1]
+									);
+							}
 						}
 					}
 				}
