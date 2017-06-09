@@ -63,6 +63,14 @@ class Configer
     }
 
     /**
+     * @return  string
+     */
+    public static function manualRoute()
+    {
+        return self::getInstance()->config['router']['manual_route'];
+    }
+
+    /**
      * @return	string
      */
     public static function defaultMethod()
