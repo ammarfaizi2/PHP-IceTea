@@ -18,11 +18,22 @@ class Router
 	use Singleton;
 
 	/**
+	 *
 	 * Uri Segments
 	 *
 	 * @var	array
+	 *
 	 */
 	private $segments;
+
+	/**
+	 *
+	 * Routes
+	 *
+	 * @var array
+	 * 
+	 */
+	private $routes;
 
 	/**
 	 *
@@ -62,7 +73,7 @@ class Router
 	 */
 	private function setRoute(string $route, $action, string $type = "GET")
 	{
-
+		$this->routes[$type][$route] = $action;
 	}
 
 	/**
@@ -74,6 +85,19 @@ class Router
 	 */
 	public static function get(string $route, $action)
 	{
-		self::getInstance();
+		self::getInstance()->setRoute($route, $action);
+	}
+
+
+	/**
+	 *
+	 * Set POST Route.
+	 *
+	 * @param string			$route
+	 * @param string|Closure	$action
+	 */
+	public static function post(string $route, $action)
+	{
+		self::getInstance()->setRoute($route, $action, "POST");
 	}
 }
