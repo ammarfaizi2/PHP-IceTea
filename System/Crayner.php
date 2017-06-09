@@ -2,6 +2,7 @@
 
 namespace System;
 
+use System\Router;
 use System\Controller;
 use System\Crayner\ConfigHandler\Configer;
 use System\Crayner\URLManagement\UriSegment;
@@ -58,6 +59,12 @@ class Crayner
      */
     public function run()
     {
+        if (Configer::manualRoute()) {
+            /* strip empty string */
+            array_shift($this->segments);
+
+            $router = new Router($this->segments);
+        }
         if (Configer::automaticRoute()) {
             $this->firstSegment        = empty($this->firstSegment) ? Configer::defaultRoute() : $this->firstSegment;
             $this->secondSegment    = empty($this->secondSegment) ? Configer::defaultMethod() : $this->secondSegment;
