@@ -31,10 +31,9 @@ class Login extends Model
 				DB::close();
 				return true;
 			}
-			var_dump($a);
 		}
 		DB::close();
-		die;
+		return false;
 	}
 
 	public function getUserCredentials(string $value, string $field = "username")
