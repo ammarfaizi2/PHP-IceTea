@@ -26,17 +26,14 @@ class Login extends Model
 
 	public function action(string $username, string $password)
 	{
-		/*$st = DB::prepare("SELECT `password`,`ukey` FROM `account_data` WHERE `username`=:user LIMIT 1;");
-		$st->execute(array(":user" => $username));
-		if ($a = $st->fetch(\PDO::FETCH_NUM)){
-			if ($password === teadecrypt($a[0], strrev($a[1]))) {
+		if ($a = (array) DB::table("account_data")->select("password","ukey")->where("username", $username)->limit(1)->first()){
+			if ($password === teadecrypt($a['password'], strrev($a['ukey']))) {
 				DB::close();
 				return true;
 			}
+			var_dump($a);
 		}
 		DB::close();
-		return false;*/
-		var_dump(DB::table("account_data")->select("password","ukey")->where("username", $username)->limit(1)->first());
 		die;
 	}
 
