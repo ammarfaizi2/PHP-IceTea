@@ -38,11 +38,7 @@ class Login extends Model
 
 	public function getUserCredentials(string $value, string $field = "username")
 	{
-		$st = DB::prepare("SELECT `userid`,`ukey` FROM `account_data` WHERE `{$field}`=:value LIMIT 1;");
-		$st->execute(array(
-				":value"		=> $value
-			));
-		$data = $st->fetch(\PDO::FETCH_ASSOC);
+		$data = (array) DB::table("account_data")->select("userid","ukey")->where($field, $value)->limit(1)->first();
 		$st = null;
 		DB::close();
 		return $data;
