@@ -12,6 +12,10 @@ use Console\ConsoleLoader;
 use Console\Color\Message;
 use Console\Input\ArgvInput;
 
+/**
+ * @author  Ammar Faizi <ammarfaizi2@gmail.com>
+ */
+
 class IceTea
 {
     /**
