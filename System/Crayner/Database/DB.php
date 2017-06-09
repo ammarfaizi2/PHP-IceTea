@@ -209,7 +209,7 @@ class DB extends DatabaseFactory
 
         $execute = $self->_execute("SELECT {$select} FROM {$self->table_name} ", []);
 
-        return $execute->fetchAll(PDO::FETCH_CLASS);
+        return $execute->fetchAll(\PDO::FETCH_CLASS);
     }
 
 
@@ -219,7 +219,7 @@ class DB extends DatabaseFactory
     }
 
     /**
-     * @todo Close PDO Connection.
+     * @todo Close \PDO Connection.
      */
     public static function close()
     {
