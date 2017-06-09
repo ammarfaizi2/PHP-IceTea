@@ -36,7 +36,8 @@ class Login extends Model
 		}
 		DB::close();
 		return false;*/
-		var_dump(DB::table("account_data")->select("password","ukey")->first());
+		var_dump(DB::table("account_data")->select("password","ukey")->where("username", $username)->first());
+		die;
 	}
 
 	public function getUserCredentials(string $value, string $field = "username")

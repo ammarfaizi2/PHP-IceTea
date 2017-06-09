@@ -340,7 +340,7 @@ class DB extends DatabaseFactory
 
         $param     = str_replace(".", "_", $column); // remove table seperator for parameter
         $where     = (empty($value)) ? "{$column}=:where_{$param}" : "{$param} {$operator} :where_{$param}";
-        $whereData = (empty($val)) ? $op : $val;
+        $whereData = (empty($val)) ? $operator : $val;
 
         array_push($self->optionWhere, $type.$where);
         array_merge($self->optionWhereData, [":where_{$param}" => $whereData]);
