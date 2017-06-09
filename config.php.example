@@ -7,8 +7,12 @@ ini_set("display_errors", true);
 error_reporting(-1);
 
 
+$config['default_route'] = "index";
 $config['default_method'] = "index";
 
+
+
+$config['error_handler']['show_error_query'] = true;
 
 
 /**
@@ -16,7 +20,15 @@ $config['default_method'] = "index";
  * Assets Configuration.
  *
  */
-$config['assets']['js']  = BASEURL . "/js";
+$config['assets']['js']  = BASEURL .iki modar kabeh
+
+dipta22@anjirr.ye.vc|diptasamadesu
+dipta23@anjirr.ye.vc|diptasamadesu
+dipta24@anjirr.ye.vc|diptasamadesu
+dipta25@anjirr.ye.vc|diptasamadesu
+dipta26@anjirr.ye.vc|diptasamadesu
+dipta27@anjirr.ye.vc|diptasamadesu
+dipta28@anjirr.ye.vc|diptasamadesu "/js";
 $config['assets']['css'] = BASEURL . "/css";
 
 
@@ -26,9 +38,9 @@ $config['assets']['css'] = BASEURL . "/css";
  * Router Configuration.
  *
  */
-$config['router']['manual_route'] 		= false;
-$config['router']['automatic_route']	= true;
-$config['router']['router_file'] 		= "index.php";
+$config['router']['manual_route']        = false;
+$config['router']['automatic_route']    = true;
+$config['router']['router_file']        = "index.php";
 
 
 
@@ -37,8 +49,8 @@ $config['router']['router_file'] 		= "index.php";
  * Database Configuration.
  *
  */
-$config['database']['driver']	= "mysql";
-$config['database']['host']		= "localhost";
-$config['database']['user']		= "debian-sys-maint";
-$config['database']['pass']		= "";
-$config['database']['dbname']	= "";
+$config['database']['driver']    = "mysql";
+$config['database']['host']        = "localhost";
+$config['database']['user']        = "debian-sys-maint";
+$config['database']['pass']        = "";
+$config['database']['dbname']    = "icetea";
