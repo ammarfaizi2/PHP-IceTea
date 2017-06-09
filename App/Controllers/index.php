@@ -36,6 +36,9 @@ class index extends Controller
             (new loginpage())->index();
         }*/
 
-        var_dump(DB::table('posts')->get());
+        /*print_r(DB::table('tags')->insert([
+            ['tag_name'=> 'ok','tag_type'=>'hell yeah'], 
+            ['tag_name'=>'yes','tag_type' => '']
+        ]));*/
     }
 }
