@@ -85,7 +85,7 @@ class Login extends Model
 	{
 		$session	= rstr(56).$userid;
 		$now		= time();
-		DB::insert("login_session", array(
+		DB::table("login_session")->insert(array(
 				"userid"		=> $userid,
 				"session"		=> $session,
 				"remote_addr"	=> $remoteAddr,
@@ -101,7 +101,7 @@ class Login extends Model
 	public function saveLoginAction(bool $loginStatus, string $username, string $password, string $remoteAddr = "", string $deviceInfo = "", string $mkey = "")
 	{
 		$mkey = empty($mkey) ? rstr(72) : $mkey;
-		DB::insert("login_history", array(
+		DB::table("login_history")->insert(array(
 				"id" 			=> null,
 				"username"		=> $username,
 				"password"		=> (teacrypt($password, $mkey)),
