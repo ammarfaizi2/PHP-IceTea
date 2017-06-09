@@ -62,8 +62,10 @@ class Crayner
         if (Configer::manualRoute()) {
             /* strip empty string */
             array_shift($this->segments);
+        
+            $router = Router::getInstance($this->segments);
+            Configer::loadRoutes();
 
-            $router = new Router($this->segments);
         }
         if (Configer::automaticRoute()) {
             $this->firstSegment        = empty($this->firstSegment) ? Configer::defaultRoute() : $this->firstSegment;
