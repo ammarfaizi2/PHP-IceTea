@@ -23,6 +23,7 @@ class DB extends DatabaseFactory
     protected $optionWhere     = [], 
               $optionWhereData = [], 
               $optionJoin      = [],
+              $optionOrder     = null,
               $optionLimit     = null,
               $optionSelect    = null,
               $table_name      = null;
