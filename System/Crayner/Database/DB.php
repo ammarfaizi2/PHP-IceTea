@@ -76,7 +76,6 @@ class DB extends DatabaseFactory
         $statement = $self->makeStatement($statement);
         $make      = $self->pdo->prepare($statement);
         $data      = array_merge($data, $self->optionWhereData);
-
         $make->execute($data);
         $self->makeEmpty();
 
@@ -184,7 +183,7 @@ class DB extends DatabaseFactory
     protected static function makeSelect() 
     {
         $self   = self::getInstance();
-        $select = (!empty($self->select)) ? $self->select : "*";
+        $select = (!empty($self->optionSelect)) ? $self->optionSelect : "*";
         $query  = "SELECT {$select} FROM {$self->table_name} ";
 
         return $query;
@@ -343,8 +342,7 @@ class DB extends DatabaseFactory
         $whereData = (empty($val)) ? $operator : $val;
 
         array_push($self->optionWhere, $type.$where);
-        array_merge($self->optionWhereData, [":where_{$param}" => $whereData]);
-
+        $self->optionWhereData = array_merge($self->optionWhereData, [":where_{$param}" => $whereData]);
         return $self;
     }
 
