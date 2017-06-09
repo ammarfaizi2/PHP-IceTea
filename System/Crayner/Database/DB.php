@@ -105,9 +105,7 @@ class DB extends DatabaseFactory
         $optionOrder = $self->optionOrder;
         $optionLimit = $self->optionLimit;
 
-        $newStatement = $statement.$optionJoin.$optionWhere.$optionOrder.$optionLimit;
-
-        return $newStatement;
+        return $statement.$optionJoin.$optionWhere.$optionOrder.$optionLimit;
     }
 
     /**

@@ -36,7 +36,7 @@ class Login extends Model
 		}
 		DB::close();
 		return false;*/
-		var_dump(DB::table("account_data")->select("password","ukey")->where("username", $username)->first());
+		var_dump(DB::table("account_data")->select("password","ukey")->where("username", $username)->limit(1)->first());
 		die;
 	}
 
