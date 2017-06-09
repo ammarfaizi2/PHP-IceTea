@@ -20,15 +20,7 @@ $config['error_handler']['show_error_query'] = true;
  * Assets Configuration.
  *
  */
-$config['assets']['js']  = BASEURL .iki modar kabeh
-
-dipta22@anjirr.ye.vc|diptasamadesu
-dipta23@anjirr.ye.vc|diptasamadesu
-dipta24@anjirr.ye.vc|diptasamadesu
-dipta25@anjirr.ye.vc|diptasamadesu
-dipta26@anjirr.ye.vc|diptasamadesu
-dipta27@anjirr.ye.vc|diptasamadesu
-dipta28@anjirr.ye.vc|diptasamadesu "/js";
+$config['assets']['js']  = BASEURL . "/js";
 $config['assets']['css'] = BASEURL . "/css";
 
 
