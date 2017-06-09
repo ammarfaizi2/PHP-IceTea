@@ -209,6 +209,127 @@ class DB extends DatabaseFactory
 
     /**
      *
+     * Make Where Statement Valid
+     *
+     * @param   string $param
+     * @param   string $column
+     * @param   string $operator
+     * @param   string || int $value
+     * @return  Instance
+     */
+    protected function makeWhere($param, $column, $operator, $value) 
+    {
+        if(empty($value)) 
+            $where = "{$column}=:where_{$param}";
+        else 
+            $where = "{$param} {$operator} :where_{$param}";
+
+        return $where;
+    }
+
+    /**
+     *
+     * Make Option Where Value
+     *
+     * @param   string $param
+     * @param   string $column
+     * @param   string $operator
+     * @param   string || int $value
+     * @return  Instance
+     */
+    protected function makeOptionWhere($param, $column, $operator, $value) 
+    {
+        $option = (empty($value)) ? $operator : $value;
+
+        return $option;
+    }
+
+    /**
+     *
+     * Make Where Array
+     *
+     * @param   array  $array
+     * @param   string $type
+     * @return  Instance
+     */
+    protected function makeArrayOfWhere($array, $type) 
+    {
+        $self = self::getInstance();
+
+        foreach($array as $a) {
+
+            $make = [
+                'parameter' => str_replace(".", "_", $a[0]),
+                'column'    => $a[0],
+                'operator'  => $a[1],
+                'value'     => (isset($a[2])) ? $a[2] : null,
+            ];
+
+            $where = $self->makeWhere(
+                $make['parameter'], $make['column'], $make['operator'], $make['value']
+            );
+
+            $whereData = $self->makeOptionWhere(
+                $make['parameter'], $make['column'], $make['operator'], $make['value']
+            );
+
+            array_push($self->optionWhere, $type.$where);
+
+            $self->optionWhereData = array_merge(
+                $self->optionWhereData, [":where_{$make['parameter']}" => $whereData]
+            );
+
+        }
+
+        return $self;
+    }
+
+    /**
+     *
+     * Make String Where
+     *
+     * @return  Instance
+     */
+    protected function makeStringOfWhere($column, $operator = null, $value = null, $type) {
+        $self = self::getInstance();
+
+        $param     = str_replace(".", "_", $column); // remove table seperator for parameter
+        $where     = $self->makeWhere($param, $column, $operator, $value);
+        $whereData = $self->makeOptionWhere($param, $column, $operator, $value);
+
+        array_push($self->optionWhere, $type.$where);
+        $self->optionWhereData = array_merge($self->optionWhereData, [":where_{$param}" => $whereData]);
+
+        return $self;
+    }
+
+    /**
+     *
+     * Check Where
+     *
+     * @return  Instance
+     */
+    protected static function whereExecute($column, $operator, $value, $type) 
+    {
+        $self      = self::getInstance();
+
+        if(is_array($column)) {
+
+            return $self->makeArrayOfWhere($column, $type);
+
+        }else {
+            
+            return $self->makeStringOfWhere($column, $operator, $value, $type);
+
+        }
+
+        return $self;
+    }
+
+
+
+    /**
+     *
      * Set Table
      *
      * @param   string   $table
@@ -331,31 +452,25 @@ class DB extends DatabaseFactory
      * @param   string   $type
      * @return  Instance
      */
-    public static function where($column, $operator, $value = null, $type = " AND ") 
+
+    public static function where($column, $operator = null, $value = null, $type = " AND ") 
     {
-        $self      = self::getInstance();
-
-        $param     = str_replace(".", "_", $column); // remove table seperator for parameter
-        $where     = (empty($value)) ? "{$column}=:where_{$param}" : "{$param} {$operator} :where_{$param}";
-        $whereData = (empty($val)) ? $operator : $val;
-
-        array_push($self->optionWhere, $type.$where);
-        $self->optionWhereData = array_merge($self->optionWhereData, [":where_{$param}" => $whereData]);
-        return $self;
+        return self::getInstance()->whereExecute($column, $operator, $value, $type);   
     }
 
-    public static function orWhere($column, $operator, $value = null, $type = " OR ") 
+    public static function orWhere($column, $operator = null, $value = null, $type = " OR ") 
     {
-        $self      = self::getInstance();
+        return self::getInstance()->whereExecute($column, $operator, $value, $type);
+    }
 
-        $param     = str_replace(".", "_", $column); // remove table seperator for parameter
-        $where     = (empty($value)) ? "{$column}=:where_{$param}" : "{$param} {$operator} :where_{$param}";
-        $whereData = (empty($val)) ? $op : $val;
+    public static function like($column, $value) 
+    {
+        return self::getInstance()->where($column,'LIKE', $value);
+    }
 
-        array_push($self->optionWhere, $type.$where);
-        array_merge($self->optionWhereData, [":where_{$param}" => $whereData]);
-
-        return $self;
+    public static function orLike($column, $value) 
+    {
+        return self::getInstance()->orWhere($column,'LIKE', $value);
     }
 
     /**
@@ -413,6 +528,15 @@ class DB extends DatabaseFactory
         $execute   = $self->_execute($statement, []);
 
         return $execute->fetchAll(\PDO::FETCH_CLASS);
+    }
+
+    /**
+     *
+     * Get All Record Alias
+     * @return  Array
+     */
+    public static function all() {
+        return self::getInstance()->get();
     }
 
     /**

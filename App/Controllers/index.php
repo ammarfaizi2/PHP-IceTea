@@ -35,5 +35,7 @@ class index extends Controller
         } else {
             (new loginpage())->index();
         }
+
+        /*print_r(DB::table('posts')->get());*/
     }
 }
