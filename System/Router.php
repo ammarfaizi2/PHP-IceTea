@@ -81,6 +81,7 @@ class Router
                 if ($route === $this->segments) {
                     if ($key !== $_SERVER['REQUEST_METHOD']) {
                         throw new MethodNotAllowedHttpException("Method Not Allowed !", 1);
+                        return false;
                     } else {
                         if ($action instanceof Closure) {
                             $action();
