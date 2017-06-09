@@ -26,6 +26,22 @@ class Router
 
 	/**
 	 *
+	 * Overide singleton
+	 *
+	 * @param 	array	$segments
+	 * @return	self
+	 */
+	public static function getInstance(array $segments = null)
+	{
+		if (self::$instance === null) {
+			self::$instance = new self($segments);
+		}
+		return self::$instance;
+	}
+
+
+	/**
+	 *
 	 * Constructor.
 	 *
 	 * @param array	$segments
@@ -51,13 +67,13 @@ class Router
 
 	/**
 	 *
-	 *
+	 * Set GET Route.
 	 *
 	 * @param string			$route
 	 * @param string|Closure	$action
 	 */
 	public static function get(string $route, $action)
 	{
-
+		self::getInstance();
 	}
 }

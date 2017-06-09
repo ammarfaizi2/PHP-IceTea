@@ -2,6 +2,7 @@
 
 namespace System\Crayner\ConfigHandler;
 
+
 use System\Crayner\Hub\Singleton;
 
 class Configer
@@ -92,5 +93,10 @@ class Configer
     public static function errorQuery()
     {
         return self::getInstance()->config['error_handler']['show_error_query'];
+    }
+
+    public static function loadRoutes()
+    {
+        require __DIR__ . "/../../../App/Routes/web.php";
     }
 }
