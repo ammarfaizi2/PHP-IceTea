@@ -65,6 +65,7 @@ class Crayner
         
             $router = Router::getInstance($this->segments);
             Configer::loadRoutes();
+            $router->run();
 
         }
         if (Configer::automaticRoute()) {
