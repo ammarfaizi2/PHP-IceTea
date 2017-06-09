@@ -17,7 +17,7 @@ class Teacrypt
      * @param   stirng  $salt   *salt must be 5 characters
      * @return  string  Encrypted String
      */
-    public static function encrypt($string, $key, $salt=null)
+    public static function encrypt(string $string, string $key, string $salt=null)
     {
         if (isset($salt) && strlen($salt)!=5) {
             throw new \Exception("Salt must be 5 characters !\n", 1);
@@ -37,7 +37,7 @@ class Teacrypt
      * @param   string  $key    Key
      * @return  string  Decrypted String
      */
-    public static function decrypt($string, $key)
+    public static function decrypt(string $string, string $key)
     {
         $string = gzinflate(strrev(base64_decode(strrev(($string)))));
         $salt = substr($string, 0, 5) xor $string = substr($string, 5) xor $key = strrev($salt) . $key;

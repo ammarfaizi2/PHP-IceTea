@@ -29,7 +29,7 @@ class InputUtilities implements InputBinding
 	 * @param string	$toString
 	 *
 	 */
-	public function __construct(string $toString, $func = null)
+	public function __construct(string $toString, \Closure $func = null)
 	{
 		$this->toString = $toString;
         $this->func     = $func;
