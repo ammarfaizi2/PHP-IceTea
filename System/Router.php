@@ -109,6 +109,7 @@ class Router
 				}
 			}
 		}
+		return true;
 	}
 
 	/**
