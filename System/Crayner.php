@@ -61,7 +61,7 @@ class Crayner
     {
         if (Configer::manualRoute()) {
             
-            $this->segments[0] = "/";
+            #$this->segments[0] = "/";
         
             $router = Router::getInstance($this->segments);
             Configer::loadRoutes();

@@ -9,7 +9,7 @@ function view(string $view, array $var = null){
 
 /**
 |
-|	Web Routes
+|	IceTea Web Routes
 |
 |
 |
@@ -22,6 +22,5 @@ function view(string $view, array $var = null){
 
 
 
-Route::get("/", function(){
-	view("welcome");
-});
+Route::get("/","index@index");
+Route::get("/login", "login@index");
