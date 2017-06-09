@@ -76,7 +76,6 @@ class DB extends DatabaseFactory
         $statement = $self->makeStatement($statement);
         $make      = $self->pdo->prepare($statement);
         $data      = array_merge($data, $self->optionWhereData);
-
         $make->execute($data);
         $self->makeEmpty();
 
@@ -106,9 +105,7 @@ class DB extends DatabaseFactory
         $optionOrder = $self->optionOrder;
         $optionLimit = $self->optionLimit;
 
-        $newStatement = $statement.$optionJoin.$optionWhere.$optionOrder.$optionLimit;
-
-        return $newStatement;
+        return $statement.$optionJoin.$optionWhere.$optionOrder.$optionLimit;
     }
 
     /**
@@ -184,7 +181,7 @@ class DB extends DatabaseFactory
     protected static function makeSelect() 
     {
         $self   = self::getInstance();
-        $select = (!empty($self->select)) ? $self->select : "*";
+        $select = (!empty($self->optionSelect)) ? $self->optionSelect : "*";
         $query  = "SELECT {$select} FROM {$self->table_name} ";
 
         return $query;
@@ -340,11 +337,10 @@ class DB extends DatabaseFactory
 
         $param     = str_replace(".", "_", $column); // remove table seperator for parameter
         $where     = (empty($value)) ? "{$column}=:where_{$param}" : "{$param} {$operator} :where_{$param}";
-        $whereData = (empty($val)) ? $op : $val;
+        $whereData = (empty($val)) ? $operator : $val;
 
         array_push($self->optionWhere, $type.$where);
-        array_merge($self->optionWhereData, [":where_{$param}" => $whereData]);
-
+        $self->optionWhereData = array_merge($self->optionWhereData, [":where_{$param}" => $whereData]);
         return $self;
     }
 

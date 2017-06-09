@@ -4,6 +4,7 @@ namespace System;
 
 use Closure;
 use System\Crayner\Hub\Singleton;
+use System\Exception\MethodNotAllowedHttpException;
 
 
 /**
@@ -89,7 +90,7 @@ class Router
 			foreach ($value as $route => $action) {
 				if ($route === $this->segments) {
 					if ($key !== $_SERVER['REQUEST_METHOD']) {
-						throw new \Exception("Method Not Allowed !", 1);
+						throw new MethodNotAllowedHttpException("Method Not Allowed !", 1);
 					} else {
 						if ($action instanceof Closure) {
 							$action();
