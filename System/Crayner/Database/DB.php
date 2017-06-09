@@ -202,10 +202,9 @@ class DB extends DatabaseFactory
 
     public static function get() 
     {
-        $self = self::getInstance();
+        $self   = self::getInstance();
 
         $select = (!empty($self->select)) ? $self->select : "*";
-        var_dump($self->table_name);
 
         $execute = $self->_execute("SELECT {$select} FROM {$self->table_name} ", []);
 
