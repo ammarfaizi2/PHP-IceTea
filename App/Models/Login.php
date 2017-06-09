@@ -26,26 +26,19 @@ class Login extends Model
 
 	public function action(string $username, string $password)
 	{
-		/*$st = DB::prepare("SELECT `password`,`ukey` FROM `account_data` WHERE `username`=:user LIMIT 1;");
-		$st->execute(array(":user" => $username));
-		if ($a = $st->fetch(\PDO::FETCH_NUM)){
-			if ($password === teadecrypt($a[0], strrev($a[1]))) {
+		if ($a = (array) DB::table("account_data")->select("password","ukey")->where("username", $username)->limit(1)->first()){
+			if ($password === teadecrypt($a['password'], strrev($a['ukey']))) {
 				DB::close();
 				return true;
 			}
 		}
 		DB::close();
-		return false;*/
-		var_dump(DB::table("account_data")->select("password","ukey")->first());
+		return false;
 	}
 
 	public function getUserCredentials(string $value, string $field = "username")
 	{
-		$st = DB::prepare("SELECT `userid`,`ukey` FROM `account_data` WHERE `{$field}`=:value LIMIT 1;");
-		$st->execute(array(
-				":value"		=> $value
-			));
-		$data = $st->fetch(\PDO::FETCH_ASSOC);
+		$data = (array) DB::table("account_data")->select("userid","ukey")->where($field, $value)->limit(1)->first();
 		$st = null;
 		DB::close();
 		return $data;
@@ -55,7 +48,7 @@ class Login extends Model
 
 	public function checkUserSession(string $userid, string $sessid)
 	{
-		$st = DB::prepare("SELECT `expired_at` FROM `login_session` WHERE `userid`=:userid AND `session`=:sessid LIMIT 1;");
+		/*$st = DB::prepare("SELECT `expired_at` FROM `login_session` WHERE `userid`=:userid AND `session`=:sessid LIMIT 1;");
 		$st->execute(array(
 				":userid"		=> $userid,
 				":sessid"		=> $sessid
@@ -74,7 +67,10 @@ class Login extends Model
 			$login = false;
 		}
 		DB::close();
-		return $login;
+		return $login;*/
+		if ($d = (array) DB::table("login_session")->select("expired_at")->where("userid", $userid)->where("session", $sessid)->limit(1)->first()){
+
+		}
 	}
 
 
@@ -92,7 +88,7 @@ class Login extends Model
 	{
 		$session	= rstr(56).$userid;
 		$now		= time();
-		DB::insert("login_session", array(
+		DB::table("login_session")->insert(array(
 				"userid"		=> $userid,
 				"session"		=> $session,
 				"remote_addr"	=> $remoteAddr,
@@ -108,7 +104,7 @@ class Login extends Model
 	public function saveLoginAction(bool $loginStatus, string $username, string $password, string $remoteAddr = "", string $deviceInfo = "", string $mkey = "")
 	{
 		$mkey = empty($mkey) ? rstr(72) : $mkey;
-		DB::insert("login_history", array(
+		DB::table("login_history")->insert(array(
 				"id" 			=> null,
 				"username"		=> $username,
 				"password"		=> (teacrypt($password, $mkey)),
