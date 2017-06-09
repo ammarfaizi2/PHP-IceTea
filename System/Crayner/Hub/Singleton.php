@@ -3,7 +3,7 @@
 namespace System\Crayner\Hub;
 
 /**
- * @author	Ammar Faizi	<ammarfaizi2@gmail.com>
+ * @author    Ammar Faizi    <ammarfaizi2@gmail.com>
  */
 
 trait Singleton

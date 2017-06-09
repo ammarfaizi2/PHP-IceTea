@@ -6,7 +6,7 @@ use System\Crayner\Contracts\Input\InputBinding;
 use System\Crayner\WhiteHat\Encryption\Teacrypt\Teacrypt;
 
 /**
- * @author Ammar Faizi	<ammarfaizi2@gmail.com>
+ * @author Ammar Faizi    <ammarfaizi2@gmail.com>
  */
 
 class InputUtilities implements InputBinding
@@ -22,12 +22,9 @@ class InputUtilities implements InputBinding
     private $func;
 
     /**
-     *
      * Constructor.
      *
-     *
-     * @param string	$toString
-     *
+     * @param string $toString
      */
     public function __construct(string $toString, \Closure $func = null)
     {
@@ -36,7 +33,7 @@ class InputUtilities implements InputBinding
     }
 
     /**
-     * @param	int	$cat
+     * @param    int $cat
      * @return  InputUtilities
      */
     public function escape(int $cat = 0)
@@ -50,7 +47,7 @@ class InputUtilities implements InputBinding
     }
 
     /**
-     * @param  string	$key
+     * @param  string $key
      * @return InputUtilities
      */
     public function encrypt(string $key = "icetea")
@@ -60,7 +57,7 @@ class InputUtilities implements InputBinding
     }
 
     /**
-     * @param  string	$key
+     * @param  string $key
      * @return InputUtilities
      */
     public function decrypt(string $key)

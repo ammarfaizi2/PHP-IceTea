@@ -12,9 +12,9 @@ class Teacrypt
     const VERSION = "1.4";
 
     /**
-     * @param   string  $string Pure string
-     * @param   string  $key    Key
-     * @param   stirng  $salt   *salt must be 5 characters
+     * @param   string $string Pure string
+     * @param   string $key    Key
+     * @param   stirng $salt   *salt must be 5 characters
      * @return  string  Encrypted String
      */
     public static function encrypt(string $string, string $key, string $salt=null)
@@ -33,8 +33,8 @@ class Teacrypt
     }
 
     /**
-     * @param   string  $string Encrypted String
-     * @param   string  $key    Key
+     * @param   string $string Encrypted String
+     * @param   string $key    Key
      * @return  string  Decrypted String
      */
     public static function decrypt(string $string, string $key)

@@ -7,7 +7,7 @@ use System\Crayner\Input\InputUtilities;
 use System\Crayner\Contracts\Cookie\CookieTable;
 
 /**
- * @author Ammar Faizi	<ammarfaizi2@gmail.com>
+ * @author Ammar Faizi    <ammarfaizi2@gmail.com>
  */
 
 class Cookie implements CookieTable
@@ -23,11 +23,7 @@ class Cookie implements CookieTable
     private $toString;
 
     /**
-     *
      * Constructor.
-     *
-     *
-     *
      */
     public function __construct()
     {
@@ -36,13 +32,13 @@ class Cookie implements CookieTable
     /**
      * Create a new cookie.
      *
-     * @param  string  $name
-     * @param  string  $value
-     * @param  int     $minutes
-     * @param  string  $path
-     * @param  string  $domain
-     * @param  bool    $encrypt
-     * @param  bool    $httpOnly
+     * @param  string $name
+     * @param  string $value
+     * @param  int    $minutes
+     * @param  string $path
+     * @param  string $domain
+     * @param  bool   $encrypt
+     * @param  bool   $httpOnly
      * @return bool
      */
     public function make(string $name, string $value, int $minute = null, string $path = "/", string $domain = null, bool $secure = false, bool $httpOnly = true)
@@ -57,8 +53,8 @@ class Cookie implements CookieTable
     /**
      * Get cookie value.
      *
-     * @param 	string	$name
-     * @return 	string
+     * @param  string $name
+     * @return string
      */
     public function get(string $name)
     {
@@ -69,8 +65,8 @@ class Cookie implements CookieTable
     /**
      * Delete cookie.
      *
-     * @param	string	$name
-     * @return	bool
+     * @param  string $name
+     * @return bool
      */
     public function delete(string $name)
     {

@@ -8,10 +8,7 @@ use System\Controller;
 class login extends Controller
 {
     /**
-     *
      * Constructor.
-     *
-     *
      */
     public function __construct()
     {
@@ -24,9 +21,7 @@ class login extends Controller
     }
 
     /**
-     *
      * Default method.
-     *
      */
     public function index()
     {
@@ -47,10 +42,10 @@ class login extends Controller
     private function checkLoginCookie()
     {
         if (isset($_COOKIE['sessid'], $_COOKIE['uid'], $_COOKIE['uk'], $_COOKIE['mt'])) {
-            if ($uk                = $this->get->cookie("uk") &&
-                $userid            = $this->get->cookie("uid")->decrypt($uk) &&
-                $udata            = $this->login->getUserCredentials($userid, "userid") &&
-                $sessid            = $this->get->cookie("sessid")->decrypt($udata['ukey']).""
+            if ($uk                = $this->get->cookie("uk")
+                && $userid            = $this->get->cookie("uid")->decrypt($uk)
+                && $udata            = $this->login->getUserCredentials($userid, "userid")
+                && $sessid            = $this->get->cookie("sessid")->decrypt($udata['ukey']).""
             ) {
                 if ($this->login->checkUserSession($userid, $sessid)) {
                     return true;
@@ -78,9 +73,10 @@ class login extends Controller
                 if ($login        = $this->login->action($username, $password)) {
                     $udata        = $this->login->getUserCredentials($username);
                     $sessid    = $this->login->createSession(
-                                $udata['userid'],
-                                $ip,
-                                $deviceInfo);
+                        $udata['userid'],
+                        $ip,
+                        $deviceInfo
+                    );
                     $expired    = 60*24*7;
                     $uidkey        = rstr(32);
                     $this->set->cookie("sessid", $sessid, $expired)->encrypt($udata['ukey']);
@@ -105,11 +101,13 @@ class login extends Controller
             $mkey                = $this->get->cookie("mkey");
             $mkey                = $this->login->saveLoginAction($login, $username, $password, $ip, $deviceInfo, $mkey);
             $this->set->cookie("mkey", $mkey, 60*24);
-            print json_encode(array(
+            print json_encode(
+                array(
                     "login"    => $login,
                     "alert"    => $alert,
                     "r"            => $r
-                ));
+                )
+            );
         } else {
             $this->load->error(404);
         }

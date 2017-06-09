@@ -13,11 +13,9 @@ class CookieFlush
     private $func;
 
     /**
-     *
      * Constructor.
      *
-     * @param Closure	$func
-     *
+     * @param Closure $func
      */
     public function __construct(Closure $func = null)
     {

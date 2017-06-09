@@ -3,13 +3,13 @@
 namespace System\Crayner\URLManagement;
 
 /**
- * @author	Ammar Faizi	<ammarfaizi2@gmail.com>
+ * @author    Ammar Faizi    <ammarfaizi2@gmail.com>
  */
 
 class UriSegment
 {
     /**
-     *   @param  string  $router
+     *   @param  string $router
      *   @return array
      */
     public static function getSegments($router='index.php')
@@ -24,8 +24,8 @@ class UriSegment
     }
 
     /**
-     *   @param  int     $n
-     *   @param  array   $segs
+     *   @param  int   $n
+     *   @param  array $segs
      *   @return string
      */
     public static function getSegment($n, $segs)

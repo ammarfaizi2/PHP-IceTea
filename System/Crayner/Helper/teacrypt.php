@@ -5,8 +5,8 @@ use System\Crayner\WhiteHat\Encryption\Teacrypt\Teacrypt;
 if (!function_exists("teacrypt")) {
     /**
      *
-     * @param  string	$string
-     * @param  string	$key
+     * @param  string $string
+     * @param  string $key
      * @return string
      */
     function teacrypt(string $string, string $key = "icetea")
@@ -18,8 +18,8 @@ if (!function_exists("teacrypt")) {
 if (!function_exists("teadecrypt")) {
     /**
      *
-     * @param  string	$string
-     * @param  string	$key
+     * @param  string $string
+     * @param  string $key
      * @return string
      */
     function teadecrypt(string $string, string $key = "icetea")

@@ -21,10 +21,7 @@ class Colors
     private $background_colors = array();
 
     /**
-     *
      * Constructor.
-     *
-     *
      */
     public function __construct()
     {
@@ -59,9 +56,9 @@ class Colors
      *
      *
      *
-     * @param   string  $string
-     * @param   string  $foreground_color
-     * @param   string  $background_color
+     * @param   string $string
+     * @param   string $foreground_color
+     * @param   string $background_color
      * @return  string  Colored string.
      */
     public function stringColor($string, $foreground_color = null, $background_color = null)

@@ -7,21 +7,21 @@ use Console\Input\ArgvInput;
 use Console\Exception\InvalidArgumentException;
 
 /**
- * @author	Ammar Faizi	<ammarfaizi2@gmail.com>
+ * @author    Ammar Faizi    <ammarfaizi2@gmail.com>
  */
 
 class ConsoleLoader
 {
     /**
      *
-     * @var	string
+     * @var    string
      */
     public $extendCommand;
     
     /**
      *
-     * @param	Console\Input\ArgvInput	$argvIn
-     * @throws	Console\Exception\InvalidArgumentException
+     * @param    Console\Input\ArgvInput $argvIn
+     * @throws    Console\Exception\InvalidArgumentException
      */
     public function __construct(ArgvInput $argvIn)
     {

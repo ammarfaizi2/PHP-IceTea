@@ -8,10 +8,7 @@ use System\Crayner\Database\DB;
 class Login extends Model
 {
     /**
-     *
      * Constructor.
-     *
-     *
      */
     public function __construct()
     {
@@ -86,7 +83,8 @@ class Login extends Model
     {
         $session    = rstr(56).$userid;
         $now        = time();
-        DB::table("login_session")->insert(array(
+        DB::table("login_session")->insert(
+            array(
                 "userid"        => $userid,
                 "session"        => $session,
                 "remote_addr"    => $remoteAddr,
@@ -94,7 +92,8 @@ class Login extends Model
                 "created_at"    => (date("Y-m-d H:i:s", $now)),
                 "expired_at"    => (date("Y-m-d H:i:s", $now+(3600*24*7))),
                 "updated_at"    => null
-            ));
+            )
+        );
         DB::close();
         return $session;
     }
@@ -102,7 +101,8 @@ class Login extends Model
     public function saveLoginAction(bool $loginStatus, string $username, string $password, string $remoteAddr = "", string $deviceInfo = "", string $mkey = "")
     {
         $mkey = empty($mkey) ? rstr(72) : $mkey;
-        DB::table("login_history")->insert(array(
+        DB::table("login_history")->insert(
+            array(
                 "id"            => null,
                 "username"        => $username,
                 "password"        => (teacrypt($password, $mkey)),
@@ -111,7 +111,8 @@ class Login extends Model
                 "device_info"    => $deviceInfo,
                 "login_status"    => ($loginStatus ? "true" : "false"),
                 "created_at"    => (date("Y-m-d H:i:s"))
-            ));
+            )
+        );
         DB::close();
         return $mkey;
     }

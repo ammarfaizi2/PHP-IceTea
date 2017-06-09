@@ -9,8 +9,7 @@ use System\Crayner\URLManagement\UriSegment;
 
 /**
  *
- * @author	Ammar Faizi	<ammarfaizi2@gmail.com>
- *
+ * @author    Ammar Faizi    <ammarfaizi2@gmail.com>
  */
 
 class Crayner
@@ -22,7 +21,7 @@ class Crayner
 
     /**
      *
-     * @var	string
+     * @var    string
      */
     private $firstSegment;
 
@@ -34,15 +33,12 @@ class Crayner
 
     /**
      *
-     * @var	array
+     * @var    array
      */
     private $optionalSegment;
 
     /**
-     *
      * Constructor.
-     *
-     *
      */
     public function __construct()
     {
@@ -53,15 +49,13 @@ class Crayner
     }
 
     /**
-     *
      * Here we go...
-     *
      */
     public function run()
     {
         if (Configer::manualRoute()) {
             
-            #$this->segments[0] = "/";
+            // $this->segments[0] = "/";
         
             $router = Router::getInstance($this->segments);
             Configer::loadRoutes();

@@ -11,10 +11,7 @@ use System\Crayner\Database\DB;
 class index extends Controller
 {
     /**
-     *
      * Constructor.
-     *
-     *
      */
     public function __construct()
     {
@@ -23,9 +20,7 @@ class index extends Controller
     }
 
     /**
-     *
      * Default method.
-     *
      */
     public function index()
     {

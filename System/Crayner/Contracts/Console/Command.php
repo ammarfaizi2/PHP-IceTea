@@ -7,29 +7,29 @@ interface Command
     /**
      * Prepare a command.
      *
-     * @param	string	$command
-     * @return	$this
+     * @param  string $command
+     * @return $this
      */
     public function prepare($selection, $optional, $command);
 
     /**
      * Get argument.
      *
-     * @param   array   $argument
+     * @param array $argument
      */
     public function argument($argument);
 
     /**
      * Execute command.
      *
-     * @return	bool
+     * @return bool
      */
     public function execute();
 
     /**
      * Show command result.
      *
-     * @return	string
+     * @return string
      */
     public function showResult();
 }

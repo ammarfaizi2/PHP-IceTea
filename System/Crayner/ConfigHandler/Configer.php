@@ -13,24 +13,21 @@ class Configer
     use Singleton;
 
     /**
-     * @var	array
+     * @var    array
      */
     protected $config;
 
     /**
-     *
      * Constructor.
-     *
-     *
      */
     public function __construct()
     {
-        require __DIR__ . '/../../../config.php';
+        include __DIR__ . '/../../../config.php';
         $this->config = $config;
     }
 
     /**
-     * @return	array
+     * @return    array
      */
     public static function database()
     {
@@ -38,8 +35,8 @@ class Configer
     }
 
     /**
-     * @param	string	$assetType
-     * @return	string
+     * @param    string $assetType
+     * @return    string
      */
     public static function asset($assetType)
     {
@@ -47,7 +44,7 @@ class Configer
     }
 
     /**
-     * @return	string
+     * @return    string
      */
     public static function routerFile()
     {
@@ -55,7 +52,7 @@ class Configer
     }
 
     /**
-     * @return	string
+     * @return    string
      */
     public static function automaticRoute()
     {
@@ -71,7 +68,7 @@ class Configer
     }
 
     /**
-     * @return	string
+     * @return    string
      */
     public static function defaultMethod()
     {
@@ -79,7 +76,7 @@ class Configer
     }
 
     /**
-     * @return	string
+     * @return    string
      */
     public static function defaultRoute()
     {
@@ -96,6 +93,6 @@ class Configer
 
     public static function loadRoutes()
     {
-        require __DIR__ . "/../../../App/Routes/web.php";
+        include __DIR__ . "/../../../App/Routes/web.php";
     }
 }

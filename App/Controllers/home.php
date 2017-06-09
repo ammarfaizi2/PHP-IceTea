@@ -7,10 +7,7 @@ use System\Controller;
 class home extends Controller
 {
     /**
-     *
      * Constructor.
-     *
-     *
      */
     public function __construct()
     {
@@ -18,9 +15,7 @@ class home extends Controller
     }
 
     /**
-     *
      * Default method.
-     *
      */
     public function index()
     {
