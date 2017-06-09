@@ -37,7 +37,6 @@ class Router
 
     /**
      *
-     * Overide singleton
      *
      * @param 	array	$segments
      * @return	self

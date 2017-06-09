@@ -62,11 +62,6 @@ class DB extends DatabaseFactory
      */
     protected $table_name;
 
-    /**
-     *
-     * Override singleton
-     *
-     */
     public static function getInstance()
     {
         if (self::$instance === null || !((self::$instance)->pdo  instanceof \PDO)) {
@@ -75,13 +70,6 @@ class DB extends DatabaseFactory
         return self::$instance;
     }
 
-    /**
-     *
-     * Constructor.
-     *
-     *
-     *
-     */
     public function __construct()
     {
         $this->showErrorQuery = Configer::errorQuery();
@@ -90,6 +78,7 @@ class DB extends DatabaseFactory
             $this->pdo = new \PDO($conf['driver'].":host=".$conf['host'].";port=".$conf['port'].";dbname=".$conf['dbname'], $conf['user'], $conf['pass'], array(
                     \PDO::ATTR_PERSISTENT => false
                 ));
+            $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (\PDOException $e) {
             var_dump($e->getMessage());
         }
