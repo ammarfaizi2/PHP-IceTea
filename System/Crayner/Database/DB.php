@@ -20,13 +20,47 @@ class DB extends DatabaseFactory
      */
     private $showErrorQuery;
 
+    /**
+     *
+     * @var array
+     */
     protected $optionWhere     = [];
+
+    /**
+     *
+     * @var array
+     */
     protected $optionWhereData = [];
+
+    /**
+     *
+     * @var array
+     */
     protected $optionJoin      = [];
-    protected $optionOrder     = null;
-    protected $optionLimit     = null;
-    protected $optionSelect    = null;
-    protected $table_name      = null;
+
+    /**
+     *
+     * @var string
+     */
+    protected $optionOrder;
+
+    /**
+     *
+     * @var string
+     */
+    protected $optionLimit;
+
+    /**
+     *
+     * @var string
+     */
+    protected $optionSelect;
+
+    /**
+     *
+     * @var string
+     */
+    protected $table_name;
 
     /**
      *
