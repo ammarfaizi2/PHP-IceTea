@@ -65,7 +65,7 @@ class Crayner
         
             $router = Router::getInstance($this->segments);
             Configer::loadRoutes();
-            if ($action = $router->run()){
+            if ($action = $router->run()) {
                 if (is_array($action)) {
                     $class = "App\\Controllers\\{$action['controller']}";
                     if (class_exists($class) and $class = new $class() and is_callable(array($class, $action['method']))) {

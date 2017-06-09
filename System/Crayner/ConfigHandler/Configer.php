@@ -2,7 +2,6 @@
 
 namespace System\Crayner\ConfigHandler;
 
-
 use System\Crayner\Hub\Singleton;
 
 class Configer

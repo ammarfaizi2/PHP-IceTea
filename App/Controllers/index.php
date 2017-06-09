@@ -2,7 +2,6 @@
 
 namespace App\Controllers;
 
-
 use System\Controller;
 
 use App\Models\Login;
@@ -30,7 +29,7 @@ class index extends Controller
      */
     public function index()
     {
-       if ($this->login->loginStatus()) {
+        if ($this->login->loginStatus()) {
             (new home())->index();
         } else {
             (new loginpage())->index();
