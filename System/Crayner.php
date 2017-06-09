@@ -6,6 +6,7 @@ use System\Router;
 use System\Controller;
 use System\Crayner\ConfigHandler\Configer;
 use System\Crayner\URLManagement\UriSegment;
+use System\Exception\MethodNotAllowedHttpException;
 
 /**
  *
@@ -59,18 +60,23 @@ class Crayner
         
             $router = Router::getInstance($this->segments);
             Configer::loadRoutes();
-            if ($action = $router->run()) {
-                if (is_array($action)) {
-                    $class = "App\\Controllers\\{$action['controller']}";
-                    if (class_exists($class) and $class = new $class() and is_callable(array($class, $action['method']))) {
-                        $class->{$action['method']}();
+            try {
+                if ($action = $router->run()) {
+                    if (is_array($action)) {
+                        $class = "App\\Controllers\\{$action['controller']}";
+                        if (class_exists($class) and $class = new $class() and is_callable(array($class, $action['method']))) {
+                            $class->{$action['method']}();
+                        } else {
+                            (new Controller())->load->error(404);
+                        }
                     } else {
                         (new Controller())->load->error(404);
                     }
-                } else {
-                    (new Controller())->load->error(404);
                 }
+            } catch (MethodNotAllowedHttpException $e) {
+                print "MethodNotAllowedHttpException : ".$e->getMessage();
             }
+            
             die;
         }
         if (Configer::automaticRoute()) {
