@@ -45,4 +45,5 @@ $config['database']['driver']    = "mysql";
 $config['database']['host']        = "localhost";
 $config['database']['user']        = "debian-sys-maint";
 $config['database']['pass']        = "";
+$config['database']['port']        = "3306";
 $config['database']['dbname']    = "icetea";
