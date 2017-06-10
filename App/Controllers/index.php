@@ -16,7 +16,7 @@ class index extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->login = new Login();
+        $this->login = new loginpage();
     }
 
     /**
@@ -24,10 +24,10 @@ class index extends Controller
      */
     public function index()
     {
-        if ($this->login->loginStatus()) {
+        if ($this->login->checkLoginCookie()) {
             (new home())->index();
         } else {
-            (new loginpage())->index();
+            $this->login->index();
         }
 
         /*print_r(DB::table('posts')->get());*/

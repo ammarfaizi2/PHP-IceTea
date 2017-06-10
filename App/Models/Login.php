@@ -39,12 +39,12 @@ class Login extends Model
     {
         if ($d = (array) DB::table("login_session")->select("expired_at")->where("userid", $userid)->where("session", $sessid)->limit(1)->first()) {
             if (strtotime($d['expired_at'])<=time()) {
-                DB::prepare("DELETE FROM `login_session` WHERE `userid`=:userid AND `session`=:sessid LIMIT 1;")->execute(
+                /*DB::prepare("DELETE FROM `login_session` WHERE `userid`=:userid AND `session`=:sessid LIMIT 1;")->execute(
                     array(
                             ":userid"       => $userid,
                             ":sessid"       => $sessid
                     )
-                );
+                );*/
                 $login = false;
             } else {
                 $login = true;
@@ -92,5 +92,11 @@ class Login extends Model
         );
         DB::close();
         return $mkey;
+    }
+
+    public function logout()
+    {
+        $a = DB::table("login_session")->delete();
+        var_dump($a);
     }
 }

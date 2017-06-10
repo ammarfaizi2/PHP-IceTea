@@ -39,7 +39,13 @@ class login extends Controller
 
     public function logout()
     {
-        if ($this->checkLoginCookie()) {
+        if ($uk                = $this->get->cookie("uk")->__toString()
+                and $userid            = $this->get->cookie("uid")->decrypt($uk)->__toString()
+                and $udata             = $this->login->getUserCredentials($userid, "userid")
+                and $sessid            = $this->get->cookie("sessid")->decrypt($udata['ukey'])) {
+            if ($this->checkLoginCookie()) {
+                $this->login->logout();
+            }
         }
     }
 
