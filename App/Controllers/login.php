@@ -25,7 +25,7 @@ class login extends Controller
      */
     public function index()
     {
-        if ($this->checkLoginCookie()){
+        if ($this->checkLoginCookie()) {
             $this->set->cookie("lt", "", 0);
             $this->set->cookie("tk", "", 0);
             header("Location: ".router_url()."/home");
@@ -40,7 +40,6 @@ class login extends Controller
     public function logout()
     {
         if ($this->checkLoginCookie()) {
-            
         }
     }
 
@@ -58,9 +57,9 @@ class login extends Controller
     public function checkLoginCookie()
     {
         if (isset($_COOKIE['sessid'], $_COOKIE['uid'], $_COOKIE['uk'], $_COOKIE['mt'])) {
-            if ($uk                = $this->get->cookie("uk")->__toString() 
-                and $userid            = $this->get->cookie("uid")->decrypt($uk)->__toString() 
-                and $udata            = $this->login->getUserCredentials($userid, "userid") 
+            if ($uk                = $this->get->cookie("uk")->__toString()
+                and $userid            = $this->get->cookie("uid")->decrypt($uk)->__toString()
+                and $udata            = $this->login->getUserCredentials($userid, "userid")
                 and $sessid            = $this->get->cookie("sessid")->decrypt($udata['ukey'])
             ) {
                 if ($this->login->checkUserSession($userid, $sessid)) {

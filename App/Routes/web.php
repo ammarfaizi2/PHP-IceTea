@@ -20,8 +20,8 @@ function view(string $view, array $var = null)
 Route::get("/", "index@index");
 
 /**
- *	Login Routes
- */ 
+ *    Login Routes
+ */
 Route::get("/login", "login@index");
 Route::get("/login/user_check", "login@user_check");
 Route::post("/login/action", "login@action");
