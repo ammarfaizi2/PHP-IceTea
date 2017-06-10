@@ -25,6 +25,8 @@ class login extends Controller
      */
     public function index()
     {
+        $this->checkLoginCookie();
+        die;
         $token_key = rstr(32);
         $this->set->cookie("lt", $token = rstr(72), 120)->encrypt($token_key);
         $this->set->cookie("tk", $token_key, 120);
@@ -42,10 +44,10 @@ class login extends Controller
     private function checkLoginCookie()
     {
         if (isset($_COOKIE['sessid'], $_COOKIE['uid'], $_COOKIE['uk'], $_COOKIE['mt'])) {
-            if ($uk                = $this->get->cookie("uk")
-                && $userid            = $this->get->cookie("uid")->decrypt($uk)
-                && $udata            = $this->login->getUserCredentials($userid, "userid")
-                && $sessid            = $this->get->cookie("sessid")->decrypt($udata['ukey']).""
+            if ($uk                = $this->get->cookie("uk")->__toString() 
+                and $userid            = $this->get->cookie("uid")->decrypt($uk)->__toString() 
+                and $udata            = $this->login->getUserCredentials($userid, "userid") 
+                and $sessid            = $this->get->cookie("sessid")->decrypt($udata['ukey'])
             ) {
                 if ($this->login->checkUserSession($userid, $sessid)) {
                     return true;
