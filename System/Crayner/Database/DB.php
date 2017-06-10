@@ -580,4 +580,9 @@ class DB extends DatabaseFactory
         $self   = self::getInstance();
         $self->pdo = null;
     }
+
+    public function __debugInfo()
+    {
+        
+    }
 }
