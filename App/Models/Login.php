@@ -38,6 +38,7 @@ class Login extends Model
     public function checkUserSession(string $userid, string $sessid)
     {
         if ($d = (array) DB::table("login_session")->select("expired_at")->where("userid", $userid)->where("session", $sessid)->limit(1)->first()) {
+            var_dump($d);
             if (strtotime($d['expired_at'])<=time()) {
                 /*DB::prepare("DELETE FROM `login_session` WHERE `userid`=:userid AND `session`=:sessid LIMIT 1;")->execute(
                     array(
@@ -97,7 +98,7 @@ class Login extends Model
     public function logout($userid, $session)
     {
         try{
-            $a = DB::table("login_session")->where(["userid", $userid],["session", $session])->limit(1)->delete();
+            $a = DB::table("login_session")->where([["userid", $userid],["session", $session]])->limit(1)->delete();
         } catch(\PDOException $e) {
             var_dump("<br><br>".DB::getInstance()->statement,"<br><br>" .$e->getMessage());
         }

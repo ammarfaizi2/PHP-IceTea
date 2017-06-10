@@ -99,10 +99,6 @@ class DB extends DatabaseFactory
 
         $statement = $self->makeStatement($statement);
         $make      = $self->pdo->prepare($statement);
-
-        // for debugging `var_dump`
-        $self->statement = $statement;
-
         $data      = array_merge($data, $self->optionWhereData);
         $make->execute($data);
         $self->makeEmpty();

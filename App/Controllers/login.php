@@ -45,11 +45,11 @@ class login extends Controller
                 and $sessid            = $this->get->cookie("sessid")->decrypt($udata['ukey'])) {
             if ($this->checkLoginCookie($userid, $sessid)) {
                 $this->login->logout($userid, $sessid);
-                /*$rem        = array("sessid", "uid", "uk", "mt", "tl", "wg");
+                $rem        = array("sessid", "uid", "uk", "mt", "tl", "wg");
                 $exp_time    = -100;
                 foreach ($rem as $val) {
                     $this->set->cookie($val, '', $exp_time);
-                }*/
+                }
                 return false;
             }
         }
