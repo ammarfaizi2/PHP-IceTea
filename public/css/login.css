@@ -49,3 +49,32 @@ body{
 a:hover{
 	text-decoration: underline;
 }
+
+@media screen and (max-width: 600px) {
+	.mcg{
+		margin-top: 25%;
+		border: 3px solid #1BCBF2;
+		width: 70%;
+	}
+}
+@media screen and (min-width: 600px) {
+	.mcg{
+		margin-top: 10%;
+		border: 3px solid #1BCBF2;
+		width: 50%;
+	}
+}
+@media screen and (min-width: 800px) {
+	.mcg{
+		margin-top: 10%;
+		border: 3px solid #1BCBF2;
+		width: 50%;
+	}
+}
+@media screen and (min-width: 1000px) {
+	.mcg{
+		margin-top: 8%;
+		border: 3px solid #1BCBF2;
+		width: 30%;
+	}
+}
