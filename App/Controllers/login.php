@@ -25,8 +25,12 @@ class login extends Controller
      */
     public function index()
     {
-        $this->checkLoginCookie();
-        die;
+        if ($this->checkLoginCookie()){
+            $this->set->cookie("lt", "", 0);
+            $this->set->cookie("tk", "", 0);
+            header("Location: ".router_url()."/home");
+            die("~");
+        }
         $token_key = rstr(32);
         $this->set->cookie("lt", $token = rstr(72), 120)->encrypt($token_key);
         $this->set->cookie("tk", $token_key, 120);
@@ -41,7 +45,7 @@ class login extends Controller
             $this->load->error(404);
         }
     }
-    private function checkLoginCookie()
+    public function checkLoginCookie()
     {
         if (isset($_COOKIE['sessid'], $_COOKIE['uid'], $_COOKIE['uk'], $_COOKIE['mt'])) {
             if ($uk                = $this->get->cookie("uk")->__toString() 
@@ -53,14 +57,15 @@ class login extends Controller
                     return true;
                 } else {
                     $rem        = array("sessid", "uid", "uk", "mt", "tl", "wg");
-                    $exp_time    = 1-time();
+                    $exp_time    = -100;
                     foreach ($rem as $val) {
-                        $this->set->cookie($val, null, $exp_time);
+                        $this->set->cookie($val, '', $exp_time);
                     }
                     return false;
                 }
             }
         }
+        return false;
     }
 
     public function action()
@@ -81,6 +86,8 @@ class login extends Controller
                     );
                     $expired    = 60*24*7;
                     $uidkey        = rstr(32);
+                    $this->set->cookie("lt", "", 0);
+                    $this->set->cookie("tk", "", 0);
                     $this->set->cookie("sessid", $sessid, $expired)->encrypt($udata['ukey']);
                     $this->set->cookie("uid", $udata['userid'], $expired)->encrypt($uidkey);
                     $this->set->cookie("uk", $uidkey, $expired);
