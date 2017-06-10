@@ -2,7 +2,12 @@
 
 namespace Console\Commands;
 
-class Export
+use mysqli;
+use System\Crayner\Contracts\Console\Command;
+use System\Crayner\ConfigHandler\Configer;
+use Console\Exception\InvalidArgumentException;
+
+class Export implements Command
 {
     // EXAMPLE:   EXPORT_TABLES("localhost","user","pass","db_name" );
     //optional: 5th parameter - to backup specific tables only: array("mytable1","mytable2",...)
@@ -10,8 +15,42 @@ class Export
     // IMPORTANT NOTE for people who try to change strings in SQL FILE before importing, MUST READ:  goo.gl/2fZDQL
                     
     // https://github.com/tazotodua/useful-php-scripts
-    public function EXPORT_TABLES($host, $user, $pass, $name, $tables=false, $backup_name=false)
+    public function prepare($selection, $optional, $command)
     {
+        /*$this->selection = $selection;
+        $this->command   = strtolower($command);
+        $this->optional  = $optional;*/
+    }
+
+    public function argument($argument)
+    {
+        /*try {
+            if (count($argument) > 1) {
+                throw new InvalidArgumentException("Invalid command argument !", 400);
+            } else {
+                $this->filename = $argument[0];
+            }
+        } catch (InvalidArgumentException $e) {
+            print Message::error($e->getMessage(), "InvalidArgumentException", $e->getFile(), $e->getLine());
+            die;
+        } catch (\Exception $e) {
+            print Message::error($e->getMessage(), "\\Exception", $e->getFile(), $e->getLine());
+        }*/
+    }
+
+    public function showResult()
+    {
+        /*return $this->result;*/
+    }
+
+    public function execute()
+    {
+        $tables=false; $backup_name="aaa";
+        $conf = Configer::database();
+        $host = $conf['host'];
+        $user = $conf['user'];
+        $pass = $conf['pass'];
+        $name = $conf['dbname'];
         set_time_limit(3000);
         $mysqli = new mysqli($host, $user, $pass, $name);
         $mysqli->select_db($name);
@@ -71,6 +110,7 @@ class Export
         header("Content-Transfer-Encoding: Binary");
         header('Content-Length: '. (function_exists('mb_strlen') ? mb_strlen($content, '8bit'): strlen($content)));
         header("Content-disposition: attachment; filename=\"".$backup_name."\"");
+        file_put_contents(BASEPATH . "/database.sql", $content);
         echo $content;
         exit;
     }
