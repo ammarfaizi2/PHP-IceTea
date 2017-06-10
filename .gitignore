@@ -3,3 +3,4 @@
 .dockerignore
 /vendor/
 /config.php
+/git
