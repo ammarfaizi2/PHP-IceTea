@@ -18,8 +18,8 @@ php icetea serve
 
 ## Credits
 
-- [Ammar Faizi][link-author]
-- [Abiyanto Wijaya][link-contributors]
+- <a href="https://github.com/ammarfaizi2">Ammar Faizi</a>
+- <a href="https://github.com/abriyanto">Abiyanto Wijaya</a>
 
 
 
