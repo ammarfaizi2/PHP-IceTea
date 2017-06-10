@@ -107,7 +107,7 @@ class DB extends DatabaseFactory
         if ($error[1] and $self->showErrorQuery) {
             var_dump(
                 array(
-                    "Error" => $make->errorInfo()
+                    "Error" => $error
                 )
             );
         }
@@ -202,9 +202,8 @@ class DB extends DatabaseFactory
     {
         $self   = self::getInstance();
         $select = (!empty($self->optionSelect)) ? $self->optionSelect : "*";
-        $query  = "SELECT {$select} FROM {$self->table_name} ";
 
-        return $query;
+        return "SELECT {$select} FROM {$self->table_name} ";
     }
 
     /**
@@ -237,13 +236,7 @@ class DB extends DatabaseFactory
      */
     protected function makeWhere($param, $column, $operator, $value)
     {
-        if (empty($value)) {
-            $where = "{$column}=:where_{$param}";
-        } else {
-            $where = "{$param} {$operator} :where_{$param}";
-        }
-
-        return $where;
+        return empty($value) ? "{$column}=:where_{$param}" : "{$param} {$operator} :where_{$param}";
     }
 
     /**
@@ -257,9 +250,8 @@ class DB extends DatabaseFactory
      */
     protected function makeOptionWhere($param, $column, $operator, $value)
     {
-        $option = (empty($value)) ? $operator : $value;
+        return (empty($value)) ? $operator : $value;
 
-        return $option;
     }
 
     /**
