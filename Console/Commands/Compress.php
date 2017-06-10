@@ -7,16 +7,13 @@ use System\Crayner\PCLZip;
 use System\Crayner\Contracts\Console\Command;
 use Console\Exception\InvalidArgumentException;
 
-
 class Compress implements Command
 {
-	public function __construct()
-	{
+    public function __construct()
+    {
+    }
 
-	}
-
-	public function prepare()
-	{
-		
-	}
+    public function prepare()
+    {
+    }
 }
