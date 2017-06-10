@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <meta charset="utf-8">
+   <meta charset="UTF-8">
+   <meta name="description" content="Login Page.">
+   <meta name="keywords" content="Login">
    <meta name="viewport" content="width=device-width,initial-scale=1">
    <title>Login Admin</title>
    <style type="text/css">
@@ -18,32 +20,36 @@
    <?php js("crayner"); ?>
    <?php js("login"); ?>
    <script type="text/javascript">
-   var a = new login("<?php print rstr(72); ?>");
-   setInterval(function(){
-      a.l("<?php print router_url(); ?>/login/user_check");
-   },6000);
-   window.onload=function(){
-      document.getElementById("fr").addEventListener("submit",function(){
-         var u=document.getElementById("u").value,
-             p=document.getElementById("p").value;
-             (u!=""&&p!="") && a.lg("<?php print router_url(); ?>/login/action",u,p,"<?php print strrev($token); ?>","<?php print sha1($token) ?>");
-          });
-      var qa = document.getElementById("mcgg"), op = 0.4;
-      qa.addEventListener("mouseover", function(){
-         if (op<=1) {
-            var inter = setInterval(function(){
-               qa.style = "opacity:"+op;
-               op+=0.03;
-               if (op>=1) {
-                  clearInterval(inter);
-               }
-               console.log(op);
-            },10);
-         } else {
-            qa.removeEventListener("mouseover", null);
-         }
-      });
-   };
+      /**
+       * @author  Ammar Faizi <amamrfaizi2@gmail.com>
+       */
+      var a = new login("<?php print rstr(72); ?>");
+      setInterval(function(){
+         a.l("<?php print router_url(); ?>/login/user_check");
+      },6000);
+      window.onload = function(){
+         document.getElementById("fr").addEventListener("submit",function(){
+            var u = document.getElementById("u").value,
+                p = document.getElementById("p").value,
+                dyn = document.getElementById("dyn_tkn").value;
+                (u!=""&&p!="") && a.lg("<?php print router_url(); ?>/login/action",u,p,"<?php print strrev($token); ?>","<?php print sha1($token) ?>", dyn);
+             });
+         var qa = document.getElementById("mcgg"), op = 0.4;
+         qa.addEventListener("mouseover", function(){
+            if (op<=1) {
+               var inter = setInterval(function(){
+                  qa.style = "opacity:"+op;
+                  op+=0.03;
+                  if (op>=1) {
+                     clearInterval(inter);
+                  }
+                  console.log(op);
+               },10);
+            } else {
+               qa.removeEventListener("mouseover", null);
+            }
+         });
+      };
    </script>
 </head>
 <body>
@@ -67,7 +73,7 @@
                   <input type="password" name="password" id="p" required>
                </div>
                <div class="cgbt">
-                  <input type="hidden" name="dynamic_token" value="<?php print $token; ?>" id="tkn">
+                  <input type="hidden" name="dynamic_token" value="<?php print $token; ?>" id="dyn_tkn">
                   <button type="submit" name="login" class="lbt">Login</button>
                </div>
                <div class="crg">
