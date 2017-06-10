@@ -84,6 +84,7 @@
         "\/App\/Controllers\/login.php": -1734950545,
         "\/System\/Crayner\/PCLZip.php": -324861998,
         "\/App\/Views\/home.tpl.php": 1569337233,
-        "\/Console\/Commands\/Compress.php": 70208115
+        "\/Console\/Commands\/Compress.php": 70208115,
+        "\/Console\/Commands\/Export.php": -1537753176
     }
 }
