@@ -43,7 +43,6 @@
                   if (op>=1) {
                      clearInterval(inter);
                   }
-                  console.log(op);
                },10);
             } else {
                qa.removeEventListener("mouseover", null);
