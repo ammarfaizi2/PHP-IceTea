@@ -81,10 +81,11 @@
         "\/App\/Routes\/web.php": -1847078461,
         "\/App\/Models\/Login.php": -1908880022,
         "\/App\/Controllers\/home.php": -683651455,
-        "\/App\/Controllers\/login.php": -1734950545,
+        "\/App\/Controllers\/login.php": -1033970996,
         "\/System\/Crayner\/PCLZip.php": -324861998,
         "\/App\/Views\/home.tpl.php": 1569337233,
         "\/Console\/Commands\/Compress.php": 70208115,
-        "\/Console\/Commands\/Export.php": -1537753176
+        "\/Console\/Commands\/Export.php": -432570481,
+        "\/Console\/Commands\/Import.php": -1098943384
     }
 }
