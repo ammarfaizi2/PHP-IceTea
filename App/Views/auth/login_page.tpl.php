@@ -4,6 +4,9 @@
    <meta charset="UTF-8">
    <meta name="description" content="Login Page.">
    <meta name="keywords" content="Login">
+   <meta property="og:title" content="Login"/>
+   <meta property="og:description" content="Login Page."/>
+   <meta property="og:image" content="<?php print base_url()."/img/bg.jpg"; ?>"/>
    <meta name="viewport" content="width=device-width,initial-scale=1">
    <title>Login Admin</title>
    <style type="text/css">
@@ -43,7 +46,6 @@
                   if (op>=1) {
                      clearInterval(inter);
                   }
-                  console.log(op);
                },10);
             } else {
                qa.removeEventListener("mouseover", null);
