@@ -3,6 +3,16 @@
 <head>
    <meta charset="utf-8">
    <title>Login Admin</title>
+   <style type="text/css">
+      body{
+         background-image: url(<?php print base_url()."/img/bg1.jpg"; ?>);
+         background-color: #cccccc;
+         background-repeat: no-repeat;
+         background-attachment: fixed;
+         background-position: top; 
+         background-size:cover;
+      }
+   </style>
    <?php css("login"); ?>
    <?php js("crayner"); ?>
    <?php js("login"); ?>
