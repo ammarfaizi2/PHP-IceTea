@@ -65,6 +65,7 @@ class Login extends Model
         DB::close();
         return $login;*/
         if ($d = (array) DB::table("login_session")->select("expired_at")->where("userid", $userid)->where("session", $sessid)->limit(1)->first()) {
+            var_dump($d);
         }
     }
 

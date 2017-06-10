@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Login;
 use System\Controller;
 
 class home extends Controller
