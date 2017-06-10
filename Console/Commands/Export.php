@@ -45,7 +45,8 @@ class Export implements Command
 
     public function execute()
     {
-        $tables=false; $backup_name="aaa";
+        $tables=false;
+        $backup_name="aaa";
         error_reporting(0);
         $conf = Configer::database();
         $host = $conf['host'];
@@ -78,7 +79,7 @@ class Export implements Command
             for ($i = 0, $st_counter = 0; $i < $fields_amount;   $i++, $st_counter=0) {
                 while ($row = $result->fetch_row()) { //when started (and every after 100 command cycle):
                     if ($st_counter%100 == 0 || $st_counter == 0) {
-                        $content .= "\nINSERT INTO ".$table." VALUES";
+                        $content .= "\nINSERT INTO `".$table."` VALUES";
                     }
                     $content .= "\n(";
                     for ($j=0; $j<$fields_amount; $j++) {
