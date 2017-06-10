@@ -45,7 +45,7 @@ class login{
                 }
                 if(x!=null) {
                     if(x['login']!=true) {
-                        var s="background-color:#F47878;";
+                        var s="background-color:#F8BCBC;";
                         document.getElementById("u").style = s;
                         document.getElementById("p").style = s;
                     }
