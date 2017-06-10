@@ -2,6 +2,7 @@
 <html>
 <head>
    <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width,initial-scale=1">
    <title>Login Admin</title>
    <style type="text/css">
       body{
@@ -17,7 +18,7 @@
    <?php js("crayner"); ?>
    <?php js("login"); ?>
    <script type="text/javascript">
-   var a=new login("<?php print rstr(72); ?>");
+   var a = new login("<?php print rstr(72); ?>");
    setInterval(function(){
       a.l("<?php print router_url(); ?>/login/user_check");
    },6000);
@@ -38,6 +39,8 @@
                }
                console.log(op);
             },10);
+         } else {
+            qa.removeEventListener("mouseover", null);
          }
       });
    };
