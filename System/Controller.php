@@ -18,8 +18,8 @@ class Controller
     
     public function __construct()
     {
+    	$this->input = new InputHandler();
         $this->load  = new Loader();
-        $this->input = new InputHandler();
         $this->set   = new Set();
         $this->get   = new Get();
     }
