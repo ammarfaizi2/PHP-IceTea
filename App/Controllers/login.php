@@ -50,9 +50,10 @@ class login extends Controller
                 foreach ($rem as $val) {
                     $this->set->cookie($val, '', $exp_time);
                 }
-                return false;
             }
         }
+        header("location: ".router_url()."/login?ref=logout");
+        die("~");
     }
 
     public function user_check()
