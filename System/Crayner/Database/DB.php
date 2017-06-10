@@ -583,6 +583,5 @@ class DB extends DatabaseFactory
 
     public function __debugInfo()
     {
-        
     }
 }

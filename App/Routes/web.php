@@ -29,4 +29,3 @@ Route::post("/login/action", "login@action");
 Route::get("/logout", "login@logout");
 
 Route::get("/home", "home@index");
-
