@@ -399,11 +399,11 @@ class DB extends DatabaseFactory
     public static function delete()
     {
         $self  = self::getInstance();
-        $table = $self->table;
+        $table = $self->table_name;
 
         $query = "DELETE FROM {$table} ";
 
-        return $self->_execute($query);
+        return $self->_execute($query, []);
     }
 
     /**
