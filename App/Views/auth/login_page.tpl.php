@@ -8,7 +8,7 @@
    <title>Login Admin</title>
    <style type="text/css">
       body{
-         background-image: url(<?php print base_url()."/img/bg1.jpg"; ?>);
+         background-image: url(<?php print base_url()."/img/bg.jpg"; ?>);
          background-color: #cccccc;
          background-repeat: no-repeat;
          background-attachment: fixed;

@@ -40,13 +40,6 @@ CREATE TABLE `login_history` (
 ) ENGINE=InnoDB AUTO_INCREMENT=85 DEFAULT CHARSET=latin1;
 
 
-INSERT INTO `login_history` VALUES
-("81","ammarfaizi2","==wCMRjNLnCjJvMNxK+4McuTWJAA","F808R_EyN2vcw9y_Fu2OC9ivFRYXds_7l9R27JiyKMV_i8_2g_PT8_8C0Dmv4m_v5EnQtwj3","127.0.0.1","{\"useragent\":\"Mozilla\\/5.0 (X11; Ubuntu; Linux i686; rv:46.0) Gecko\\/20100101 Firefox\\/46.0\"}","true","2017-06-10 20:40:26"),
-("82","ammarfaizi2","==wcKfzDN5CMR0M9UCxEWAHjXcAA","F808R_EyN2vcw9y_Fu2OC9ivFRYXds_7l9R27JiyKMV_i8_2g_PT8_8C0Dmv4m_v5EnQtwj3","127.0.0.1","{\"useragent\":\"Mozilla\\/5.0 (X11; Ubuntu; Linux i686; rv:46.0) Gecko\\/20100101 Firefox\\/46.0\"}","true","2017-06-10 20:40:34"),
-("83","ammarfaizi2","==wyPvwiIqCDydhNVD+8zsErJWAA","F808R_EyN2vcw9y_Fu2OC9ivFRYXds_7l9R27JiyKMV_i8_2g_PT8_8C0Dmv4m_v5EnQtwj3","127.0.0.1","{\"useragent\":\"Mozilla\\/5.0 (X11; Ubuntu; Linux i686; rv:46.0) Gecko\\/20100101 Firefox\\/46.0\"}","true","2017-06-10 20:40:35"),
-("84","ammarfaizi2","==wsIQvM1jUdyic8wKnVTTTqkLAA","F808R_EyN2vcw9y_Fu2OC9ivFRYXds_7l9R27JiyKMV_i8_2g_PT8_8C0Dmv4m_v5EnQtwj3","127.0.0.1","{\"useragent\":\"Mozilla\\/5.0 (X11; Ubuntu; Linux i686; rv:46.0) Gecko\\/20100101 Firefox\\/46.0\"}","true","2017-06-10 20:40:53");
-
-
 
 
 CREATE TABLE `login_session` (

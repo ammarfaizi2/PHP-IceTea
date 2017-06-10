@@ -36,6 +36,7 @@ class Loader
     public function error(int $code)
     {
         http_response_code($code);
+        $this->helper("url");
         $this->view("errors/{$code}");
         die;
     }
