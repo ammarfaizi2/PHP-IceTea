@@ -46,6 +46,7 @@ class Export implements Command
     public function execute()
     {
         $tables=false; $backup_name="aaa";
+        error_reporting(0);
         $conf = Configer::database();
         $host = $conf['host'];
         $user = $conf['user'];
@@ -111,7 +112,11 @@ class Export implements Command
         header('Content-Length: '. (function_exists('mb_strlen') ? mb_strlen($content, '8bit'): strlen($content)));
         header("Content-disposition: attachment; filename=\"".$backup_name."\"");
         file_put_contents(BASEPATH . "/database.sql", $content);
-        echo $content;
+        print "Backup ".sizeof($target_tables)." tables\n\n";
+        foreach ($target_tables as $val) {
+            print $val."\n";
+        }
+        print "\n\nSaved : ".BASEPATH . "/database.sql\n\n";
         exit;
     }
 }
