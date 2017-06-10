@@ -19,7 +19,7 @@ php icetea serve
 ## Credits
 
 - <a href="https://github.com/ammarfaizi2">Ammar Faizi</a>
-- <a href="https://github.com/abriyanto">Abiyanto Wijaya</a>
+- <a href="https://github.com/arbiyanto">Abiyanto Wijaya</a>
 
 
 
