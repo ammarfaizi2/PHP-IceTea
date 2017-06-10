@@ -3,12 +3,13 @@ body{
 }
 .mcg{
 	margin-top: 6.5%;
-	border: 3px solid #000;
+	border: 3px solid #1BCBF2;
 	width: 30%;
 	padding-bottom: 2%;
 	padding-top: 5%;
 	border-radius: 1.5%;
 	background-color: #CBEA4D;
+	opacity: 0.4;
 }
 .lghd{
 	margin-top: -13.5%;
