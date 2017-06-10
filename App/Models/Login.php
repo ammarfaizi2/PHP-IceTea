@@ -94,9 +94,12 @@ class Login extends Model
         return $mkey;
     }
 
-    public function logout()
+    public function logout($userid, $session)
     {
-        $a = DB::table("login_session")->delete();
-        var_dump($a);
+    try{
+        $a = DB::table("login_session")->where(["userid", $userid],["session", $session])->limit(1)->delete();
+    } catch(\PDOException $e) {
+        var_dump(DB::getInstance()->statement);
+        }
     }
 }

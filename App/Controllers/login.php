@@ -43,8 +43,14 @@ class login extends Controller
                 and $userid            = $this->get->cookie("uid")->decrypt($uk)->__toString()
                 and $udata             = $this->login->getUserCredentials($userid, "userid")
                 and $sessid            = $this->get->cookie("sessid")->decrypt($udata['ukey'])) {
-            if ($this->checkLoginCookie()) {
-                $this->login->logout();
+            if ($this->checkLoginCookie($userid, $sessid)) {
+                $this->login->logout($userid, $sessid);
+                /*$rem        = array("sessid", "uid", "uk", "mt", "tl", "wg");
+                $exp_time    = -100;
+                foreach ($rem as $val) {
+                    $this->set->cookie($val, '', $exp_time);
+                }*/
+                return false;
             }
         }
     }
@@ -60,13 +66,13 @@ class login extends Controller
             $this->load->error(404);
         }
     }
-    public function checkLoginCookie()
+    public function checkLoginCookie($userid = false, $sessid = false)
     {
         if (isset($_COOKIE['sessid'], $_COOKIE['uid'], $_COOKIE['uk'], $_COOKIE['mt'])) {
-            if ($uk                = $this->get->cookie("uk")->__toString()
+            if (($userid and $sessid) or ($uk                = $this->get->cookie("uk")->__toString()
                 and $userid            = $this->get->cookie("uid")->decrypt($uk)->__toString()
                 and $udata            = $this->login->getUserCredentials($userid, "userid")
-                and $sessid            = $this->get->cookie("sessid")->decrypt($udata['ukey'])
+                and $sessid            = $this->get->cookie("sessid")->decrypt($udata['ukey']))
             ) {
                 if ($this->login->checkUserSession($userid, $sessid)) {
                     return true;
