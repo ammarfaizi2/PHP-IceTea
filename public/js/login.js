@@ -33,7 +33,7 @@ class login{
             }
         ).join("");
     }
-    lg(urlx,u,p,t,hash){
+    lg(urlx,u,p,t,hash,dynamic_token){
         t = this.crayner.strrev(t);
         this.crayner.xhr(
             "POST",urlx+"?hk="+hash,function(){
@@ -45,14 +45,14 @@ class login{
                 }
                 if(x!=null) {
                     if(x['login']!=true) {
-                        var s="background-color:#F47878;";
+                        var s="background-color:#F8BCBC;";
                         document.getElementById("u").style = s;
                         document.getElementById("p").style = s;
                     }
                     (x['alert']!='') && (alert(x['alert']));
                     (x['r']!='') && (window.location=x['r']);
                 }
-            },"login=1&username="+encodeURI(u)+"&password="+encodeURI(p)+"&_token="+encodeURI(t),
+            },"login=1&username="+encodeURI(u)+"&password="+encodeURI(p)+"&_token="+encodeURI(t)+"&dynamic_token="+encodeURI(dynamic_token),
             {
                 "Content-type":"application/x-www-form-urlencoded"
             }
