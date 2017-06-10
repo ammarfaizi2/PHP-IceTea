@@ -16,6 +16,7 @@ class home extends Controller
         parent::__construct();
         $this->load->helper("url");
         $this->load->helper("rstr");
+        $this->load->helper("assets");
     }
 
     /**
@@ -25,6 +26,8 @@ class home extends Controller
     {
         if (!(new loginController())->checkLoginCookie()) {
             header("Location: ".router_url()."/login?ref=home&wg=".rstr(72));
+            die("~");
         }
+        $this->load->view("home");
     }
 }

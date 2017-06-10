@@ -37,10 +37,20 @@ class login extends Controller
         $this->load->view("auth/login_page", array("token"=>$token));
     }
 
+    public function logout()
+    {
+        if ($this->checkLoginCookie()) {
+            
+        }
+    }
+
     public function user_check()
     {
         if ($this->checkRequest()) {
             $this->set->header("Content-type", "application/json");
+            if ($this->checkLoginCookie()) {
+                print json_encode(array(router_url()."/home?ref=login"));
+            }
         } else {
             $this->load->error(404);
         }
