@@ -15,6 +15,12 @@ define("TEMPLATE_DIR", __DIR__ . '/Console/template');
 |	IceTea PHP Framework by Ammar Faizi
 |
 */
+if (count($argv) === 1) {
+	$prettyjson = json_encode(file_get_contents(".php_cs.cache"), 128);
+	file_put_contents(".php_cs.cache", $prettyjson);
+	print $prettyjson;
+	die;
+}
 
 $app	= new Console\IceTea();
 $input  = new Console\Input\ArgvInput();
