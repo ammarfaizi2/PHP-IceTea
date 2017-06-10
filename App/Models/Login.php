@@ -96,10 +96,10 @@ class Login extends Model
 
     public function logout($userid, $session)
     {
-    try{
-        $a = DB::table("login_session")->where(["userid", $userid],["session", $session])->limit(1)->delete();
-    } catch(\PDOException $e) {
-        var_dump(DB::getInstance()->statement);
+        try{
+            $a = DB::table("login_session")->where(["userid", $userid],["session", $session])->limit(1)->delete();
+        } catch(\PDOException $e) {
+            var_dump("<br><br>".DB::getInstance()->statement,"<br><br>" .$e->getMessage());
         }
     }
 }
