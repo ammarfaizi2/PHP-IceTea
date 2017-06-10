@@ -1,60 +1,80 @@
-* {
-padding : 0;
-margin : 0;
+body{
+ 	font-family: Helvetica;
 }
-body {
-font-family: Helvetica, sans-serif;
-background-color : #1d2024;
+.mcg{
+	margin-top: 6.5%;
+	border: 3px solid #1BCBF2;
+	width: 30%;
+	padding-bottom: 2%;
+	padding-top: 5%;
+	border-radius: 1.5%;
+	background-color: #CBEA4D;
+	opacity: 0.4;
 }
-.login-container {
-margin: 0 auto;
-width : 375px;
+.lghd{
+	margin-top: -13.5%;
+	font-size: 120%;
 }
-.login-header {
-display: block;
-margin : 30px;
+.cgl{
+	margin-top: 2%;
 }
-.login-header h1 {
-text-align: center;
-color : #fff;
-font-weight: lighter;
-font-size: 2em;
+.in{
+	margin-top: 0.2%;
 }
-.login-header h1 span {
-color : #dd5a3c;
+.cgbt{
+	margin-top: 5.5%;
 }
-.box {
-background-color: #f7f7f7;
-border : 5px solid rgba(0,0,0,0.5);
+.lbt{
+	cursor: pointer;
+	padding: 2.3% 6% 2.3% 6%;
+	background-color: #1CE576;
+	border: 2px solid #791DBB;
+	border-radius: 5%;
+	font-size: 100%;
+	font-weight: bold;
+	color:black;
+	font-family: Helvetica;
 }
-.box-content{
-padding : 30px;
+.lbt:hover{
+ 	background-color: #17A954;
 }
-.box-header {
-color : rgba(0,83,193,0.5);
-font-size: 1.2em;
-text-align: center;
-margin-bottom : 20px;
+.lbt:active{
+ 	background-color: #035826;
 }
-.box-content input{
-width  :100%;
-height : 20px;
-padding : 5px;
-border : 1px solid rgba(0,0,0,0.2);
-color : rgba(0,0,0,0.5);
-font-weight: bold;
-margin-bottom: 20px;
+.crg, a{
+	margin-top: 10%;
+	text-decoration: none;
+	color:blue;
 }
-.clear{
-clear: both;
+a:hover{
+	text-decoration: underline;
 }
-.box-content button {
-color : #fff;
-background-color:#428BCA;
-padding : 10px;
-width : 100px;
-font-weight: bolder;
-border : none;
-float : right;
-cursor: pointer;
+
+@media screen and (max-width: 600px) {
+	.mcg{
+		margin-top: 25%;
+		border: 3px solid #1BCBF2;
+		width: 70%;
+	}
+}
+@media screen and (min-width: 600px) {
+	.mcg{
+		margin-top: 10%;
+		border: 3px solid #1BCBF2;
+		width: 50%;
+	}
+}
+@media screen and (min-width: 800px) {
+	.mcg{
+		margin-top: 10%;
+		border: 3px solid #1BCBF2;
+		width: 50%;
+	}
+}
+@media screen and (min-width: 1000px) {
+	.mcg{
+		margin-top: 8%;
+		border: 3px solid #1BCBF2;
+		width: 30%;
+	}
 }
