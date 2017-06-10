@@ -2,17 +2,13 @@
 
 namespace App\Controllers;
 
-
 use System\Controller;
 
 
 class ~~~controller_name~~~ extends Controller
 {
 	/**
-	 *
 	 * Constructor.
-	 *
-	 *
 	 */
 	public function __construct()
 	{
@@ -20,9 +16,7 @@ class ~~~controller_name~~~ extends Controller
 	}
 
 	/**
-	 *
 	 * Default method.
-	 *
 	 */
 	public function index()
 	{
