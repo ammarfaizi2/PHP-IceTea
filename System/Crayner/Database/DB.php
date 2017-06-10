@@ -251,7 +251,6 @@ class DB extends DatabaseFactory
     protected function makeOptionWhere($param, $column, $operator, $value)
     {
         return (empty($value)) ? $operator : $value;
-
     }
 
     /**
