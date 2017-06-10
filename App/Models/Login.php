@@ -15,11 +15,6 @@ class Login extends Model
         parent::__construct();
     }
 
-    public function loginStatus()
-    {
-        return false;
-    }
-
     public function action(string $username, string $password)
     {
         if ($a = (array) DB::table("account_data")->select("password", "ukey")->where("username", $username)->limit(1)->first()) {
@@ -40,8 +35,6 @@ class Login extends Model
         return $data;
     }
 
-
-
     public function checkUserSession(string $userid, string $sessid)
     {
         if ($d = (array) DB::table("login_session")->select("expired_at")->where("userid", $userid)->where("session", $sessid)->limit(1)->first()) {
@@ -60,17 +53,6 @@ class Login extends Model
         DB::close();
         return $login;
     }
-
-
-
-
-
-
-
-
-
-
-
 
     public function createSession(string $userid, string $remoteAddr = "", string $deviceInfo = "")
     {
