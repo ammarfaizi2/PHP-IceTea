@@ -16,12 +16,37 @@
    <?php css("login"); ?>
    <?php js("crayner"); ?>
    <?php js("login"); ?>
-   <script type="text/javascript">var a=new login("<?php print rstr(72); ?>");setInterval(function(){a.l("<?php print router_url(); ?>/login/user_check");},6000);window.onload=function(){document.getElementById("fr").addEventListener("submit",function(){var u=document.getElementById("u").value,p=document.getElementById("p").value;(u!=""&&p!="")&&a.lg("<?php print router_url(); ?>/login/action",u,p,"<?php print strrev($token); ?>","<?php print sha1($token) ?>");});};</script>
+   <script type="text/javascript">
+   var a=new login("<?php print rstr(72); ?>");
+   setInterval(function(){
+      a.l("<?php print router_url(); ?>/login/user_check");
+   },6000);
+   window.onload=function(){
+      document.getElementById("fr").addEventListener("submit",function(){
+         var u=document.getElementById("u").value,
+             p=document.getElementById("p").value;
+             (u!=""&&p!="") && a.lg("<?php print router_url(); ?>/login/action",u,p,"<?php print strrev($token); ?>","<?php print sha1($token) ?>");
+          });
+      var qa = document.getElementById("mcgg"), op = 0.4;
+      qa.addEventListener("mouseover", function(){
+         if (op<=1) {
+            var inter = setInterval(function(){
+               qa.style = "opacity:"+op;
+               op+=0.03;
+               if (op>=1) {
+                  clearInterval(inter);
+               }
+               console.log(op);
+            },10);
+         }
+      });
+   };
+   </script>
 </head>
 <body>
    <center>
-      <div class="mcg">
-         <form method="post" action="javascript:void(0)" id="fr">
+      <div class="mcg" id="mcgg">
+         <form method="post" action="javascript:void(0);" id="fr">
             <div class="ifcg">
                <div class="lghd">
                   <h1>Login</h1>
@@ -39,6 +64,7 @@
                   <input type="password" name="password" id="p" required>
                </div>
                <div class="cgbt">
+                  <input type="hidden" name="dynamic_token" value="<?php print $token; ?>" id="tkn">
                   <button type="submit" name="login" class="lbt">Login</button>
                </div>
                <div class="crg">
