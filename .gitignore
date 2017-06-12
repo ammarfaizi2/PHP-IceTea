@@ -4,3 +4,6 @@
 /vendor/
 /config.php
 /git
+/.bashrc
+/.bash_logout
+/.profile
