@@ -9,4 +9,4 @@
 /.profile
 /public/.htaccess
 /public/.well-known/
-
+/public/.webhooks
