@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use System\Controller;
 
+use App\Models\Register as RegisterModel;
 
 class register extends Controller
 {
@@ -43,15 +44,16 @@ class register extends Controller
 		}
 		$this->set->header("Content-type","application/json");
 		if ($json['status']) {
-			$this->store_to_db();
+			$a = new RegisterModel();
+			if($a->validDB($this->u)){
+				$a->store();
+			} else {
+				$json = array("status"=>false,"redirect"=>"","alert"=>$a->alert);
+			}
 		}
 		die(json_encode($json));
 	}
 
-	private function store_to_db()
-	{
-		DB::table("account_data")
-	}
 
 	private $alert;
 	private $u;
