@@ -2,26 +2,8 @@
 <html>
 <head>
 	<title>Register</title>
-	<style type="text/css">
-		body{
-			font-family: Helvetica;
-		}
-		.mcg{
-			margin-top: 4%;
-		}
-		.fcg{
-			border: 2px solid black;
-			max-width: 35%;
-		}
-		.sbbt{
-			margin-top: 5%;
-			margin-bottom: 5%;
-		}
-		.mg{
-			margin-top: 5%;
-		}
-	</style>
-	<?php js("register") ?>
+	<?php css("register"); ?>
+	<?php js("register"); ?>
 	<script type="text/javascript">
 		window.onload = function(){
 			tgl(<?php print date("Y") ?>);

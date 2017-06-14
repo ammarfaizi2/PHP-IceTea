@@ -1,0 +1,17 @@
+body{
+	font-family: Helvetica;
+}
+.mcg{
+	margin-top: 4%;
+}
+.fcg{
+	border: 2px solid black;
+	max-width: 35%;
+}
+.sbbt{
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+.mg{
+	margin-top: 5%;
+}
