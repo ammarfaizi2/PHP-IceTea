@@ -13,7 +13,34 @@
 			border: 2px solid black;
 			max-width: 35%;
 		}
+		.sbbt{
+			margin-top: 5%;
+			margin-bottom: 5%;
+		}
+		.mg{
+			margin-top: 5%;
+		}
 	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			/**
+			 *	Buat tanggal lahir
+			 */
+			 var i = 1, b = ['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'],oo='<option>',oc='</option>',so='<select ',sc='</select>',a=so+'required name="tanggal">'+oo+oc;
+			 for(;i<=31;i++){
+			 	a+=oo+i+oc;
+			 }
+			 a+=sc+so+'required name="bulan">';
+			 for(x in b){
+			 	a+=oo+b[x]+oc;
+			 }
+			 a+=sc+so+'required name="tahun">'+oo+oc;
+			 for(i=<?php print date("Y"); ?>;i>=1960;i--){
+			 	a+=oo+i+oc;
+			 }
+			 document.getElementById('tgl').innerHTML = a+'</select>';
+		}
+	</script>
 </head>
 <body>
 <center>
@@ -22,13 +49,28 @@
 		<form action="javascript:void(0);" method="post" id="fr">
 			<table>
 			<thead>
-				<tr><th colspan="3"><h2>Register</h2></th></tr>
+				<tr><th colspan="3" align="center"><h2>Register</h2></th></tr>
 			</thead>
 			<tbody>
 				<tr><td>Nama Lengkap</td><td>:</td><td><input type="text" name="nama" id="name" required></td></tr>
 				<tr><td>Tempat Lahir</td><td>:</td><td><input type="text" name="tempat_lahir" id="tempat_lahir" required></td></tr>
+				<tr><td>Tanggal Lahir</td><td>:</td><td id="tgl"><?php #print $tgl_lahir; ?></td></tr>
+				<tr><td>Nomor HP</td><td>:</td><td><input type="text" name="phone" id="phone" required></td></tr>
+				<tr><td>E-Mail</td><td>:</td><td><input type="email" name="email" id="email" required></td></tr>
 				<tr><td>Alamat</td><td>:</td><td><textarea name="alamat" id="alamat" required></textarea></td></tr>
+				<tr><td colspan="3"><div class="mg"></div></td></tr>
 			</tbody>
+			<thead>
+				<tr><th colspan="3" align="center"><h2>Buat Akun</h2></th></tr>
+			</thead>
+			<tbody>
+				<tr><td>Username</td><td>:</td><td><input type="text" name="username" id="username" required></td></tr>
+				<tr><td>Password</td><td>:</td><td><input type="password" name="password" id="password" required></td></tr>
+				<tr><td>Konfirmasi Password</td><td>:</td><td><input type="password" name="cpassword" id="cpassword" required></td></tr>
+			</tbody>
+			<tfoot>
+				<tr><th colspan="3" align="center"><div class="sbbt"><button>Daftar</button></div></th></tr>
+			</tfoot>
 			</table>
 		</form>
 		</div>
