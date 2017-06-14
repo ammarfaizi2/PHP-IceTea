@@ -71,12 +71,13 @@ class register{
 			try{
 				x = JSON.parse(this.responseText);
 			} catch(e){
+				alert("Server bermasalah !");
 				x = null; console.log(e);
 			}
 			if(x!=null) {
 				self.backendResponse = x;
 			}
-		},"register_data="+encodeURI(self.fr)+"&token_hash="+self.hash,{"Content-type":"application/x-www-form-urlencoded","X-Token-Register":self.token});
+		},"register_data="+encodeURI(self.fr)+"&seshash="+self.hash,{"Content-type":"application/x-www-form-urlencoded","X-Token-Register":self.token});
 		return self.backendResponse['status'];
 	}
 	rule(){
