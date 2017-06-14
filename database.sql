@@ -109,6 +109,7 @@ CREATE TABLE `register_history` (
   `try` int(11) NOT NULL DEFAULT '1',
   `status` enum('true','false') NOT NULL DEFAULT 'false',
   `created_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
