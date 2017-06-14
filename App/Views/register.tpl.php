@@ -22,6 +22,11 @@
 		}
 	</style>
 	<?php js("register") ?>
+	<script type="text/javascript">
+		window.onload = function(){
+			tgl(<?php print date("Y") ?>);
+		}
+	</script>
 </head>
 <body>
 <center>
