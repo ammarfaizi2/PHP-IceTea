@@ -32,6 +32,22 @@ INSERT INTO `account_data` VALUES
 
 
 
+CREATE TABLE `account_info` (
+  `userid` varchar(16) NOT NULL,
+  `nama` varchar(225) NOT NULL,
+  `tempat_lahir` varchar(225) DEFAULT NULL,
+  `tanggal_lahir` date DEFAULT NULL,
+  `alamat` text,
+  `phone` varchar(20) DEFAULT NULL,
+  `last_login` datetime DEFAULT NULL,
+  `hid` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+
+
+
 CREATE TABLE `login_history` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` text NOT NULL,
