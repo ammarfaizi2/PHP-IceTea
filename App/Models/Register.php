@@ -18,10 +18,16 @@ class Register extends Model
 
 	private function genUserId()
 	{
-		return rstr(10);
+		$pdo = DB::pdoInstance();
+		$st = $pdo->prepare("SELECT `userid` FROM `account_data` WHERE `userid`=:userid LIMIT 1;");
+		do {
+			$userid = rstr(10, "1234567890", 1);;
+			$st->execute([":userid"=>$userid]);
+		} while ($st->fetch(\PDO::FETCH_NUM));
+		return $userid;
 	}
 
-	public function store_to_db()
+	public function store()
 	{
 		$data = $this->dt;
 		$userid = $this->genUserId();
@@ -38,7 +44,7 @@ class Register extends Model
 				"created_at"	=> $time_reg
 			]);
 		DB::table("account_info")->insert([
-				"userid"		=> $userid.
+				"userid"		=> $userid,
 				"nama"			=> $data['nama'],
 				"tempat_lahir"	=> $data['tempat_lahir'],
 				"tanggal_lahir"	=> $data['tanggal_lahir'],
