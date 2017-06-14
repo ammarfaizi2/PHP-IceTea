@@ -28,12 +28,11 @@ class register extends Controller
 
 	public function action()
 	{
-		$this->set->header("Content-type","application/json");
 		if ($this->validation()) {
 			$json = array(
-					"status"=>true,
+					"status"=>false,
 					"redirect"=>router_url()."/register_success",
-					"alert"=>null
+					"alert"=>"sukses"
 				);
 		} else {
 			$json = array(
@@ -42,17 +41,74 @@ class register extends Controller
 					"alert"=>$this->alert
 				);
 		}
+		$this->set->header("Content-type","application/json");
+		if ($json['status']) {
+			$this->store_to_db();
+		}
 		die(json_encode($json));
 	}
 
+	private function store_to_db()
+	{
+		DB::table("account_data")
+	}
+
 	private $alert;
+	private $u;
 	private function validation()
 	{
 		$input = json_decode($this->input->post("register_data"), true);
 		if (!is_array($input)) {
+			$this->load->error(404);
+			die;
+		}
+		if (strlen($input['nama'])<4) {
+			$this->alert = "Nama terlalu pendek!";
+			return false;	
+		}
+		if (strlen($input['tempat_lahir'])<5) {
+			$this->alert = "Tempat lahir terlalu pendek!";
 			return false;
 		}
-		
+		$d = explode("-", $input['tanggal_lahir']);
+		if (!checkdate($d[1], $d[2], $d[0])) {
+			$this->alert = "Tanggal lahir tidak valid!";
+			return false;
+		}
+		if (strlen($input['phone'])<10 || preg_match("#[^0-9\+]#", $input['phone'])) {
+			$this->alert = "Nomor hp tidak valid!";
+			return false;
+		}
+		if (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
+			$this->alert = "E-Mail tidak valid!";
+			return false;
+		}
+		if (strlen($input['alamat'])<10) {
+			$this->alert = "Alamat kurang lengkap!";
+			return false;
+		}
+		if (strlen($input['username'])<4) {
+			$this->alert = "Username terlalu pendek!\nMinimal 4 karakter.";
+			return false;
+		}
+		if (strlen($input['username'])>20) {
+			$this->alert = "Username terlalu panjang!\nMaksimal 20 karakter.";
+			return false;
+		}
+		if (strlen($input['password'])<6) {
+			$this->alert = "Password terlalu pendek!\nMinimal 6 karakter.";
+			return false;
+		}
+		if (strlen($input['password'])>64) {
+			$this->alert = "Password terlalu panjang!\nMaksimal 64 karakter.";
+			return false;
+		}
+		if ($input['password']!==$input['cpassword']) {
+			$this->alert = "Konfirmasi Password tidak sama!";
+			return false;
+		}
+		$this->u = $input;
+		return true;
 	}
 
 	/*private function tanggal_lahir()
