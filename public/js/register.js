@@ -4,7 +4,7 @@ const b = ['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus'
 class register{
 	constructor(bd,token,hash){
 		this.crayner = new crayner;
-		this.form 	 = null;
+		this.fr 	 = null;
 		this.alert   = "";
 		this.backendResponse = null;
 		this.backendDestination = bd;
@@ -55,32 +55,42 @@ class register{
 		};
 		if (this.rule()) {
 			this.fr = JSON.stringify(this.fr);
-			if (this.backendValidation()) {
-				this.redirect(this.backendResponse['redirect']);
-			} else {
-				alert(this.backendResponse['alert']);
-			}
+			this.backendValidation();
 		} else {
 			alert(this.alert);
 		}
 	}
+	getResult(){
+		if(this.fileid != null){
+			this.interval = clearInterval(interval);
+			alert(fileid);
+		}
+	};
 	backendValidation(){
-		var self = this;
-		self.crayner.xhr("POST",this.backendDestination,function(){
-			var x;
-			try{
-				x = JSON.parse(this.responseText);
-			} catch(e){
-				alert("Server bermasalah !");
-				x = null; console.log(e);
-			}
-			if(x!=null) {
-				self.backendResponse = x;
-			}
-		},"register_data="+encodeURI(self.fr)+"&seshash="+self.hash,{"Content-type":"application/x-www-form-urlencoded","X-Token-Register":self.token});
-		return self.backendResponse['status'];
+		this.fileid = null;
+		var a = this.crayner.xhr("POST",this.backendDestination,
+			function(){
+				var x = null;
+				try{
+					x = JSON.parse(this.responseText);
+				} catch(e){
+					console.log(e);
+				}
+				if (x!==null) {
+					if (x['status']===true) {
+						window.location = x['redirect'];
+					} else {
+						alert(x['alert']);
+					}
+				}
+			},
+		"register_data="+encodeURI(this.fr)+"&seshash="+this.hash,
+		{	"Content-type":"application/x-www-form-urlencoded",
+			"X-Token-Register":this.token
+		});
 	}
 	rule(){
+		return true;
 		if (this.fr.nama.length<4) {
 			this.alert = "Nama terlalu pendek!";
 			return false;
@@ -109,8 +119,12 @@ class register{
 			this.alert = "Username terlalu panjang!\nMaksimal 20 karakter.";
 			return false;
 		}
-		if (this.fr.password<6) {
+		if (this.fr.password.length<6) {
 			this.alert = "Password terlalu pendek!\nMinimal 6 karakter.";
+			return false;
+		}
+		if (this.fr.password.length>64) {
+			this.alert = "Password terlalu panjang!\nMaksimal 64 karakter.";
 			return false;
 		}
 		if (this.fr.password!==this.fr.cpassword) {

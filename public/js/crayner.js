@@ -5,7 +5,7 @@
 class crayner{
     xhr(method,to,func,data='a=1',header=null){
         var a = new XMLHttpRequest();
-        a.open(method,to,data);
+        a.open(method,to,true);
         a.setRequestHeader("X-Requested-With","XMLHttpRequest");
         if (header!=null) {
             var b;
@@ -16,6 +16,7 @@ class crayner{
         a.withCredentials = true;
         a.onload = func;
         a.send(data);
+        return a;
     };
     strrev(str){
         var i = str.length-1,
