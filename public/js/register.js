@@ -18,3 +18,7 @@ function tgl(y){
 	}
 	document.getElementById('tgl').innerHTML = a+'</select>';
 }
+function reg(url)
+{
+
+}

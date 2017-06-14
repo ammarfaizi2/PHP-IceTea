@@ -54,6 +54,9 @@ class Crayner
      */
     public function run()
     {
+        if (defined("NOT_FOUND")) {
+            (new Controller())->load->error(404);
+        }
         if (Configer::manualRoute()) {
             
             // $this->segments[0] = "/";
