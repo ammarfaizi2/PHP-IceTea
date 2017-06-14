@@ -6,7 +6,7 @@
 	<?php js("crayner"); ?>
 	<?php js("register"); ?>
 	<script type="text/javascript">
-		var r = new register;
+		var r = new register("<?php print router_url()."/register/action" ?>","<?php print rstr(64); ?>","<?php print sha1(rstr(32)); ?>");
 		window.onload = function(){
 			r.tgl(<?php print date("Y") ?>);
 			document.getElementById('fr').addEventListener("submit", function(){
@@ -42,7 +42,14 @@
 				<tr><td>Konfirmasi Password</td><td>:</td><td><input type="password" name="cpassword" id="cpassword" required></td></tr>
 			</tbody>
 			<tfoot>
-				<tr><th colspan="3" align="center"><div class="bt"><button>Daftar</button></div></th></tr>
+				<tr>
+					<th colspan="3" align="center">
+						<div class="bt">
+							<input type="hidden" name="dynamic_token" id="dyn" value="<?php print $dyn; ?>">
+							<button type="submit">Daftar</button>
+						</div>
+					</th>
+				</tr>
 			</tfoot>
 			</table>
 		</form>

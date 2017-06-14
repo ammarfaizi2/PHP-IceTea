@@ -2,10 +2,14 @@
 const b = ['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
 
 class register{
-	constructor(){
+	constructor(bd,token,hash){
 		this.crayner = new crayner;
 		this.form 	 = null;
 		this.alert   = "";
+		this.backendResponse = null;
+		this.backendDestination = bd;
+		this.token = token;
+		this.hash = hash;
 	}
 	tgl(y){
 		var i = 1,oo='<option>',oc='</option>',so='<select ',sc='</select>',a=so+'required name="tgl" id="tl">'+oo+oc,x;
@@ -22,7 +26,7 @@ class register{
 		}
 		document.getElementById('tgl').innerHTML = a+'</select>';
 	}
-	
+
 	gv(id){
 		return document.getElementById(id).value;
 	}
@@ -45,13 +49,27 @@ class register{
 			"alamat"		:	this.gv("alamat"),
 			"username"		:	this.gv("username"),
 			"password"		:	this.gv("password"),
-			"cpassword"		:	this.gv("cpassword")
+			"cpassword"		:	this.gv("cpassword"),
+			"token"			:   this.token,
+			"dynamic_token"	:	this.gv("dyn")
 		};
 		if (this.rule()) {
-			this.send(JSON.stringify(this.fr));
+			this.fr = JSON.stringify(this.fr);
+			if (this.backendValidation()) {
+				this.redirect(this.backendResponse['redirect']);
+			} else {
+				alert(this.alert);
+			}
 		} else {
 			alert(this.alert);
 		}
+	}
+	backendValidation(){
+		this.crayner.xhr("POST",this.backendDestination,function(){
+
+		},
+		"register_data="+encodeURI(this.fr)+"&token_hash="+this.hash
+		,{"Content-type":"application/x-www-form-urlencoded","X-Token-Register":this.token});
 	}
 	rule(){
 		if (this.fr.nama.length<4) {
