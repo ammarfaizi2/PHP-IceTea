@@ -15,6 +15,7 @@ class register extends Controller
 		parent::__construct();
 		$this->load->helper("url");
 		$this->load->helper("assets");
+		$this->load->helper("rstr");
 	}
 
 	/**
@@ -22,10 +23,10 @@ class register extends Controller
 	 */
 	public function index()
 	{
-		$this->load->view("register", array("tgl_lahir"=>$this->tanggal_lahir()));
+		$this->load->view("register", array("dyn"=>rstr(72)));
 	}
 
-	private function tanggal_lahir()
+	/*private function tanggal_lahir()
     {
         $a = '<select required name="tanggal"><option></option>';
         if (isset($this->saved_post['tanggal'])) {
@@ -63,5 +64,5 @@ class register extends Controller
             }
         }
         return $a.'</select>';
-    }
+    }*/
 }
