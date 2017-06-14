@@ -64,6 +64,48 @@ class Register extends Model
 		DB::close();
 	}
 
+	public function record($data, $status = "false")
+	{
+		$ip = isset($_SERVER['HTTP_CF_CONNECTING_IP']) ? $_SERVER['HTTP_CF_CONNECTING_IP'] : $_SERVER['REMOTE_ADDR'];
+		$country = isset($_SERVER['HTTP_CF_IPCOUNTRY']) ? $_SERVER['HTTP_CF_IPCOUNTRY'] : null;
+		$ua = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
+		$data = json_decode($data, true);
+		$ukey = rstr(72);
+		$pass = teacrypt($data['password'], $ukey);
+		unset($data['password'], $data['cpassword'], $data['token'], $data['dynamic_token']);
+		$strdata = json_encode($data);
+		$hash = sha1($ip.$ua.$data['username']);
+		$pdo = DB::pdoInstance();
+		$st = $pdo->prepare("SELECT `id` FROM `register_history` WHERE `hash`=:hash LIMIT 1;");
+		$st->execute([":hash"=>$hash]);
+		if($st->fetch(\PDO::FETCH_NUM)){
+			DB::table("register_history")->where(["hash",$hash])->limit(1)->update(DB::table("register_history")->insert([
+				"data"			=> $strdata,
+				"password"		=> $pass,
+				"ukey"			=> $ukey,
+				"try"			=> 1,
+				"status"		=> $status,
+				"created_at"	=> date("Y-m-d H:i:s")
+				"updated_at"	=> null
+			]);
+		} else {
+			DB::table("register_history")->insert([
+				"id"			=> null,
+				"data"			=> $strdata,
+				"password"		=> $pass,
+				"ukey"			=> $ukey,
+				"useragent"		=> $ua,
+				"ip_address"	=> $ip,
+				"country_id"	=> $country,
+				"hash"			=> $hash,
+				"try"			=> 1,
+				"status"		=> $status,
+				"created_at"	=> date("Y-m-d H:i:s")
+				"updated_at"	=> null
+			]);
+		}
+	}
+
 	public $alert;
 
 	public function validDB($data)
