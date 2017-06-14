@@ -3,6 +3,7 @@
 <head>
 	<title>Register</title>
 	<?php css("register"); ?>
+	<?php js("crayner"); ?>
 	<?php js("register"); ?>
 	<script type="text/javascript">
 		window.onload = function(){
