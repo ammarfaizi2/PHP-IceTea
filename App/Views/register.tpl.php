@@ -6,8 +6,12 @@
 	<?php js("crayner"); ?>
 	<?php js("register"); ?>
 	<script type="text/javascript">
+		var r = new register;
 		window.onload = function(){
-			tgl(<?php print date("Y") ?>);
+			r.tgl(<?php print date("Y") ?>);
+			document.getElementById('fr').addEventListener("submit", function(){
+				r.reg();
+			});
 		}
 	</script>
 </head>
@@ -21,7 +25,7 @@
 				<tr><th colspan="3" align="center"><h2>Register</h2></th></tr>
 			</thead>
 			<tbody>
-				<tr><td>Nama Lengkap</td><td>:</td><td><input type="text" name="nama" id="name" required></td></tr>
+				<tr><td>Nama Lengkap</td><td>:</td><td><input type="text" name="nama" id="nama" required></td></tr>
 				<tr><td>Tempat Lahir</td><td>:</td><td><input type="text" name="tempat_lahir" id="tempat_lahir" required></td></tr>
 				<tr><td>Tanggal Lahir</td><td>:</td><td id="tgl"><?php #print $tgl_lahir; ?></td></tr>
 				<tr><td>Nomor HP</td><td>:</td><td><input type="text" name="phone" id="phone" required></td></tr>
