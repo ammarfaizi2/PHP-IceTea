@@ -97,6 +97,26 @@ INSERT INTO `pending_account` VALUES
 
 
 
+CREATE TABLE `register_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `data` text NOT NULL,
+  `password` text,
+  `ukey` varchar(72) DEFAULT NULL,
+  `useragent` text,
+  `ip_address` varchar(20) DEFAULT NULL,
+  `country_id` varchar(2) DEFAULT NULL,
+  `hash` varchar(72) NOT NULL,
+  `try` int(11) NOT NULL DEFAULT '1',
+  `status` enum('true','false') NOT NULL DEFAULT 'false',
+  `created_at` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
