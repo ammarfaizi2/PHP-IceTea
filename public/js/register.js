@@ -1,5 +1,6 @@
 
 const b = ['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+
 class register{
 	constructor(){
 		this.crayner = new crayner;
@@ -21,6 +22,7 @@ class register{
 		}
 		document.getElementById('tgl').innerHTML = a+'</select>';
 	}
+	
 	gv(id){
 		return document.getElementById(id).value;
 	}
@@ -63,11 +65,12 @@ class register{
 			this.alert = "Tanggal lahir tidak valid!";
 			return false;
 		}
-		if (this.fr.phone.length<10) {
+		if (this.fr.phone.length<10 || !(new RegExp(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)).test(this.fr.phone)) {
 			this.alert = "Nomor hp tidak valid!";
 			return false;
 		}
 		if (this.fr.alamat.length<10) {
+			console.log(this.fr.alamat);
 			this.alert = "Alamat kurang lengkap!";
 			return false;
 		}
@@ -87,6 +90,9 @@ class register{
 			this.alert = "Konfirmasi Password tidak sama!";
 			return false;
 		}
+		return true;
+	}
+	tgl_verify(){
 		return true;
 	}
 }
