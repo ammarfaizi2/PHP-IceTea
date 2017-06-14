@@ -58,18 +58,26 @@ class register{
 			if (this.backendValidation()) {
 				this.redirect(this.backendResponse['redirect']);
 			} else {
-				alert(this.alert);
+				alert(this.backendResponse['alert']);
 			}
 		} else {
 			alert(this.alert);
 		}
 	}
 	backendValidation(){
-		this.crayner.xhr("POST",this.backendDestination,function(){
-
-		},
-		"register_data="+encodeURI(this.fr)+"&token_hash="+this.hash
-		,{"Content-type":"application/x-www-form-urlencoded","X-Token-Register":this.token});
+		var self = this;
+		self.crayner.xhr("POST",this.backendDestination,function(){
+			var x;
+			try{
+				x = JSON.parse(this.responseText);
+			} catch(e){
+				x = null; console.log(e);
+			}
+			if(x!=null) {
+				self.backendResponse = x;
+			}
+		},"register_data="+encodeURI(self.fr)+"&token_hash="+self.hash,{"Content-type":"application/x-www-form-urlencoded","X-Token-Register":self.token});
+		return self.backendResponse['status'];
 	}
 	rule(){
 		if (this.fr.nama.length<4) {
