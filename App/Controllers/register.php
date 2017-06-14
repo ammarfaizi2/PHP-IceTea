@@ -17,6 +17,7 @@ class register extends Controller
 		$this->load->helper("url");
 		$this->load->helper("assets");
 		$this->load->helper("rstr");
+		$this->load->helper("teacrypt");
 	}
 
 	/**
@@ -31,7 +32,7 @@ class register extends Controller
 	{
 		if ($this->validation()) {
 			$json = array(
-					"status"=>false,
+					"status"=>true,
 					"redirect"=>router_url()."/register_success",
 					"alert"=>"sukses"
 				);
@@ -47,6 +48,7 @@ class register extends Controller
 			$a = new RegisterModel();
 			if($a->validDB($this->u)){
 				$a->store();
+				$json = array("status"=>false,"redirect"=>"","alert"=>$a->alert);
 			} else {
 				$json = array("status"=>false,"redirect"=>"","alert"=>$a->alert);
 			}

@@ -15,7 +15,7 @@ if (!function_exists("rstr")) {
     function rstr(int $n = 32, string $list = "", bool $pure = false)
     {
         if ($pure) {
-            $list = $concatation;
+            $list = $list;
             $len  = strlen($list) - 1;
         } else {
             $len  = 64 + strlen($list);

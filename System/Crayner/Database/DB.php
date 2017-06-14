@@ -567,6 +567,11 @@ class DB extends DatabaseFactory
         return $this->pdo->lastInsertId();
     }
 
+    public function pdoInstance()
+    {
+        return self::getInstance()->pdo;
+    }
+
     public function __destruct()
     {
         $this->pdo = null;
