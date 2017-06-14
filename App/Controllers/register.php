@@ -26,6 +26,35 @@ class register extends Controller
 		$this->load->view("register", array("dyn"=>rstr(72)));
 	}
 
+	public function action()
+	{
+		$this->set->header("Content-type","application/json");
+		if ($this->validation()) {
+			$json = array(
+					"status"=>true,
+					"redirect"=>router_url()."/register_success",
+					"alert"=>null
+				);
+		} else {
+			$json = array(
+					"status"=>false,
+					"redirect"=>"",
+					"alert"=>$this->alert
+				);
+		}
+		die(json_encode($json));
+	}
+
+	private $alert;
+	private function validation()
+	{
+		$input = json_decode($this->input->post("register_data"), true);
+		if (!is_array($input)) {
+			return false;
+		}
+		
+	}
+
 	/*private function tanggal_lahir()
     {
         $a = '<select required name="tanggal"><option></option>';
