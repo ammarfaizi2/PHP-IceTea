@@ -25,7 +25,7 @@
 				<tr><td>Tanggal Lahir</td><td>:</td><td id="tgl"><?php #print $tgl_lahir; ?></td></tr>
 				<tr><td>Nomor HP</td><td>:</td><td><input type="text" name="phone" id="phone" required></td></tr>
 				<tr><td>E-Mail</td><td>:</td><td><input type="email" name="email" id="email" required></td></tr>
-				<tr><td>Alamat</td><td>:</td><td><textarea name="alamat" id="alamat" required></textarea></td></tr>
+				<tr><td>Alamat</td><td>:</td><td><textarea fixed name="alamat" id="alamat" required></textarea></td></tr>
 				<tr><td colspan="3"><div class="mg"></div></td></tr>
 			</tbody>
 			<thead>
@@ -37,7 +37,7 @@
 				<tr><td>Konfirmasi Password</td><td>:</td><td><input type="password" name="cpassword" id="cpassword" required></td></tr>
 			</tbody>
 			<tfoot>
-				<tr><th colspan="3" align="center"><div class="sbbt"><button>Daftar</button></div></th></tr>
+				<tr><th colspan="3" align="center"><div class="bt"><button>Daftar</button></div></th></tr>
 			</tfoot>
 			</table>
 		</form>
