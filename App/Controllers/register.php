@@ -36,7 +36,7 @@ class register extends Controller
 
     public function success()
     {
-
+        $this->load->view("register_success");
     }
 
     public function action()
