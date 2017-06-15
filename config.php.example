@@ -14,6 +14,7 @@ $config['default_method'] = "index";
 
 $config['error_handler']['show_error_query'] = true;
 
+$config['cookie_default_domain'] = null;
 
 /**
  *
