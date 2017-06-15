@@ -38,7 +38,15 @@ class register extends Controller
     public function verify_account()
     {
         $reg = new RegisterModel();
-        
+        if (isset($_GET['userid'], $_GET['wg'], $_GET['t'])) {
+            if($reg->verifyAccount($_GET['userid'], $_GET['t'])){
+                $reg->verifyAction();
+            } else {
+                $this->load->error(404);
+            }
+        } else {
+            $this->load->error(404);
+        }
     }
 
     public function success()
