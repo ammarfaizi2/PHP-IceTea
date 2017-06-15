@@ -35,6 +35,12 @@ class register extends Controller
         $this->load->view("register", array("dyn"=>$dyn, "token"=>$token));
     }
 
+    public function verify_account()
+    {
+        $reg = new RegisterModel();
+        
+    }
+
     public function success()
     {
         if (!isset($_COOKIE['registered_user'], $_COOKIE['tokenizer'])) {
