@@ -63,14 +63,15 @@ class Register extends Model
             ]);
         $token = rstr(144);
         $tkey  = rstr(72);
+        $exp = date("Y-m-d H:i:s", strtotime($time_reg)+(3600*2));
         DB::table("pending_account")->insert([
                 "userid"        => $userid,
                 "token"            => teacrypt($token, $tkey),
                 "tkey"            => $tkey,
-                "expired"        => $time_reg
+                "expired"        => $exp
             ]);
         $data['userid'] = $userid;
-        $this->sendVerification($token, $data);
+        $this->sendVerification($token, $data, $exp);
         DB::close();
     }
     public function record($data, $status = "false")
@@ -136,18 +137,25 @@ class Register extends Model
         return $tokenizer;
     }
 
-    public function sendVerification($token, $d)
+    public function sendVerification($token, $d, $ex)
     {
         $bulan = ['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
         $a = new Mailer();
-        $link = "https://www.crayner.cf/verify_account/fqcn/annotation?t=".urlencode($token)."&uid={$d['userid']}&wg=".rstr(32);
+        $link = "https://www.crayner.cf/verify/account/annotation/fqcn?t=".urlencode($token)."&uid={$d['userid']}&wg=".rstr(32);
         $lahir = strtotime($d['tanggal_lahir']);
         $x = $a->mail([
                 "from"=>["admin@crayner.cf","Crayner System"],
                 "to"=>[$d['email'],$d['nama']],
-                "content"=>"<h3>Selamat Datang di Crayner</h3><p>Tinggal selangkah lagi untuk bergabung di Crayner. Silahkan verifikasi kepemilikian akun.</p><br>User ID : {$d['userid']}<br>Nama : {$d['nama']}<br>Alamat : {$d['alamat']}<br>Tanggal Lahir : ".date("d",$lahir)." ".$bulan[(int)date("m",$lahir)]." ".date("Y",$lahir)."<br>Nomor HP : {$d['phone']}<br><br><br><br>Silahkan klik link ini untuk memverifikasi akun anda : <br><a href=\"{$link}\">{$link}</a>",
+                "content"=>"<h3>Selamat Datang di Crayner</h3><p>Tinggal selangkah lagi untuk bergabung di Crayner. Silahkan verifikasi kepemilikian akun.</p><br>User ID : {$d['userid']}<br>Nama : {$d['nama']}<br>Alamat : {$d['alamat']}<br>Tanggal Lahir : ".date("d",$lahir)." ".$bulan[(int)date("m",$lahir)]." ".date("Y",$lahir)."<br>Nomor HP : {$d['phone']}<br><br><br><br>Klik link ini untuk memverifikasi akun anda : <br><a href=\"{$link}\">{$link}</a><br><br>Link tersebut hanya berlaku 2 jam, akan expired pada ".date("d",$ex)." ".$bulan[(int)date("m",$ex)]." ".date("Y",$ex),
                 "subject"=>"Verifikasi Akun Crayner",
                 "replyto"=>["noreply@crayner.cf","No Reply"]
             ]);
+    }
+
+    public function verifyAccount($userid, $token)
+    {
+        if ($a = DB::table("pending_account")->select("token", "tkey", "expired")->where("userid", $userid)->limit(1)->first()) {
+            
+        }
     }
 }
