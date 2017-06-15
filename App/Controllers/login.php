@@ -61,7 +61,7 @@ class login extends Controller
                 $this->set->cookie($val, '', $exp_time);
             }
         }
-        header("location: ".router_url()."/login?ref=logout");
+        header("location: ".router_url()."/login?ref=logout&cr=".rstr(72));
         die("~");
     }
 
@@ -102,7 +102,7 @@ class login extends Controller
                 foreach ($rem as $val) {
                     $this->set->cookie($val, '', $exp_time);
                 }
-                header("Location:". router_url()."/logout?ref=server_error");
+                header("Location:". router_url()."/logout?ref=server_error&cr=".rstr(72));
             }
         }
         return false;

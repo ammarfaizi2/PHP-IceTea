@@ -27,12 +27,13 @@ class Register extends Model
         } while ($st->fetch(\PDO::FETCH_NUM));
         return $userid;
     }
-
+    public $userid;
     public function store()
     {
         $data = $this->dt;
         $userid = $this->genUserId();
         $time_reg = date("Y-m-d H:i:s");
+        $this->userid = $userid;
         $key = rstr(72-strlen($userid)).$userid;
         DB::table("account_data")->insert([
                 "userid"        => $userid,

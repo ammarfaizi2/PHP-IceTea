@@ -28,6 +28,7 @@ Route::post("/login/action", "login@action");
 
 Route::get("/register", "register@index");
 Route::post("/register/action", "register@action");
+Route::get("/register/success", "register@success");
 
 Route::get("/logout", "login@logout");
 

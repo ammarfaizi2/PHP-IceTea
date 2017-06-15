@@ -44,8 +44,13 @@ class Cookie implements CookieTable
     public function make(string $name, string $value, int $minute = null, string $path = "/", string $domain = null, bool $secure = false, bool $httpOnly = true)
     {
         $this->toString = $value;
-        $this->func        = function ($value) use ($name, $minute, $path, $domain, $secure, $httpOnly) {
-            setcookie($name, $value, time()+($minute * 60), $path, $domain, $secure, $httpOnly);
+        if ($minute === 0) {
+            $timez = 0;
+        } else {
+            $timez = time() + ($minute * 60);
+        }
+        $this->func        = function ($value) use ($name, $timez, $path, $domain, $secure, $httpOnly) {
+            setcookie($name, $value, $timez, $path, $domain, $secure, $httpOnly);
         };
         return new InputUtilities($this->toString, $this->func);
     }
