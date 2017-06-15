@@ -15,7 +15,7 @@ class Set
         return header("{$name}: {$value}");
     }
 
-    public function cookie(string $name, string $value, int $minute = null, string $path = "/", string $domain = null, bool $secure = false, bool $httpOnly = true)
+    public function cookie(string $name, string $value, int $minute = null, string $path = "/", string $domain = null, bool $secure = null, bool $httpOnly = true)
     {
         return Cookie::getInstance()->make($name, $value, $minute, $path, $domain, $secure, $httpOnly);
     }
