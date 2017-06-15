@@ -188,7 +188,7 @@ class DB extends DatabaseFactory
             $newData[] = "{$field}=:{$field}";
         }
 
-        $newData = implode(",", $m); // override new data
+        $newData = implode(",", $newData); // override new data
 
         return $newData;
     }
