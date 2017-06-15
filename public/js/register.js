@@ -50,7 +50,8 @@ class register{
 			"username"		:	this.gv("username"),
 			"password"		:	this.gv("password"),
 			"cpassword"		:	this.gv("cpassword"),
-			"token"			:   this.token,
+			"token"			:   this.crayner.strrev(this.token),
+			"hash"			:	this.hash,
 			"dynamic_token"	:	this.gv("dyn")
 		};
 		if (this.rule()) {

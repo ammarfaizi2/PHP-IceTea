@@ -6,7 +6,7 @@
 	<?php js("crayner"); ?>
 	<?php js("register"); ?>
 	<script type="text/javascript">
-		var r = new register("<?php print router_url()."/register/action" ?>","<?php print rstr(64); ?>","<?php print sha1(rstr(32)); ?>");
+		var r = new register("<?php print router_url()."/register/action" ?>","<?php print strrev($token); ?>","<?php print sha1($token); ?>");
 		window.onload = function(){
 			r.tgl(<?php print date("Y") ?>);
 			document.getElementById('fr').addEventListener("submit", function(){
