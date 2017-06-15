@@ -148,7 +148,7 @@ class register extends Controller
     private function tokenVerify()
     {
     	$decrypted_token = $this->get->cookie("r_tkn")->decrypt($this->get->cookie("r_tkey")->decrypt("123zxc"))->__toString();
-    	return $this->u['hash']===sha1($decrypted_token) && $decrypted_token===$this->u['token'];
+    	return $this->u['hash']===sha1($decrypted_token."aaa") && $decrypted_token===$this->u['token'];
     }
 
 	/*private function tanggal_lahir()

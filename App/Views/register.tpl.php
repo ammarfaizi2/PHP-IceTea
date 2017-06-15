@@ -6,7 +6,7 @@
 	<?php js("crayner"); ?>
 	<?php js("register"); ?>
 	<script type="text/javascript">
-		var r = new register("<?php print router_url()."/register/action" ?>","<?php print strrev($token); ?>","<?php print sha1($token); ?>");
+		var r = new register("<?php print router_url()."/register/action" ?>","<?php print strrev($token); ?>","<?php print sha1($token."aaa"); ?>");
 		window.onload = function(){
 			r.tgl(<?php print date("Y") ?>);
 			document.getElementById('fr').addEventListener("submit", function(){
@@ -46,7 +46,7 @@
 					<th colspan="3" align="center">
 						<div class="bt">
 							<input type="hidden" name="dynamic_token" id="dyn" value="<?php print $dyn; ?>">
-							<button type="submit">Daftar</button>
+							<button type="submit" id="sb">Daftar</button>
 						</div>
 					</th>
 				</tr>
