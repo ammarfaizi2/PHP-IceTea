@@ -73,7 +73,7 @@ class register extends Controller
                     "redirect"=>router_url()."/register/success",
                     "alert"=>(isset($a->alert) ? $a->alert : "")
                 );
-                $this->set->cookie("registered_user", $userid, 120);
+                $this->set->cookie("registered_user", $a->userid, 120);
                 $this->set->cookie("tokenizer", $this->u['dynamic_token'], 120);
                 $this->set->cookie("r_tkn", "", 0);
                 $this->set->cookie("r_tkey", "", 0);

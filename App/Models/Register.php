@@ -25,6 +25,8 @@ class Register extends Model
             ;
             $st->execute([":userid"=>$userid]);
         } while ($st->fetch(\PDO::FETCH_NUM));
+        $st = null;
+        DB::close();
         return $userid;
     }
     public $userid;
