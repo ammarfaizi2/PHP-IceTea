@@ -4,3 +4,10 @@
 /vendor/
 /config.php
 /git
+/.bashrc
+/.bash_logout
+/.profile
+/public/.htaccess
+/public/.well-known/
+/public/.webhooks
+/logs

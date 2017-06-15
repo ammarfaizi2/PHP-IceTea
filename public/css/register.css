@@ -1,0 +1,44 @@
+body{
+	font-family: Helvetica;
+}
+.mcg{
+	margin-top: 8%;
+	margin-bottom: 15%;
+}
+.fcg{
+	border: 2px solid black;
+	border-radius: 1.5%;
+	max-width: 35%;
+	background-color: #3FF390;
+}
+.bt{
+	margin-top: 5%;
+	margin-bottom: 5%;
+}
+.mg{
+	margin-top: 5%;
+}
+#alamat{
+	resize: none;
+	width: 153px; 
+	height: 86px;
+}
+#sb{
+	background-color: #D8F51E;
+	padding: 8px 15px 8px 15px;
+	cursor: pointer;
+	border-radius: 5%;
+	border: 1.9px solid black;
+	font-weight: bold;
+	color: #000;
+	font-size: 100%;
+	margin-top: 3.5%;
+}
+#sb:hover{
+	background-color:#A8B818;
+	color:#212409;
+}
+#sb:active{
+	background-color: #404607;
+	color:#fff;
+}

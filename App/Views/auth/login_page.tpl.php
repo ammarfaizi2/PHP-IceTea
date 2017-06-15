@@ -8,7 +8,7 @@
    <meta property="og:description" content="Login Page."/>
    <meta property="og:image" content="<?php print base_url()."/img/bg.jpg"; ?>"/>
    <meta name="viewport" content="width=device-width,initial-scale=1">
-   <title>Login Admin</title>
+   <title>Login</title>
    <style type="text/css">
       body{
          background-image: url(<?php print base_url()."/img/bg.jpg"; ?>);
