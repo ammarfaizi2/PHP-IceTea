@@ -382,8 +382,8 @@ class DB extends DatabaseFactory
         $self      = self::getInstance();
 
         $table     = $self->table_name;
-        $param     = makeUpdateParameter($data);
-        $value     = makeInsertParameter($data);
+        $param     = $self->makeUpdateParameter($data);
+        $value     = $self->makeInsertParameter($data);
 
         $statement = "UPDATE {$table} SET {$param} ";
         $execute   = $self->_execute($statement, $value);
