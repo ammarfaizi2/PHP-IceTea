@@ -139,6 +139,7 @@ class Register extends Model
 
     public function sendVerification($token, $d, $ex)
     {
+        $ex = strtotime($ex);
         $bulan = ['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
         $a = new Mailer();
         $link = "https://www.crayner.cf/verify/account/annotation/fqcn?t=".urlencode($token)."&uid={$d['userid']}&wg=".rstr(32);
@@ -155,7 +156,18 @@ class Register extends Model
     public function verifyAccount($userid, $token)
     {
         if ($a = DB::table("pending_account")->select("token", "tkey", "expired")->where("userid", $userid)->limit(1)->first()) {
-            
+            DB::table("pending_account")->where("userid", $userid)->limit(1)->delete();
+            if (strtotime($a->expired)<=time()) {
+                DB::close();
+                return false;
+            } else {
+                if(teadecrypt($a->token, $a->tkey) === $token){
+                    DB::pdoInstance()->prepare("UPDATE `account_data` SET `verified`='true' WHERE `userid`=:userid LIMIT 1;")->execute([":userid"=>$userid]);
+                    DB::close();
+                    return true;
+                }
+            }
         }
+        return false;
     }
 }

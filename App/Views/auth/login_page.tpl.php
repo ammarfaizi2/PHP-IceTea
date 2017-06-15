@@ -1,3 +1,9 @@
+<?php 
+if (isset($_COOKIE['verified_account'])) {
+   $ver = true;
+   setcookie("verified_account",null,0);
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +28,11 @@
    <?php css("login"); ?>
    <?php js("crayner"); ?>
    <?php js("login"); ?>
+   <?php if (isset($ver)) {
+      ?>
+      <script type="text/javascript">alert("Akun berhasil diverifikasi!");</script>
+      <?php
+   } ?>
    <script type="text/javascript">
       /**
        * @author  Ammar Faizi <amamrfaizi2@gmail.com>
