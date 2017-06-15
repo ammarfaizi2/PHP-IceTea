@@ -27,7 +27,7 @@
 			<tbody>
 				<tr><td>Nama Lengkap</td><td>:</td><td><input type="text" name="nama" id="nama" required></td></tr>
 				<tr><td>Tempat Lahir</td><td>:</td><td><input type="text" name="tempat_lahir" id="tempat_lahir" required></td></tr>
-				<tr><td>Tanggal Lahir</td><td>:</td><td id="tgl"><?php #print $tgl_lahir; ?></td></tr>
+				<tr><td>Tanggal Lahir</td><td>:</td><td id="tgl"><?php #print $tgl_lahir;?></td></tr>
 				<tr><td>Nomor HP</td><td>:</td><td><input type="text" name="phone" id="phone" required></td></tr>
 				<tr><td>E-Mail</td><td>:</td><td><input type="email" name="email" id="email" required></td></tr>
 				<tr><td>Alamat</td><td>:</td><td><textarea name="alamat" id="alamat" required></textarea></td></tr>
