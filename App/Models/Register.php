@@ -140,12 +140,14 @@ class Register extends Model
     {
         $a = new Mailer();
         $link = "https://www.crayner.cf/verify_account/fqcn/annotation?t=".urlencode($token)."&uid={$d['userid']}&wg=".rstr(32);
-        $a->mail([
+        $x = $a->mail([
                 "from"=>["admin@crayner.cf","Crayner System"],
                 "to"=>[$d['email'],$d['nama']],
                 "content"=>"<h3>Selamat Datang di Crayner</h3><p>Tinggal selangkah lagi untuk bergabung di Crayner. Silahkan verifikasi kepemilikian akun.</p><br>Nama : {$d['nama']}<br>Alamat : {$d['alamat']}<br>Tanggal Lahir : {$d['tanggal_lahir']}<br><br><br>Silahkan klik link ini untuk memverifikasi akun anda : <br><a href=\"{$link}\">{$link}</a>",
                 "subject"=>"Verifikasi Akun Crayner",
                 "replyto"=>["noreply@crayner.cf","No Reply"]
             ]);
+	var_dump($x);
+die;
     }
 }
