@@ -102,6 +102,10 @@ class register extends Controller
 			$this->alert = "Alamat kurang lengkap!";
 			return false;
 		}
+		if (preg_match("#[^0-9a-zA-Z\_\.]#", $input['username'])) {
+			$this->alert = "Username hanya boleh mengandung karakter a-zA-Z0-9 . _";
+			return false;
+		}
 		if (strlen($input['username'])<4) {
 			$this->alert = "Username terlalu pendek!\nMinimal 4 karakter.";
 			return false;
