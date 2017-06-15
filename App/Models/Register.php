@@ -5,6 +5,8 @@ namespace App\Models;
 use System\Model;
 use System\Crayner\Database\DB;
 
+use App\Models\Mailer;
+
 class Register extends Model
 {
     /**
@@ -21,18 +23,21 @@ class Register extends Model
     {
         $st = $this->pdo->prepare("SELECT `userid` FROM `account_data` WHERE `userid`=:userid LIMIT 1;");
         do {
-            $userid = rstr(10, "1234567890", 1);
+            $userid = rand(1,9).rstr(10, "1234567890", 1);
             ;
             $st->execute([":userid"=>$userid]);
         } while ($st->fetch(\PDO::FETCH_NUM));
+        $st = null;
+        DB::close();
         return $userid;
     }
-
+    public $userid;
     public function store()
     {
         $data = $this->dt;
         $userid = $this->genUserId();
         $time_reg = date("Y-m-d H:i:s");
+        $this->userid = $userid;
         $key = rstr(72-strlen($userid)).$userid;
         DB::table("account_data")->insert([
                 "userid"        => $userid,
@@ -58,15 +63,17 @@ class Register extends Model
             ]);
         $token = rstr(144);
         $tkey  = rstr(72);
+        $exp = date("Y-m-d H:i:s", strtotime($time_reg)+(3600*2));
         DB::table("pending_account")->insert([
                 "userid"        => $userid,
                 "token"            => teacrypt($token, $tkey),
                 "tkey"            => $tkey,
-                "expired"        => $time_reg
+                "expired"        => $exp
             ]);
+        $data['userid'] = $userid;
+        $this->sendVerification($token, $data, $exp);
         DB::close();
     }
-
     public function record($data, $status = "false")
     {
         $ip = isset($_SERVER['HTTP_CF_CONNECTING_IP']) ? $_SERVER['HTTP_CF_CONNECTING_IP'] : $_SERVER['REMOTE_ADDR'];
@@ -128,5 +135,39 @@ class Register extends Model
         } while (DB::table("account_data")->select("userid")->where("tokenizer", $tokenizer)->limit(1)->first());
         DB::close();
         return $tokenizer;
+    }
+
+    public function sendVerification($token, $d, $ex)
+    {
+        $ex = strtotime($ex);
+        $bulan = ['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+        $a = new Mailer();
+        $link = "https://www.crayner.cf/verify/account/annotation/fqcn?t=".urlencode($token)."&uid={$d['userid']}&wg=".rstr(32);
+        $lahir = strtotime($d['tanggal_lahir']);
+        $x = $a->mail([
+                "from"=>["admin@crayner.cf","Crayner System"],
+                "to"=>[$d['email'],$d['nama']],
+                "content"=>"<h3>Selamat Datang di Crayner</h3><p>Tinggal selangkah lagi untuk bergabung di Crayner. Silahkan verifikasi kepemilikian akun.</p><br>User ID : {$d['userid']}<br>Nama : {$d['nama']}<br>Alamat : {$d['alamat']}<br>Tanggal Lahir : ".date("d",$lahir)." ".$bulan[(int)date("m",$lahir)]." ".date("Y",$lahir)."<br>Nomor HP : {$d['phone']}<br><br><br><br>Klik link ini untuk memverifikasi akun anda : <br><a href=\"{$link}\">{$link}</a><br><br>Link tersebut hanya berlaku 2 jam, akan expired pada ".date("d",$ex)." ".$bulan[(int)date("m",$ex)]." ".date("Y",$ex)." ".date("h:i:s A", $ex),
+                "subject"=>"Verifikasi Akun Crayner",
+                "replyto"=>["noreply@crayner.cf","No Reply"]
+            ]);
+    }
+
+    public function verifyAccount($userid, $token)
+    {
+        if ($a = DB::table("pending_account")->select("token", "tkey", "expired")->where("userid", $userid)->limit(1)->first()) {
+            DB::table("pending_account")->where("userid", $userid)->limit(1)->delete();
+            if (strtotime($a->expired)<=time()) {
+                DB::close();
+                return false;
+            } else {
+                if(teadecrypt($a->token, $a->tkey) === $token){
+                    DB::pdoInstance()->prepare("UPDATE `account_data` SET `verified`='true' WHERE `userid`=:userid LIMIT 1;")->execute([":userid"=>$userid]);
+                    DB::close();
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

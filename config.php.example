@@ -14,6 +14,7 @@ $config['default_method'] = "index";
 
 $config['error_handler']['show_error_query'] = true;
 
+$config['cookie_default_domain'] = null;
 
 /**
  *
@@ -35,7 +36,6 @@ $config['router']['automatic_route'] = true;
 $config['router']['router_file'] = "index.php";
 
 
-
 /**
  *
  * Database Configuration.
@@ -47,3 +47,12 @@ $config['database']['user']      = "debian-sys-maint";
 $config['database']['pass']      = "";
 $config['database']['port']      = "3306";
 $config['database']['dbname']    = "icetea";
+
+$config['smtp'] = [
+			"host"=>"smtp.gmail.com",
+			"port"=>587,
+			"secure"=>"tls",
+			"auth"=>true,
+			"username"=>"user@gmail.com",
+			"password"=>"password123"
+		];

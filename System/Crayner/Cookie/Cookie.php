@@ -4,6 +4,7 @@ namespace System\Crayner\Cookie;
 
 use System\Crayner\Hub\Singleton;
 use System\Crayner\Input\InputUtilities;
+use System\Crayner\ConfigHandler\Configer;
 use System\Crayner\Contracts\Cookie\CookieTable;
 
 /**
@@ -41,11 +42,22 @@ class Cookie implements CookieTable
      * @param  bool   $httpOnly
      * @return bool
      */
-    public function make(string $name, string $value, int $minute = null, string $path = "/", string $domain = null, bool $secure = false, bool $httpOnly = true)
+    public function make(string $name, string $value, int $minute = null, string $path = "/", string $domain = null, bool $secure = null, bool $httpOnly = true)
     {
         $this->toString = $value;
-        $this->func        = function ($value) use ($name, $minute, $path, $domain, $secure, $httpOnly) {
-            setcookie($name, $value, time()+($minute * 60), $path, $domain, $secure, $httpOnly);
+        if ($minute === 0) {
+            $timez = 0;
+        } else {
+            $timez = time() + ($minute * 60);
+        }
+        if ($secure===null and isset($_SERVER['HTTPS'])) {
+            $secure = true;
+        }
+        if ($domain===null) {
+            $domain = Configer::getCookieDefaultDomain();
+        }
+        $this->func        = function ($value) use ($name, $timez, $path, $domain, $secure, $httpOnly) {
+            setcookie($name, $value, $timez, $path, $domain, $secure, $httpOnly);
         };
         return new InputUtilities($this->toString, $this->func);
     }

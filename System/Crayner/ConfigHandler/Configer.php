@@ -91,8 +91,18 @@ class Configer
         return self::getInstance()->config['error_handler']['show_error_query'];
     }
 
+    public static function getCookieDefaultDomain()
+    {
+        return self::getInstance()->config['cookie_default_domain'];
+    }
+
     public static function loadRoutes()
     {
         include __DIR__ . "/../../../App/Routes/web.php";
+    }
+
+    public static function smtp()
+    {
+        return self::getInstance()->config['smtp'];
     }
 }
