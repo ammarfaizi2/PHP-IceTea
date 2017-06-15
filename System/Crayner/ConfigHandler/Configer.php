@@ -100,4 +100,9 @@ class Configer
     {
         include __DIR__ . "/../../../App/Routes/web.php";
     }
+
+    public static function smtp()
+    {
+        return self::getInstance()->config['smtp'];
+    }
 }

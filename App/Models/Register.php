@@ -4,7 +4,9 @@ namespace App\Models;
 
 use System\Model;
 use System\Crayner\Database\DB;
-use PHPMailer;
+
+use App\Models\Mailer;
+
 class Register extends Model
 {
     /**
@@ -67,10 +69,10 @@ class Register extends Model
                 "tkey"            => $tkey,
                 "expired"        => $time_reg
             ]);
+        $data['userid'] = $userid;
+        $this->sendVerification($token, $data);
         DB::close();
-        $this->sendVerification($token);
     }
-
     public function record($data, $status = "false")
     {
         $ip = isset($_SERVER['HTTP_CF_CONNECTING_IP']) ? $_SERVER['HTTP_CF_CONNECTING_IP'] : $_SERVER['REMOTE_ADDR'];
@@ -134,8 +136,16 @@ class Register extends Model
         return $tokenizer;
     }
 
-    public function mailer()
+    public function sendVerification($token, $d)
     {
-        
+        $a = new Mailer();
+        $link = "https://www.crayner.cf/verify_account/fqcn/annotation?t=".urlencode($token)."&uid={$d['userid']}&wg=".rstr(32);
+        $a->mail([
+                "from"=>["admin@crayner.cf","Crayner System"],
+                "to"=>[$d['email'],$d['nama']],
+                "content"=>"<h3>Selamat Datang di Crayner</h3><p>Tinggal selangkah lagi untuk bergabung di Crayner. Silahkan verifikasi kepemilikian akun.</p><br>Nama : {$d['nama']}<br>Alamat : {$d['alamat']}<br>Tanggal Lahir : {$d['tanggal_lahir']}<br><br><br>Silahkan klik link ini untuk memverifikasi akun anda : <br><a href=\"{$link}\">{$link}</a>",
+                "subject"=>"Verifikasi Akun Crayner",
+                "replyto"=>["noreply@crayner.cf","No Reply"]
+            ]);
     }
 }
