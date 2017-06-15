@@ -147,7 +147,5 @@ class Register extends Model
                 "subject"=>"Verifikasi Akun Crayner",
                 "replyto"=>["noreply@crayner.cf","No Reply"]
             ]);
-	var_dump($x);
-die;
     }
 }
