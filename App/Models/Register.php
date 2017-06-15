@@ -4,7 +4,7 @@ namespace App\Models;
 
 use System\Model;
 use System\Crayner\Database\DB;
-
+use PHPMailer;
 class Register extends Model
 {
     /**
@@ -68,6 +68,7 @@ class Register extends Model
                 "expired"        => $time_reg
             ]);
         DB::close();
+        $this->sendVerification($token);
     }
 
     public function record($data, $status = "false")
@@ -131,5 +132,10 @@ class Register extends Model
         } while (DB::table("account_data")->select("userid")->where("tokenizer", $tokenizer)->limit(1)->first());
         DB::close();
         return $tokenizer;
+    }
+
+    public function mailer()
+    {
+        
     }
 }
