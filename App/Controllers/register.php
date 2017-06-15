@@ -5,6 +5,7 @@ namespace App\Controllers;
 use System\Controller;
 
 use App\Models\Register as RegisterModel;
+use App\Models\User;
 
 class register extends Controller
 {
@@ -40,7 +41,11 @@ class register extends Controller
             $this->load->error(404);
             die;
         }
-        $this->load->view("register_success");
+        if ($data = (new User())->getUserInfo($this->get->cookie("registered_user"), $this->get->cookie("tokenizer"))) {
+            $this->load->view("register_success", ["u"=>$data]);
+        } else {
+            $this->load->error(404);
+        }
     }
 
     public function action()
