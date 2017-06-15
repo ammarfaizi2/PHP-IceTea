@@ -5,6 +5,7 @@ namespace App\Controllers;
 use System\Controller;
 
 use App\Models\Register as RegisterModel;
+use App\Models\User;
 
 class register extends Controller
 {
@@ -34,12 +35,40 @@ class register extends Controller
         $this->load->view("register", array("dyn"=>$dyn, "token"=>$token));
     }
 
+    public function verify_account()
+    {
+        $reg = new RegisterModel();
+        if (isset($_GET['uid'], $_GET['wg'], $_GET['t'])) {
+            if($reg->verifyAccount($_GET['uid'], $_GET['t'])){
+                $this->set->cookie("verified_account", "true", 5);
+                $this->load->view("verified_account");
+            } else {
+                $this->load->error(404);
+            }
+        } else {
+            $this->load->error(404);
+        }
+    }
+
+    public function success()
+    {
+        if (!isset($_COOKIE['registered_user'], $_COOKIE['tokenizer'])) {
+            $this->load->error(404);
+            die;
+        }
+        if ($data = (new User())->getUserInfo($this->get->cookie("registered_user"), $this->get->cookie("tokenizer"))) {
+            $this->load->view("register_success", ["u"=>$data]);
+        } else {
+            $this->load->error(404);
+        }
+    }
+
     public function action()
     {
         if ($this->validation()) {
             $json = array(
                     "status"=>true,
-                    "redirect"=>router_url()."/register_success",
+                    "redirect"=>router_url()."/register/success?ref=reg_page&crf=".rstr(72),
                     "alert"=>""
                 );
         } else {
@@ -56,9 +85,13 @@ class register extends Controller
                 $a->store();
                 $json = array(
                     "status"=>true,
-                    "redirect"=>"/register/success",
+                    "redirect"=>router_url()."/register/success?ref=reg_page&crf=".rstr(72),
                     "alert"=>(isset($a->alert) ? $a->alert : "")
                 );
+                $this->set->cookie("registered_user", $a->userid, 120);
+                $this->set->cookie("tokenizer", $this->u['dynamic_token'], 120);
+                $this->set->cookie("r_tkn", "", 0);
+                $this->set->cookie("r_tkey", "", 0);
             } else {
                 $json = array(
                     "status"=>false,
@@ -85,7 +118,7 @@ class register extends Controller
         }
         if (!$this->tokenVerify()) {
             $this->alert = "Token mismatch!";
-            #$this->redirect = "?ref=token_mismatch&wg=".urlencode(rstr(72));
+            $this->redirect = "?ref=token_mismatch&wg=".urlencode(rstr(72));
             return false;
         }
         if (strlen($input['nama'])<4) {
