@@ -53,7 +53,7 @@ class register extends Controller
         if ($this->validation()) {
             $json = array(
                     "status"=>true,
-                    "redirect"=>router_url()."/register_success",
+                    "redirect"=>router_url()."/register/success?ref=reg_page&crf=".rstr(72),
                     "alert"=>""
                 );
         } else {
@@ -70,7 +70,7 @@ class register extends Controller
                 $a->store();
                 $json = array(
                     "status"=>true,
-                    "redirect"=>router_url()."/register/success",
+                    "redirect"=>router_url()."/register/success?ref=reg_page&crf=".rstr(72),
                     "alert"=>(isset($a->alert) ? $a->alert : "")
                 );
                 $this->set->cookie("registered_user", $a->userid, 120);

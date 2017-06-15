@@ -25,6 +25,10 @@ class login extends Controller
      */
     public function index()
     {
+        if (isset($_COOKIE['registered_user'], $_COOKIE['tokenizer'])) {
+            $this->set->cookie("registered_user", "", 0);
+            $this->set->cookie("tokenizer", "", 0);
+        }
         if ($this->checkLoginCookie()) {
             $this->set->cookie("lt", "", 0);
             $this->set->cookie("tk", "", 0);

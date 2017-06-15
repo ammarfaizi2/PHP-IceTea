@@ -24,6 +24,10 @@ class index extends Controller
      */
     public function index()
     {
+        if (isset($_COOKIE['registered_user'], $_COOKIE['tokenizer'])) {
+            $this->set->cookie("registered_user", "", 0);
+            $this->set->cookie("tokenizer", "", 0);
+        }
         if ($this->login->checkLoginCookie()) {
             (new home())->index();
         } else {
