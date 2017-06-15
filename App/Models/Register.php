@@ -14,12 +14,13 @@ class Register extends Model
 	public function __construct()
 	{
 		parent::__construct();
+		$this->pdo = DB::pdoInstance();
 	}
+	private $pdo;
 
 	private function genUserId()
 	{
-		$pdo = DB::pdoInstance();
-		$st = $pdo->prepare("SELECT `userid` FROM `account_data` WHERE `userid`=:userid LIMIT 1;");
+		$st = $this->pdo->prepare("SELECT `userid` FROM `account_data` WHERE `userid`=:userid LIMIT 1;");
 		do {
 			$userid = rstr(10, "1234567890", 1);;
 			$st->execute([":userid"=>$userid]);
@@ -35,12 +36,14 @@ class Register extends Model
 		$key = rstr(72-strlen($userid)).$userid;
 		DB::table("account_data")->insert([
 				"userid" 		=> $userid,
+				"email"			=> $data['email'],
 				"username"		=> $data['username'],
-				"password"		=> teacrypt($data['password'], strrev($key)),
+				"password"		=> teacrypt($data['password'], strrev($key)."\x63\x72\x61\x79\x6e\x65\x72"),
 				"ukey"			=> $key,
 				"authority" 	=> "user",
 				"status"		=> "active",
 				"verified"		=> "false",
+				"tokenizer"		=> $data['dynamic_token'],
 				"created_at"	=> $time_reg
 			]);
 		DB::table("account_info")->insert([
@@ -69,27 +72,12 @@ class Register extends Model
 		$ip = isset($_SERVER['HTTP_CF_CONNECTING_IP']) ? $_SERVER['HTTP_CF_CONNECTING_IP'] : $_SERVER['REMOTE_ADDR'];
 		$country = isset($_SERVER['HTTP_CF_IPCOUNTRY']) ? $_SERVER['HTTP_CF_IPCOUNTRY'] : null;
 		$ua = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
-		$data = json_decode($data, true);
 		$ukey = rstr(72);
 		$pass = teacrypt($data['password'], $ukey);
 		unset($data['password'], $data['cpassword'], $data['token'], $data['dynamic_token']);
 		$strdata = json_encode($data);
 		$hash = sha1($ip.$ua.$data['username']);
-		$pdo = DB::pdoInstance();
-		$st = $pdo->prepare("SELECT `id` FROM `register_history` WHERE `hash`=:hash LIMIT 1;");
-		$st->execute([":hash"=>$hash]);
-		if($st->fetch(\PDO::FETCH_NUM)){
-			DB::table("register_history")->where(["hash",$hash])->limit(1)->update(DB::table("register_history")->insert([
-				"data"			=> $strdata,
-				"password"		=> $pass,
-				"ukey"			=> $ukey,
-				"try"			=> 1,
-				"status"		=> $status,
-				"created_at"	=> date("Y-m-d H:i:s")
-				"updated_at"	=> null
-			]);
-		} else {
-			DB::table("register_history")->insert([
+		DB::table("register_history")->insert([
 				"id"			=> null,
 				"data"			=> $strdata,
 				"password"		=> $pass,
@@ -98,12 +86,11 @@ class Register extends Model
 				"ip_address"	=> $ip,
 				"country_id"	=> $country,
 				"hash"			=> $hash,
-				"try"			=> 1,
 				"status"		=> $status,
-				"created_at"	=> date("Y-m-d H:i:s")
+				"created_at"	=> date("Y-m-d H:i:s"),
 				"updated_at"	=> null
 			]);
-		}
+		DB::close();
 	}
 
 	public $alert;
@@ -111,6 +98,35 @@ class Register extends Model
 	public function validDB($data)
 	{
 		$this->dt = $data;
+		if ($a = DB::table("account_data")->select("username")->where("tokenizer", $data['dynamic_token'])->limit(1)->first()) {
+			$this->alert = "Harap periksa kembali, anda sudah terdaftar baru-baru ini dengan username {$a->username}";
+			DB::close();
+			return false;
+		}
+		if (DB::table("account_info")->select("userid")->where("phone",$data['phone'])->limit(1)->first()) {
+			$this->alert = "Nomor HP sudah digunakan!";
+			DB::close();
+			return false;
+		}
+		if (DB::table("account_data")->select("userid")->where("email",$data['email'])->limit(1)->first()) {
+			$this->alert = "E-Mail sudah digunakan!";
+			DB::close();
+			return false;
+		}
+		if (DB::table("account_data")->select("userid")->where("username",$data['username'])->limit(1)->first()) {
+			$this->alert = "Username sudah digunakan!";
+			DB::close();
+			return false;
+		}
 		return true;
+	}
+
+	public function tokenizer()
+	{
+		do {
+			$tokenizer = rstr(144);
+		} while (DB::table("account_data")->select("userid")->where("tokenizer", $tokenizer)->limit(1)->first());
+		DB::close();
+		return $tokenizer;
 	}
 }

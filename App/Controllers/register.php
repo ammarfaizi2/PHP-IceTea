@@ -25,7 +25,8 @@ class register extends Controller
 	 */
 	public function index()
 	{
-		$this->load->view("register", array("dyn"=>rstr(72)));
+		$dyn = (new RegisterModel())->tokenizer();
+		$this->load->view("register", array("dyn"=>$dyn));
 	}
 
 	public function action()
@@ -34,7 +35,7 @@ class register extends Controller
 			$json = array(
 					"status"=>true,
 					"redirect"=>router_url()."/register_success",
-					"alert"=>"sukses"
+					"alert"=>""
 				);
 		} else {
 			$json = array(
@@ -44,15 +45,24 @@ class register extends Controller
 				);
 		}
 		$this->set->header("Content-type","application/json");
+		$a = new RegisterModel();
 		if ($json['status']) {
-			$a = new RegisterModel();
 			if($a->validDB($this->u)){
 				$a->store();
-				$json = array("status"=>false,"redirect"=>"","alert"=>$a->alert);
+				$json = array(
+					"status"=>true,
+					"redirect"=>"/register/success",
+					"alert"=>(isset($a->alert) ? $a->alert : "")
+				);
 			} else {
-				$json = array("status"=>false,"redirect"=>"","alert"=>$a->alert);
+				$json = array(
+					"status"=>false,
+					"redirect"=>(isset($a->redirect) ? $a->redirect : ""),
+					"alert"=>$a->alert
+				);
 			}
 		}
+		$a->record($this->u, ($json['status'] ? "true" : "false"));
 		die(json_encode($json));
 	}
 
@@ -62,6 +72,7 @@ class register extends Controller
 	private function validation()
 	{
 		$input = json_decode($this->input->post("register_data"), true);
+		$this->u = $input;
 		if (!is_array($input)) {
 			$this->load->error(404);
 			die;
@@ -80,7 +91,7 @@ class register extends Controller
 			return false;
 		}
 		if (strlen($input['phone'])<10 || preg_match("#[^0-9\+]#", $input['phone'])) {
-			$this->alert = "Nomor hp tidak valid!";
+			$this->alert = "Nomor hp tidak valid!~";
 			return false;
 		}
 		if (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)) {
@@ -111,7 +122,6 @@ class register extends Controller
 			$this->alert = "Konfirmasi Password tidak sama!";
 			return false;
 		}
-		$this->u = $input;
 		return true;
 	}
 
