@@ -26,11 +26,16 @@ class register extends Controller
 	public function index()
 	{
 		$dyn = (new RegisterModel())->tokenizer();
-		$this->load->view("register", array("dyn"=>$dyn));
+		$key = rstr(72);
+		$token = rstr(64);
+		$enc = teacrypt($token, $key);
+		$this->set->cookie("r_tkey", $key, 120)->encrypt("123zxc");
+		$this->set->cookie("r_tkn", $token, 120)->encrypt($key);
+		$this->load->view("register", array("dyn"=>$dyn, "token"=>$token));
 	}
 
 	public function action()
-	{
+	{	
 		if ($this->validation()) {
 			$json = array(
 					"status"=>true,
@@ -40,7 +45,7 @@ class register extends Controller
 		} else {
 			$json = array(
 					"status"=>false,
-					"redirect"=>"",
+					"redirect"=>(isset($this->redirect) ? $this->redirect : ""),
 					"alert"=>$this->alert
 				);
 		}
@@ -69,13 +74,19 @@ class register extends Controller
 
 	private $alert;
 	private $u;
+	private $redirect;
 	private function validation()
 	{
 		$input = json_decode($this->input->post("register_data"), true);
 		$this->u = $input;
-		if (!is_array($input)) {
+		if (!$this->checkRequest() || !is_array($input)) {
 			$this->load->error(404);
 			die;
+		}
+		if (!$this->tokenVerify()) {
+			$this->alert = "Token mismatch!";
+			#$this->redirect = "?ref=token_mismatch&wg=".urlencode(rstr(72));
+			return false;
 		}
 		if (strlen($input['nama'])<4) {
 			$this->alert = "Nama terlalu pendek!";
@@ -128,6 +139,17 @@ class register extends Controller
 		}
 		return true;
 	}
+
+	private function checkRequest()
+    {
+        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) and $_SERVER['HTTP_X_REQUESTED_WITH'] === "XMLHttpRequest";
+    }
+
+    private function tokenVerify()
+    {
+    	$decrypted_token = $this->get->cookie("r_tkn")->decrypt($this->get->cookie("r_tkey")->decrypt("123zxc"))->__toString();
+    	return $this->u['hash']===sha1($decrypted_token) && $decrypted_token===$this->u['token'];
+    }
 
 	/*private function tanggal_lahir()
     {
