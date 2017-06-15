@@ -25,6 +25,12 @@ class login extends Controller
      */
     public function index()
     {
+        if (isset($_COOKIE['verified_account'])) {
+            $ver = true;
+            $this->set->cookie("verified_account", "", 0);
+        } else {
+            $ver = false;
+        }
         if (isset($_COOKIE['registered_user'], $_COOKIE['tokenizer'])) {
             $this->set->cookie("registered_user", "", 0);
             $this->set->cookie("tokenizer", "", 0);
@@ -38,7 +44,7 @@ class login extends Controller
         $token_key = rstr(32);
         $this->set->cookie("lt", $token = rstr(72), 120)->encrypt($token_key);
         $this->set->cookie("tk", $token_key, 120);
-        $this->load->view("auth/login_page", array("token"=>$token));
+        $this->load->view("auth/login_page", array("token"=>$token, "ver"=>$ver));
     }
 
     public function logout()
