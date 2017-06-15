@@ -147,7 +147,7 @@ class Register extends Model
         $x = $a->mail([
                 "from"=>["admin@crayner.cf","Crayner System"],
                 "to"=>[$d['email'],$d['nama']],
-                "content"=>"<h3>Selamat Datang di Crayner</h3><p>Tinggal selangkah lagi untuk bergabung di Crayner. Silahkan verifikasi kepemilikian akun.</p><br>User ID : {$d['userid']}<br>Nama : {$d['nama']}<br>Alamat : {$d['alamat']}<br>Tanggal Lahir : ".date("d",$lahir)." ".$bulan[(int)date("m",$lahir)]." ".date("Y",$lahir)."<br>Nomor HP : {$d['phone']}<br><br><br><br>Klik link ini untuk memverifikasi akun anda : <br><a href=\"{$link}\">{$link}</a><br><br>Link tersebut hanya berlaku 2 jam, akan expired pada ".date("d",$ex)." ".$bulan[(int)date("m",$ex)]." ".date("Y",$ex),
+                "content"=>"<h3>Selamat Datang di Crayner</h3><p>Tinggal selangkah lagi untuk bergabung di Crayner. Silahkan verifikasi kepemilikian akun.</p><br>User ID : {$d['userid']}<br>Nama : {$d['nama']}<br>Alamat : {$d['alamat']}<br>Tanggal Lahir : ".date("d",$lahir)." ".$bulan[(int)date("m",$lahir)]." ".date("Y",$lahir)."<br>Nomor HP : {$d['phone']}<br><br><br><br>Klik link ini untuk memverifikasi akun anda : <br><a href=\"{$link}\">{$link}</a><br><br>Link tersebut hanya berlaku 2 jam, akan expired pada ".date("d",$ex)." ".$bulan[(int)date("m",$ex)]." ".date("Y",$ex)." ".date("h:i:s A", $ex),
                 "subject"=>"Verifikasi Akun Crayner",
                 "replyto"=>["noreply@crayner.cf","No Reply"]
             ]);
