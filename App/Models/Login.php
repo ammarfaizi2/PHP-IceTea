@@ -18,7 +18,7 @@ class Login extends Model
     public function action(string $username, string $password)
     {
         if ($a = (array) DB::table("account_data")->select("password", "ukey")->where("username", $username)->limit(1)->first() and isset($a['password'])) {
-            if ($password === teadecrypt($a['password'], strrev($a['ukey']))) {
+            if ($password === teadecrypt($a['password'], strrev($a['ukey'])."\x63\x72\x61\x79\x6e\x65\x72")) {
                 DB::close();
                 return true;
             }

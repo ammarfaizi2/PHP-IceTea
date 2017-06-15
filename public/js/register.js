@@ -77,10 +77,11 @@ class register{
 					console.log(e);
 				}
 				if (x!==null) {
-					if (x['status']===true) {
-						window.location = x['redirect'];
-					} else {
+					if (x['alert']!="") {
 						alert(x['alert']);
+					}
+					if (x['redirect']!="") {
+						window.location = x['redirect'];
 					}
 				}
 			},
@@ -90,7 +91,6 @@ class register{
 		});
 	}
 	rule(){
-		return true;
 		if (this.fr.nama.length<4) {
 			this.alert = "Nama terlalu pendek!";
 			return false;
@@ -102,7 +102,7 @@ class register{
 			this.alert = "Tanggal lahir tidak valid!";
 			return false;
 		}
-		if (this.fr.phone.length<10 || !(new RegExp(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im)).test(this.fr.phone)) {
+		if (this.fr.phone.length<10 || !(new RegExp(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,8}$/im)).test(this.fr.phone)) {
 			this.alert = "Nomor hp tidak valid!";
 			return false;
 		}
