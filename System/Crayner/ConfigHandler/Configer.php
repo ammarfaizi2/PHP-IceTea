@@ -91,7 +91,7 @@ class Configer
         return self::getInstance()->config['error_handler']['show_error_query'];
     }
 
-    public function getCookieDefaultDomain()
+    public static function getCookieDefaultDomain()
     {
         return self::getInstance()->config['cookie_default_domain'];
     }

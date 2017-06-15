@@ -36,7 +36,6 @@ $config['router']['automatic_route'] = true;
 $config['router']['router_file'] = "index.php";
 
 
-
 /**
  *
  * Database Configuration.

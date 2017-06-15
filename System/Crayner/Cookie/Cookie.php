@@ -53,6 +53,7 @@ class Cookie implements CookieTable
         if ($secure===null and isset($_SERVER['HTTPS'])) {
             $secure = true;
         }
+        var_dump($secure, $_SERVER['HTTPS']);
         if ($domain===null) {
             $domain = Configer::getCookieDefaultDomain();
         }
