@@ -21,7 +21,7 @@ class Mailer extends Model
 	public function mail($u)
 	{
 		$mail = new PHPMailer;
-		$s = Configer::smtp();
+		$a = Configer::smtp();
 		//Tell PHPMailer to use SMTP
 		$mail->isSMTP();
 
