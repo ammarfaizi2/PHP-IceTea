@@ -47,3 +47,12 @@ $config['database']['user']      = "debian-sys-maint";
 $config['database']['pass']      = "";
 $config['database']['port']      = "3306";
 $config['database']['dbname']    = "icetea";
+
+$config['smtp'] = [
+			"host"=>"smtp.gmail.com",
+			"port"=>587,
+			"secure"=>"tls",
+			"auth"=>true,
+			"username"=>"user@gmail.com",
+			"password"=>"password123"
+		];
