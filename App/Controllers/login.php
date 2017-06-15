@@ -39,18 +39,26 @@ class login extends Controller
 
     public function logout()
     {
-        if ($uk                = $this->get->cookie("uk")->__toString()
-            and $userid            = $this->get->cookie("uid")->decrypt($uk)->__toString()
-            and $udata             = $this->login->getUserCredentials($userid, "userid")
-            and $sessid            = $this->get->cookie("sessid")->decrypt($udata['ukey'])
-        ) {
-            if ($this->checkLoginCookie($userid, $sessid)) {
-                $this->login->logout($userid, $sessid);
-                $rem        = array("sessid", "uid", "uk", "mt", "tl", "wg");
-                $exp_time    = -100;
-                foreach ($rem as $val) {
-                    $this->set->cookie($val, '', $exp_time);
+        try {
+            if ($uk                = $this->get->cookie("uk")->__toString()
+                and $userid            = $this->get->cookie("uid")->decrypt($uk)->__toString()
+                and $udata             = $this->login->getUserCredentials($userid, "userid")
+                and $sessid            = $this->get->cookie("sessid")->decrypt($udata['ukey'])
+            ) {
+                if ($this->checkLoginCookie($userid, $sessid)) {
+                    $this->login->logout($userid, $sessid);
+                    $rem        = array("sessid", "uid", "uk", "mt", "tl", "wg");
+                    $exp_time    = -100;
+                    foreach ($rem as $val) {
+                        $this->set->cookie($val, '', $exp_time);
+                    }
                 }
+            }
+        } catch (\Error $e) {
+            $rem        = array("sessid", "uid", "uk", "mt", "tl", "wg");
+            $exp_time    = -100;
+            foreach ($rem as $val) {
+                $this->set->cookie($val, '', $exp_time);
             }
         }
         header("location: ".router_url()."/login?ref=logout");
@@ -71,21 +79,30 @@ class login extends Controller
     public function checkLoginCookie($userid = false, $sessid = false)
     {
         if (isset($_COOKIE['sessid'], $_COOKIE['uid'], $_COOKIE['uk'], $_COOKIE['mt'])) {
-            if (($userid and $sessid) or ($uk                = $this->get->cookie("uk")->__toString()
-                and $userid            = $this->get->cookie("uid")->decrypt($uk)->__toString()
-                and $udata            = $this->login->getUserCredentials($userid, "userid")
-                and $sessid            = $this->get->cookie("sessid")->decrypt($udata['ukey']))
-            ) {
-                if ($this->login->checkUserSession($userid, $sessid)) {
-                    return true;
-                } else {
-                    $rem        = array("sessid", "uid", "uk", "mt", "tl", "wg");
-                    $exp_time    = -100;
-                    foreach ($rem as $val) {
-                        $this->set->cookie($val, '', $exp_time);
+            try {
+                if (($userid and $sessid) or ($uk                = $this->get->cookie("uk")->__toString()
+                    and $userid            = $this->get->cookie("uid")->decrypt($uk)->__toString()
+                    and $udata            = $this->login->getUserCredentials($userid, "userid")
+                    and $sessid            = $this->get->cookie("sessid")->decrypt($udata['ukey']))
+                ) {
+                    if ($this->login->checkUserSession($userid, $sessid)) {
+                        return true;
+                    } else {
+                        $rem        = array("sessid", "uid", "uk", "mt", "tl", "wg");
+                        $exp_time    = -100;
+                        foreach ($rem as $val) {
+                            $this->set->cookie($val, '', $exp_time);
+                        }
+                        return false;
                     }
-                    return false;
                 }
+            } catch (\Error $e) {
+                $rem        = array("sessid", "uid", "uk", "mt", "tl", "wg");
+                $exp_time    = -100;
+                foreach ($rem as $val) {
+                    $this->set->cookie($val, '', $exp_time);
+                }
+                header("Location:". router_url()."/logout?ref=server_error");
             }
         }
         return false;
