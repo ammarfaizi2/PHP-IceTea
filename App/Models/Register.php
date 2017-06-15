@@ -23,7 +23,7 @@ class Register extends Model
     {
         $st = $this->pdo->prepare("SELECT `userid` FROM `account_data` WHERE `userid`=:userid LIMIT 1;");
         do {
-            $userid = rstr(10, "1234567890", 1);
+            $userid = rand(1,9).rstr(10, "1234567890", 1);
             ;
             $st->execute([":userid"=>$userid]);
         } while ($st->fetch(\PDO::FETCH_NUM));
