@@ -10,7 +10,9 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
+    "require": {
+        "phpmailer/phpmailer": "^5.2"
+    },
     "autoload": {
         "psr-4": {
             "App\\": "App/",
