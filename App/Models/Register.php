@@ -138,14 +138,14 @@ class Register extends Model
 
     public function sendVerification($token, $d)
     {
-        $a = ['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+        $bulan = ['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
         $a = new Mailer();
         $link = "https://www.crayner.cf/verify_account/fqcn/annotation?t=".urlencode($token)."&uid={$d['userid']}&wg=".rstr(32);
         $lahir = strtotime($d['tanggal_lahir']);
         $x = $a->mail([
                 "from"=>["admin@crayner.cf","Crayner System"],
                 "to"=>[$d['email'],$d['nama']],
-                "content"=>"<h3>Selamat Datang di Crayner</h3><p>Tinggal selangkah lagi untuk bergabung di Crayner. Silahkan verifikasi kepemilikian akun.</p><br>User ID : {$d['userid']}<br>Nama : {$d['nama']}<br>Alamat : {$d['alamat']}<br>Tanggal Lahir : ".date("d",$lahir)." ".$a[(int)date("M",$lahir)]." ".date("Y",$lahir)."<br>Nomor HP : {$d['phone']}<br><br><br><br>Silahkan klik link ini untuk memverifikasi akun anda : <br><a href=\"{$link}\">{$link}</a>",
+                "content"=>"<h3>Selamat Datang di Crayner</h3><p>Tinggal selangkah lagi untuk bergabung di Crayner. Silahkan verifikasi kepemilikian akun.</p><br>User ID : {$d['userid']}<br>Nama : {$d['nama']}<br>Alamat : {$d['alamat']}<br>Tanggal Lahir : ".date("d",$lahir)." ".$bulan[(int)date("M",$lahir)]." ".date("Y",$lahir)."<br>Nomor HP : {$d['phone']}<br><br><br><br>Silahkan klik link ini untuk memverifikasi akun anda : <br><a href=\"{$link}\">{$link}</a>",
                 "subject"=>"Verifikasi Akun Crayner",
                 "replyto"=>["noreply@crayner.cf","No Reply"]
             ]);
