@@ -36,6 +36,10 @@ class register extends Controller
 
     public function success()
     {
+        if (!isset($_COOKIE['registered_user'], $_COOKIE['tokenizer'])) {
+            $this->load->error(404);
+            die;
+        }
         $this->load->view("register_success");
     }
 
@@ -61,7 +65,7 @@ class register extends Controller
                 $a->store();
                 $json = array(
                     "status"=>true,
-                    "redirect"=>"/register/success",
+                    "redirect"=>router_url()."/register/success",
                     "alert"=>(isset($a->alert) ? $a->alert : "")
                 );
                 $this->set->cookie("registered_user", $userid, 120);
