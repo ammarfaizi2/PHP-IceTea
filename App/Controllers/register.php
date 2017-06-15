@@ -34,6 +34,11 @@ class register extends Controller
         $this->load->view("register", array("dyn"=>$dyn, "token"=>$token));
     }
 
+    public function success()
+    {
+
+    }
+
     public function action()
     {
         if ($this->validation()) {
@@ -59,6 +64,10 @@ class register extends Controller
                     "redirect"=>"/register/success",
                     "alert"=>(isset($a->alert) ? $a->alert : "")
                 );
+                $this->set->cookie("registered_user", $userid, 120);
+                $this->set->cookie("tokenizer", $this->u['dynamic_token'], 120);
+                $this->set->cookie("r_tkn", "", 0);
+                $this->set->cookie("r_tkey", "", 0);
             } else {
                 $json = array(
                     "status"=>false,
@@ -85,7 +94,7 @@ class register extends Controller
         }
         if (!$this->tokenVerify()) {
             $this->alert = "Token mismatch!";
-            #$this->redirect = "?ref=token_mismatch&wg=".urlencode(rstr(72));
+            $this->redirect = "?ref=token_mismatch&wg=".urlencode(rstr(72));
             return false;
         }
         if (strlen($input['nama'])<4) {
