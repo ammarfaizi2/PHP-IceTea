@@ -188,7 +188,7 @@ class DB extends DatabaseFactory
             $newData[] = "{$field}=:{$field}";
         }
 
-        $newData = implode(",", $m); // override new data
+        $newData = implode(",", $newData); // override new data
 
         return $newData;
     }
@@ -382,8 +382,8 @@ class DB extends DatabaseFactory
         $self      = self::getInstance();
 
         $table     = $self->table_name;
-        $param     = makeUpdateParameter($data);
-        $value     = makeInsertParameter($data);
+        $param     = $self->makeUpdateParameter($data);
+        $value     = $self->makeInsertParameter($data);
 
         $statement = "UPDATE {$table} SET {$param} ";
         $execute   = $self->_execute($statement, $value);
