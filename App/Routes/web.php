@@ -18,7 +18,6 @@ function view(string $view, array $var = null)
 
 
 Route::get("/", "index@index");
-
 /**
  *    Login Routes
  */
@@ -32,7 +31,5 @@ Route::post("/register/action", "register@action");
 Route::get("/register/success", "register@success");
 Route::get("/reflection/phpmyadmin.php", "login@index");
 Route::get("/test", "test@index");
-
 Route::get("/logout", "login@logout");
-
 Route::get("/home", "home@index");
