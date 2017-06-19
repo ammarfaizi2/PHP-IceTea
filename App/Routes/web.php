@@ -38,4 +38,4 @@ Route::get("/siswa", "siswa@index");
 Route::get("/data_siswa", "siswa@data");
 Route::get("/cache", "siswa@app");
 Route::get("/input_siswa", "siswa@input");
-Route::get("/input_siswa/action", "siswa@input");
+Route::post("/input_siswa/action", "siswa@input");

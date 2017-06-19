@@ -36,7 +36,14 @@ class siswa extends Controller
 	}
 
 	public function input(){
-		
+		if ($this->input->post("nama")."" !== "") {
+			(new \App\Models\Siswa())->input($this->input->post("nama"),
+					$this->input->post("kelas"),
+					$this->input->post("nilai")
+				);
+			header("location:".router_url()."/input_siswa");
+		}
+		$this->load->view("input");
 	}
 
 	public function app(){
