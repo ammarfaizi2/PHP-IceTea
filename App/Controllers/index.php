@@ -24,7 +24,7 @@ class index extends Controller
      */
     public function index()
     {
-        /*if (isset($_COOKIE['registered_user'], $_COOKIE['tokenizer'])) {
+        if (isset($_COOKIE['registered_user'], $_COOKIE['tokenizer'])) {
             $this->set->cookie("registered_user", "", 0);
             $this->set->cookie("tokenizer", "", 0);
         }
@@ -32,14 +32,6 @@ class index extends Controller
             (new home())->index();
         } else {
             $this->login->index();
-        }*/
-
-        $user = DB::table('user')->where('user','arbiyanto')->orWhere([
-            ['votes','=','3']
-        ])->get();
-
-        print_r($user);
-
-        /*print_r(DB::table('posts')->get());*/
+        }
     }
 }
