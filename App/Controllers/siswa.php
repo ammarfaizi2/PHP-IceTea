@@ -35,6 +35,10 @@ class siswa extends Controller
 		print json_encode((new \App\Models\Siswa())->getDataSiswa(), 128);
 	}
 
+	public function input(){
+		
+	}
+
 	public function app(){
 		$this->set->header("Content-type","text/cache-manifest");
 		echo <<<qq
