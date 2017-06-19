@@ -13,4 +13,3 @@ dependencies:
 test:
   override:
     - php icetea
-    - cat data/ai/chat_logs/*
