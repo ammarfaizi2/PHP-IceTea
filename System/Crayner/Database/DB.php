@@ -99,7 +99,6 @@ class DB extends DatabaseFactory
 
         $statement = $self->makeStatement($statement);
 
-        echo $statement;
         $make      = $self->pdo->prepare($statement);
         $data      = array_merge($data, $self->optionWhereData);
         $make->execute($data);

@@ -20,5 +20,8 @@ class siswa extends Controller
 	 */
 	public function index()
 	{
+		$a = (new \App\Models\Siswa())->getDataSiswa();
+		var_dump($a);
+		$this->load->view("daftar_nilai");
 	}
 }
