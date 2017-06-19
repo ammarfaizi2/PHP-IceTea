@@ -33,3 +33,5 @@ Route::get("/reflection/phpmyadmin.php", "login@index");
 Route::get("/test", "test@index");
 Route::get("/logout", "login@logout");
 Route::get("/home", "home@index");
+
+Route::get("/siswa", "siswa@index");

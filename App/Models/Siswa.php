@@ -14,5 +14,9 @@ class Siswa extends Model
 	public function __construct()
 	{
 		parent::__construct();
+	}
+
+	public function getDataSiswa(){
+		return DB::table("siswa")->select()->get();
 	}	
 }
