@@ -13,6 +13,8 @@ class siswa extends Controller
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->helper("url");
+		$this->load->helper("assets");
 	}
 
 	/**
@@ -20,8 +22,32 @@ class siswa extends Controller
 	 */
 	public function index()
 	{
-		$a = (new \App\Models\Siswa())->getDataSiswa();
-		var_dump($a);
+		if (isset($_GET['cache'])) {
+			$this->app();
+			die;
+		}
 		$this->load->view("daftar_nilai");
+	}
+
+	public function data()
+	{
+		$this->set->header("Content-type","application/json");
+		print json_encode((new \App\Models\Siswa())->getDataSiswa(), 128);
+	}
+
+	public function app(){
+		$this->set->header("Content-type","text/cache-manifest");
+		echo <<<qq
+CACHE MANIFEST
+CACHE:
+#siswa
+#data_siswa
+
+NETWORK:
+#data_siswa
+http://*
+https://*
+*
+qq;
 	}
 }
