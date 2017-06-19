@@ -19,4 +19,8 @@ class Siswa extends Model
 	public function getDataSiswa(){
 		return DB::table("siswa")->select()->get();
 	}	
+	public function input($a,$b,$c)
+	{
+		DB::table("siswa")->insert(["id"=>null,"nama"=>$a,"kelas"=>$b,"nilai"=>$c]);
+	}
 }
