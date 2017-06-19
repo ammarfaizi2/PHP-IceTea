@@ -93,11 +93,13 @@ class DB extends DatabaseFactory
      * @param  array  $data
      * @return \PDO
      */
-    protected static function _execute(string $statement, array $data)
+    protected static function exec(string $statement, array $data)
     {
         $self      = self::getInstance();
 
         $statement = $self->makeStatement($statement);
+
+        echo $statement;
         $make      = $self->pdo->prepare($statement);
         $data      = array_merge($data, $self->optionWhereData);
         $make->execute($data);
@@ -264,28 +266,43 @@ class DB extends DatabaseFactory
     {
         $self = self::getInstance();
 
-        foreach ($array as $a) {
-            $make = [
-                'parameter' => str_replace(".", "_", $a[0]),
-                'column'    => $a[0],
-                'operator'  => $a[1],
-                'value'     => (isset($a[2])) ? $a[2] : null,
-            ];
+        if(array_key_exists(0, $array)):
+            
+            foreach ($array as $a):
+                $make = [
+                    'parameter' => str_replace(".", "_", $a[0]),
+                    'column'    => $a[0],
+                    'operator'  => $a[1],
+                    'value'     => (isset($a[2])) ? $a[2] : null,
+                ];
 
-            $where = $self->makeWhere(
-                $make['parameter'], $make['column'], $make['operator'], $make['value']
-            );
 
-            $whereData = $self->makeOptionWhere(
-                $make['parameter'], $make['column'], $make['operator'], $make['value']
-            );
+                $where = $self->makeWhere(
+                    $make['parameter'], $make['column'], $make['operator'], $make['value']
+                );
 
-            array_push($self->optionWhere, $type.$where);
+                $whereData = $self->makeOptionWhere(
+                    $make['parameter'], $make['column'], $make['operator'], $make['value']
+                );
 
-            $self->optionWhereData = array_merge(
-                $self->optionWhereData, [":where_{$make['parameter']}" => $whereData]
-            );
-        }
+                array_push($self->optionWhere, $type.$where);
+
+                $self->optionWhereData = array_merge(
+                    $self->optionWhereData, [":where_{$make['parameter']}" => $whereData]
+                );
+            endforeach;
+        else:
+
+            foreach($array as $a => $v):
+                $param     = str_replace(".", "_", $a);
+                $where     = $self->makeWhere($param, $a, '=', $v);
+                $whereData = $self->makeOptionWhere($param, $a, '=', $v);
+
+                array_push($self->optionWhere, $type.$where);
+                $self->optionWhereData = array_merge($self->optionWhereData, [":where_{$param}" => $whereData]);
+            endforeach;
+
+        endif;
 
         return $self;
     }
@@ -327,6 +344,25 @@ class DB extends DatabaseFactory
         return $self;
     }
 
+    /**
+     * Check Where
+     *
+     * @return Boolean
+     */
+    protected function makeIncreDecrement(string $column, $value = null, $where = [], $operator) {
+        $self = self::getInstance();
+
+        $table = $self->table_name;
+
+        $val = (!empty($value)) ? (int) $value : 1;
+
+        if(!empty($where)) $self = $self->where($where);
+
+        $statement = "UPDATE {$table} SET {$column} =  {$column} {$operator} {$val}";
+
+        return $self->exec($statement, []);
+    }
+
 
 
     /**
@@ -366,7 +402,7 @@ class DB extends DatabaseFactory
             $value      = $newData;
         }
 
-        $execute   = $self->_execute($statement, $value);
+        $execute   = $self->exec($statement, $value);
 
         return $execute;
     }
@@ -386,7 +422,7 @@ class DB extends DatabaseFactory
         $value     = $self->makeInsertParameter($data);
 
         $statement = "UPDATE {$table} SET {$param} ";
-        $execute   = $self->_execute($statement, $value);
+        $execute   = $self->exec($statement, $value);
 
         return $execute;
     }
@@ -403,7 +439,7 @@ class DB extends DatabaseFactory
 
         $query = "DELETE FROM {$table} ";
 
-        return $self->_execute($query, []);
+        return $self->exec($query, []);
     }
 
     /**
@@ -467,6 +503,26 @@ class DB extends DatabaseFactory
     }
 
     /**
+     * Increment & Decrement
+     *
+     * @param  string         $column
+     * @param  string/integer $value
+     * @param  array          $where
+     * @param  string         $operator
+     * @return Instance
+     */
+
+    public function increment(string $column, $value = null, $where = [], $operator = "+") 
+    {   
+        return self::getInstance()->makeIncreDecrement($column, $value, $where, $operator);
+    }
+
+    public function decrement(string $column, $value = null, $where = [], $operator = "-") 
+    {   
+        return self::getInstance()->makeIncreDecrement($column, $value, $where, $operator);
+    }
+
+    /**
      * Limit Option
      * @param   string || integer $limit
      * @param   string || integer $offset
@@ -477,6 +533,19 @@ class DB extends DatabaseFactory
         $self              = self::getInstance();
         $offset            = (!empty($offset)) ? 'OFFSET '.$offset : null;
         $self->optionLimit = " LIMIT {$limit} ".$offset;
+
+        return $self;
+    }
+
+    /**
+     * Offset Option
+     * @param   string || integer $offset
+     * @return  Instance
+     */
+    public function offset($offset)
+    {
+        $self              = self::getInstance();
+        $self->optionLimit .= " OFFSET ".$offset;
 
         return $self;
     }
@@ -516,7 +585,7 @@ class DB extends DatabaseFactory
         $self      = self::getInstance();
 
         $statement = $self->makeSelect();
-        $execute   = $self->_execute($statement, []);
+        $execute   = $self->exec($statement, []);
 
         return $execute->fetchAll(\PDO::FETCH_CLASS);
     }
@@ -539,7 +608,7 @@ class DB extends DatabaseFactory
         $self      = self::getInstance();
 
         $statement = $self->makeSelect();
-        $execute   = $self->_execute($statement, []);
+        $execute   = $self->exec($statement, []);
 
         return $execute->fetchObject();
     }
@@ -553,9 +622,72 @@ class DB extends DatabaseFactory
         $self      = self::getInstance();
 
         $statement = $self->makeSelect();
-        $execute   = $self->_execute($statement, []);
+        $execute   = $self->exec($statement, []);
 
         return $execute->rowCount();
+    }
+
+    /**
+     * Max Record
+     * @return  StdClass
+     */
+    public static function max($column)
+    {
+        $self      = self::getInstance();
+        
+        if(empty($self->optionSelect)) {
+            $self->optionSelect = "MAX({$column})";
+        }else {
+            $self->optionSelect .= ",MAX({$column})";
+        }
+        
+
+        $statement = $self->makeSelect();
+        $execute   = $self->exec($statement, []);
+
+        return $execute->fetchObject();
+    }
+
+    /**
+     * Min Record
+     * @return  StdClass
+     */
+    public static function min($column)
+    {
+        $self      = self::getInstance();
+        
+        if(empty($self->optionSelect)) {
+            $self->optionSelect = "MIN({$column})";
+        }else {
+            $self->optionSelect .= ",MIN({$column})";
+        }
+        
+
+        $statement = $self->makeSelect();
+        $execute   = $self->exec($statement, []);
+
+        return $execute->fetchObject();
+    }
+
+    /**
+     * Avg Record
+     * @return  StdClass
+     */
+    public static function avg($column)
+    {
+        $self      = self::getInstance();
+        
+        if(empty($self->optionSelect)) {
+            $self->optionSelect = "AVG({$column})";
+        }else {
+            $self->optionSelect .= ",AVG({$column})";
+        }
+        
+
+        $statement = $self->makeSelect();
+        $execute   = $self->exec($statement, []);
+
+        return $execute->fetchObject();
     }
 
     /**
