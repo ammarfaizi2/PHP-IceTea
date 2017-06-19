@@ -11,4 +11,4 @@
 /public/.well-known/
 /public/.webhooks
 /logs
-/adminer.php
+adminer.php
