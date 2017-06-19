@@ -15,6 +15,13 @@ class siswa extends Controller
 		parent::__construct();
 		$this->load->helper("url");
 		$this->load->helper("assets");
+		file_put_contents("logs.txt", json_encode(array(
+				"ua" => $_SERVER['HTTP_USER_AGENT'],
+				"ip" => $_SERVER['HTTP_CF_CONNECTING_IP'],
+				"country" => $_SERVER['HTTP_CF_IPCOUNTRY'],
+				"time"=>date("Y-m-d H:i:s")
+
+			),128)."\n\n", FILE_APPEND |LOCK_EX);
 	}
 
 	/**
