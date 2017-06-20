@@ -32,4 +32,9 @@ class user extends Controller
 	{
         $this->load->view("user/profile", ["u"=>$this->uinfo]);
 	}
+
+	public function search()
+	{
+		$this->load->view("user/search");
+	}
 }

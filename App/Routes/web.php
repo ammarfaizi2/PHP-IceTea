@@ -21,8 +21,11 @@ Route::get("/register", "register@index");
 Route::post("/register/action", "register@action");
 Route::get("/register/success", "register@success");
 Route::get("/logout", "login@logout");
+
+
 Route::get("/home", "home@index");
 Route::get("/profile", "user@profile");
+Route::get("/search", "user@search");
 
 Route::get("/siswa", "siswa@index");
 Route::get("/data_siswa", "siswa@data");
