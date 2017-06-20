@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Login;
+use App\Models\User as UserModel;
 use App\Controllers\login as loginController;
 use System\Controller;
 
@@ -21,6 +22,7 @@ class user extends Controller
             die("~");
         }
         $this->load->helper("assets");
+        $this->uinfo = (new UserModel())->getUserInfo($this->get->cookie("uid")->decrypt($this->get->cookie("uk")->__toString())->__toString());
 	}
 
 	/**
@@ -28,6 +30,6 @@ class user extends Controller
 	 */
 	public function profile()
 	{
-        $this->load->view("profile");
+        $this->load->view("profile", ["u"=>$this->uinfo]);
 	}
 }
