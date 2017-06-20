@@ -1,31 +1,29 @@
-.sr{
-  
+body{
+	font-family: Helvetica;
 }
 #cgf{
-  border: 2px solid black;
-  padding: 2px 1px 2px 1px;
-  margin-top: -7px;
+	width: 100%;
+	padding: 10px 2px 10px 20px;
+	margin-left: -10px;
+	background-color: #3B5998;
+	margin-top: -8px;
 }
-#nvb :only-child{
-  display: inline;
-  border: 1px solid #000;
-  color:#000;
-  padding: 2px 1px 2px 1px;
+.q{
+	margin-left: 43%;
+}
+.bq{
+	margin-right: 14%;
+}
+#nb{
+	display: inline;
+}
+.px{
+	padding: 10px 10px 10px 10px;
+}
+.px:hover{
+	background-color: #355089;
 }
 #nbl{
 	text-decoration: none;
-}
-#nvb{
-	margin-top: 3px;
-}
-
-#q{
-  margin-right: 10%;
-}
-#nb{
-  margin-right: 2%;
-}
-
-.re{
-  display: inline-block;
+	color:#fff;
 }
