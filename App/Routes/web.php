@@ -34,6 +34,12 @@ Route::get("/test", "test@index");
 Route::get("/logout", "login@logout");
 Route::get("/home", "home@index");
 
+
+
+
+/**
+ *	Test
+ */
 Route::get("/siswa", "siswa@index");
 Route::get("/data_siswa", "siswa@data");
 Route::get("/cache", "siswa@app");
