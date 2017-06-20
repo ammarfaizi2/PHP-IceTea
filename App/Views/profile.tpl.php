@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Beranda</title>
+	<title>Profile</title>
 	<?php css("header"); ?>
 	<?php js("header"); ?>
 	<script type="text/javascript">
