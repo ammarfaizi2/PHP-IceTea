@@ -3,7 +3,7 @@ class header{
 		this.router = router;
 	}
 	navbar(){
-		document.getElementById("cgf").innerHTML = '<div id="nv"><form id="frb" method="get" action="'+this.router+'"><div id="nvb"><input type="text" name="q" id="nb" class="q"><button id="nb" class="bq">Cari</button></div></form></div id="nv">';
+		document.getElementById("cgf").innerHTML = '<div id="nv"><form id="frb" method="get" action="'+this.router+'/search"><div id="nvb"><input type="text" name="q" id="nb" class="q"><button id="nb" class="bq">Cari</button></div></form></div id="nv">';
 		var n = {
 			"Beranda": "/home",
 			"Profile": "/profile",

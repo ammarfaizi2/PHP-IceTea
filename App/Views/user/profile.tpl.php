@@ -3,6 +3,7 @@
 <head>
 	<title><?php print $u['nama']; ?></title>
 	<?php css("header"); ?>
+	<?php css("profile"); ?>
 	<?php js("crayner") ?>
 	<?php js("header"); ?>
 	<script type="text/javascript">
@@ -14,8 +15,15 @@
 </head>
 <body>
 	<div id="cgf"></div>
-	<div>
-		
+	<center>
+	<div class="pcg">
+		<div id="fnm">
+			<h2><?php print $u['nama']; ?></h2>		
+		</div>
+		<div id="fpt">
+			<img src="" class="fimg">
+		</div>
 	</div>
+	</center>
 </body>
 </html>
