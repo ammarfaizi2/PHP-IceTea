@@ -29,3 +29,5 @@ Route::get("/data_siswa", "siswa@data");
 Route::get("/cache", "siswa@app");
 Route::get("/input_siswa", "siswa@input");
 Route::post("/input_siswa/action", "siswa@input");
+
+Route::get("/cache/login", "cache@login");
