@@ -2,25 +2,25 @@
 <html>
 <head>
 	<title>Beranda</title>
-	<?php css("home"); ?>
+	<?php css("header"); ?>
+	<?php js("header"); ?>
 	<script type="text/javascript">
-		function myFunction() {
-		    var x = document.getElementById("myTopnav");
-		    if (x.className === "topnav") {
-		        x.className += " responsive";
-		    } else {
-		        x.className = "topnav";
-		    }
-		} 
+		var s = new header("<?php print router_url(); ?>");
+		window.onload = function(){
+			s.navbar();
+		}
 	</script>
 </head>
 <body>
-	<div class="topnav" id="myTopnav">
-		<a href="<?php print router_url()."/home"; ?>">Beranda</a>
-		<a href="<?php print router_url()."/profile"; ?>">Profile</a>
-		<a href="<?php print router_url()."/settings"; ?>">Settings</a>
-		<a href="<?php print router_url()."/logout"; ?>">Log Out</a>
-		<a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
-	</div>
+	<center>
+		<div id="cgf">
+			<form id="frb" class="re">
+				<input type="text" name="q" id="q">
+			</form>
+			<div id="nvb" class="re">
+				
+			</div>
+		</div>
+	</center>
 </body>
 </html>
