@@ -8,23 +8,14 @@ function view(string $view, array $var = null)
 }
 
 
-/**
- *    IceTea Web Routes
- */
-
-
 
 
 
 
 Route::get("/", "index@index");
-/**
- *    Login Routes
- */
 Route::get("/login", "login@index");
 Route::get("/login/user_check", "login@user_check");
 Route::post("/login/action", "login@action");
-
 Route::get("/verify/account/annotation/fqcn", "register@verify_account");
 Route::get("/register", "register@index");
 Route::post("/register/action", "register@action");
@@ -33,11 +24,6 @@ Route::get("/logout", "login@logout");
 Route::get("/home", "home@index");
 Route::get("/profile", "user@profile");
 
-
-
-/**
- *	Test
- */
 Route::get("/siswa", "siswa@index");
 Route::get("/data_siswa", "siswa@data");
 Route::get("/cache", "siswa@app");

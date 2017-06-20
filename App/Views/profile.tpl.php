@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Profile</title>
+	<title><?php print $u['nama']; ?></title>
 	<?php css("header"); ?>
 	<?php js("header"); ?>
 	<script type="text/javascript">
@@ -14,5 +14,6 @@
 <body>
 	<div id="cgf">
 	</div>
+	<?php print_r(get_defined_vars()) ?>
 </body>
 </html>
