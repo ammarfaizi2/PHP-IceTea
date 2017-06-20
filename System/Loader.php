@@ -14,18 +14,19 @@ class Loader
      * @param string $view
      * @param string $__variables
      */
-    public function view(string $view, array $__variables = null, bool $realpath = false)
+    public function view(string $___view, array $___variables = null, bool $___realpath = false)
     {
-        $file = __DIR__ . '/../App/Views/' . ($realpath ? $view : $view . '.tpl.php');
-        if (!file_exists($file)) {
+        $___file = __DIR__ . '/../App/Views/' . ($___realpath ? $___view : $___view . '.tpl.php');
+        if (!file_exists($___file)) {
             throw new \Exception("View not found ! File : {$view}", 400);
         }
-        if (is_array($__variables)) {
-            foreach ($__variables as $key => $value) {
-                $$key = $value;
+        if (is_array($___variables)) {
+            foreach ($___variables as $___key => $___value) {
+                $$___key = $___value;
             }
         }
-        include realpath($file);
+        unset($___variables, $___key, $___value, $___realpath, $___view);
+        include $___file;
     }
 
     /**
