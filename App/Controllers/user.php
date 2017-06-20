@@ -30,6 +30,6 @@ class user extends Controller
 	 */
 	public function profile()
 	{
-        $this->load->view("profile", ["u"=>$this->uinfo]);
+        $this->load->view("user/profile", ["u"=>$this->uinfo]);
 	}
 }

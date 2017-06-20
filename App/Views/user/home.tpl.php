@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title><?php print $u['nama']; ?></title>
+	<title>Beranda</title>
 	<?php css("header"); ?>
+	<?php js("crayner") ?>
 	<?php js("header"); ?>
 	<script type="text/javascript">
 		var h = new header("<?php print router_url(); ?>");
@@ -12,8 +13,9 @@
 	</script>
 </head>
 <body>
-	<div id="cgf">
+	<div id="cgf"></div>
+	<div>
+		
 	</div>
-	<?php print_r(get_defined_vars()) ?>
 </body>
 </html>
