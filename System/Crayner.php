@@ -4,6 +4,7 @@ namespace System;
 
 use System\Router;
 use System\Controller;
+use System\Crayner\Hub\Singleton;
 use System\Crayner\ConfigHandler\Configer;
 use System\Crayner\URLManagement\UriSegment;
 use System\Exception\MethodNotAllowedHttpException;
@@ -15,6 +16,8 @@ use System\Exception\MethodNotAllowedHttpException;
 
 class Crayner
 {
+    use Singleton;
+
     /**
      * @var array
      */
@@ -49,10 +52,20 @@ class Crayner
         $this->optionalSegment    = array_diff($this->segments, array('', $this->firstSegment, $this->secondSegment));
     }
 
+    public static function run()
+    {
+        self::getInstance()->_run();
+    }
+
+    public static function getURI()
+    {
+        return self::getInstance()->segments;
+    }
+
     /**
      * Here we go...
      */
-    public function run()
+    public function _run()
     {
         if (defined("NOT_FOUND")) {
             (new Controller())->load->error(404);

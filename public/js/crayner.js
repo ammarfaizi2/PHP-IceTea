@@ -2,6 +2,7 @@
  *
  * @author    Ammar Faizi    <ammarfaizi2@gmail.com>
  */
+
 class crayner{
     xhr(method,to,func,data='a=1',header=null){
         var a = new XMLHttpRequest();
@@ -46,5 +47,13 @@ class crayner{
             }
         }
         return "";
+    }
+    move(page, url) {
+        if (typeof (history.pushState) != "undefined") {
+            var obj = {Page: page, Url: url};
+            history.pushState(obj, obj.Page, obj.Url);
+        } else {
+            window.location.href = url;
+        }
     }
 }
