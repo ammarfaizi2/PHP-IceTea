@@ -24,7 +24,8 @@ Route::get("/logout", "login@logout");
 
 
 Route::get("/home", "home@index");
-Route::get("/profile", "user@profile");
+Route::get("/profile", "user@userpage");
+
 Route::get("/search", "user@search");
 
 Route::get("/siswa", "siswa@index");
@@ -34,3 +35,5 @@ Route::get("/input_siswa", "siswa@input");
 Route::post("/input_siswa/action", "siswa@input");
 
 Route::get("/cache/login", "cache@login");
+
+Route::get("/user/ajax", "user@ajax");

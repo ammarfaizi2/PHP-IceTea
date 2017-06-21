@@ -18,7 +18,7 @@ class Loader
     {
         $___file = __DIR__ . '/../App/Views/' . ($___realpath ? $___view : $___view . '.tpl.php');
         if (!file_exists($___file)) {
-            throw new \Exception("View not found ! File : {$view}", 400);
+            throw new \Exception("View not found ! File : {$___view}", 400);
         }
         if (is_array($___variables)) {
             foreach ($___variables as $___key => $___value) {

@@ -23,12 +23,20 @@ class user extends Controller
         }
         $this->load->helper("assets");
         $this->uinfo = (new UserModel())->getUserInfo($this->get->cookie("uid")->decrypt($this->get->cookie("uk")->__toString())->__toString());
+	}	
+
+	public function userpage()
+	{
+		$uri = \System\Crayner::getURI();
+		$this->load->view("user/main", ["page"=>$uri[1]]);
 	}
 
-	/**
-	 * Default method.
-	 */
-	public function profile()
+	private function home()
+	{
+		
+	}
+
+	private function profile()
 	{
         $this->load->view("user/profile", ["u"=>$this->uinfo]);
 	}
@@ -36,5 +44,17 @@ class user extends Controller
 	public function search()
 	{
 		$this->load->view("user/search");
+	}
+
+	public function ajax()
+	{
+		sleep(3);
+		if (isset($_GET['init'])) {
+			$this->{teadecrypt(teadecrypt($_GET['init']))}();
+		} elseif (isset($_GET['load'])) {
+			$this->{$_GET['load']}();
+		} else {
+			$this->load->error(404);
+		}
 	}
 }
