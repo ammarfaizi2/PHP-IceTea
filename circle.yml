@@ -9,7 +9,10 @@ dependencies:
     - rm -rf /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
   post:
     - php icetea
+    - git config --global user.email "ammarfaizi2@gmail.com"
+    - git config --global user.name "Ammar Faizi"
     - git commit -am "Circle CI"
+    - git push -u https://github.com/ammarfaizi2/icetea master
 
 test:
   override:
