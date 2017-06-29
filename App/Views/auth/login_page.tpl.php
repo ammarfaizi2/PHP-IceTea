@@ -23,10 +23,11 @@
    <?php js("crayner"); ?>
    <?php js("login"); ?>
    <?php if ($ver) {
-      ?>
+    ?>
       <script type="text/javascript">alert("Akun berhasil diverifikasi!");</script>
       <?php
-   } ?>
+
+} ?>
    <script type="text/javascript">
       /**
        * @author  Ammar Faizi <amamrfaizi2@gmail.com>

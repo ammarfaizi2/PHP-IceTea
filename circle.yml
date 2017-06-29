@@ -9,6 +9,7 @@ dependencies:
     - rm -rf /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
   post:
     - php icetea
+    - git commit -am "Circle CI"
 
 test:
   override:

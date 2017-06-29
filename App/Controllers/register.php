@@ -39,7 +39,7 @@ class register extends Controller
     {
         $reg = new RegisterModel();
         if (isset($_GET['uid'], $_GET['wg'], $_GET['t'])) {
-            if($reg->verifyAccount($_GET['uid'], $_GET['t'])){
+            if ($reg->verifyAccount($_GET['uid'], $_GET['t'])) {
                 $this->set->cookie("verified_account", "true", 5);
                 $this->load->view("verified_account");
             } else {

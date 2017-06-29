@@ -23,7 +23,7 @@ class Register extends Model
     {
         $st = $this->pdo->prepare("SELECT `userid` FROM `account_data` WHERE `userid`=:userid LIMIT 1;");
         do {
-            $userid = rand(1,9).rstr(10, "1234567890", 1);
+            $userid = rand(1, 9).rstr(10, "1234567890", 1);
             ;
             $st->execute([":userid"=>$userid]);
         } while ($st->fetch(\PDO::FETCH_NUM));
@@ -147,7 +147,7 @@ class Register extends Model
         $x = $a->mail([
                 "from"=>["admin@crayner.cf","Crayner System"],
                 "to"=>[$d['email'],$d['nama']],
-                "content"=>"<h3>Selamat Datang di Crayner</h3><p>Tinggal selangkah lagi untuk bergabung di Crayner. Silahkan verifikasi kepemilikian akun.</p><br>User ID : {$d['userid']}<br>Nama : {$d['nama']}<br>Alamat : {$d['alamat']}<br>Tanggal Lahir : ".date("d",$lahir)." ".$bulan[(int)date("m",$lahir)]." ".date("Y",$lahir)."<br>Nomor HP : {$d['phone']}<br><br><br><br>Klik link ini untuk memverifikasi akun anda : <br><a href=\"{$link}\">{$link}</a><br><br>Link tersebut hanya berlaku 2 jam, akan expired pada ".date("d",$ex)." ".$bulan[(int)date("m",$ex)]." ".date("Y",$ex)." ".date("h:i:s A", $ex),
+                "content"=>"<h3>Selamat Datang di Crayner</h3><p>Tinggal selangkah lagi untuk bergabung di Crayner. Silahkan verifikasi kepemilikian akun.</p><br>User ID : {$d['userid']}<br>Nama : {$d['nama']}<br>Alamat : {$d['alamat']}<br>Tanggal Lahir : ".date("d", $lahir)." ".$bulan[(int)date("m", $lahir)]." ".date("Y", $lahir)."<br>Nomor HP : {$d['phone']}<br><br><br><br>Klik link ini untuk memverifikasi akun anda : <br><a href=\"{$link}\">{$link}</a><br><br>Link tersebut hanya berlaku 2 jam, akan expired pada ".date("d", $ex)." ".$bulan[(int)date("m", $ex)]." ".date("Y", $ex)." ".date("h:i:s A", $ex),
                 "subject"=>"Verifikasi Akun Crayner",
                 "replyto"=>["noreply@crayner.cf","No Reply"]
             ]);
@@ -161,7 +161,7 @@ class Register extends Model
                 DB::close();
                 return false;
             } else {
-                if(teadecrypt($a->token, $a->tkey) === $token){
+                if (teadecrypt($a->token, $a->tkey) === $token) {
                     DB::pdoInstance()->prepare("UPDATE `account_data` SET `verified`='true' WHERE `userid`=:userid LIMIT 1;")->execute([":userid"=>$userid]);
                     DB::close();
                     return true;

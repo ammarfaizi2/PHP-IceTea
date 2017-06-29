@@ -1,7 +1,7 @@
 <?php
 $tanggal_lahir = strtotime($u['tanggal_lahir']);
 $bln = ['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-$tanggal_lahir = (int)date("d",$tanggal_lahir)." ".$bln[(int)date("m",$tanggal_lahir)]." ".date("Y", $tanggal_lahir);
+$tanggal_lahir = (int)date("d", $tanggal_lahir)." ".$bln[(int)date("m", $tanggal_lahir)]." ".date("Y", $tanggal_lahir);
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,13 +16,13 @@ $tanggal_lahir = (int)date("d",$tanggal_lahir)." ".$bln[(int)date("m",$tanggal_l
 		window.onload = function(){
 			h.navbar();
 			var x = JSON.parse('<?php print json_encode([
-					"Nama"=>$u['nama'],
-					"Alamat"=>$u['alamat'],
-					"Tempat Lahir"=>$u['tempat_lahir'],
-					"Tanggal Lahir"=> $tanggal_lahir,
-					"Nomor HP"=>$u['phone'],
-					"E-Mail"=>$u['email']
-				]); ?>'), uf = document.getElementById('uf');
+                    "Nama"=>$u['nama'],
+                    "Alamat"=>$u['alamat'],
+                    "Tempat Lahir"=>$u['tempat_lahir'],
+                    "Tanggal Lahir"=> $tanggal_lahir,
+                    "Nomor HP"=>$u['phone'],
+                    "E-Mail"=>$u['email']
+                ]); ?>'), uf = document.getElementById('uf');
 			for(q in x){
 				uf.innerHTML += "<tr><td>"+q+"</td><td>:</td><td>"+x[q]+"</td></tr>";
 			}

@@ -9,7 +9,7 @@
 	<script type="text/javascript">
 		var cr 	= new crayner,
 			h 	= new header("<?php print router_url(); ?>"),
-			l 	= new loader(cr, "<?php print str_replace("=","__",(teacrypt(teacrypt(($page??"home"))))); ?>", "<?php print router_url(); ?>");
+			l 	= new loader(cr, "<?php print str_replace("=", "__", (teacrypt(teacrypt(($page??"home"))))); ?>", "<?php print router_url(); ?>");
 		window.onload = function(){
 			var rt = l.init_load();
 			h.navbar();
