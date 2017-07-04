@@ -120,6 +120,7 @@ class login extends Controller
 
     public function action()
     {
+        header("Content-type:text/plain");
         if ($this->checkRequest()) {
             $this->set->header("Content-type", "application/json");
             $ip                    = $_SERVER['REMOTE_ADDR'];

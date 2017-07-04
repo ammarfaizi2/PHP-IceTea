@@ -27,8 +27,7 @@ class user extends Controller
 
     public function userpage()
     {
-        $uri = \System\Crayner::getURI();
-        $this->load->view("user/main", ["page"=>$uri[1]]);
+        $this->load->view("user/main");
     }
 
     private function home()
