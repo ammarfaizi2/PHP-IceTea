@@ -8,13 +8,7 @@ defined("STDIN") or define("STDIN", fopen("php://stdin", "r"));
 define("APP_DIR", __DIR__ . '/App');
 define("SYSTEM_DIR", __DIR__ . '/System');
 define("PUBLIC_DIR", __DIR__ . '/public');
-define("TEMPLATE_DIR", __DIR__ . '/Console/template');
 
-/**
-|
-|	IceTea PHP Framework by Ammar Faizi
-|
-*/
 if (count($argv) === 1) {
 	print shell_exec("php ".realpath("vendor/ammarfaizi2/icetea-framework/src/Console/bin/fixer")." fix .");
 	$prettyjson = json_encode(json_decode(file_get_contents(".php_cs.cache")), 128);
