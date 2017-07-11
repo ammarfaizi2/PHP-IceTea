@@ -3,9 +3,9 @@
 <head id="crayner_head">
 	<title></title>
 	<?php css("header"); ?>
-	<?php js("crayner") ?>
-	<?php js("header"); ?>
-	<?php js("loader"); ?>
+    <?php js("crayner") ?>
+    <?php js("header"); ?>
+    <?php js("loader"); ?>
 	<script type="text/javascript">
 		var cr 	= new crayner,
 			h 	= new header("<?php print router_url(); ?>"),

@@ -19,13 +19,13 @@
          background-size:cover;
       }
    </style>
-   <?php css("login"); ?>
-   <?php js("crayner"); ?>
-   <?php js("login"); ?>
-   <?php if ($ver) {
+    <?php css("login"); ?>
+    <?php js("crayner"); ?>
+    <?php js("login"); ?>
+    <?php if ($ver) {
     ?>
       <script type="text/javascript">alert("Akun berhasil diverifikasi!");</script>
-      <?php
+        <?php
 
 } ?>
    <script type="text/javascript">

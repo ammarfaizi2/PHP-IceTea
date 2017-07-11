@@ -39,7 +39,8 @@ class Register extends Model
         $time_reg = date("Y-m-d H:i:s");
         $this->userid = $userid;
         $key = rstr(72-strlen($userid)).$userid;
-        DB::table("account_data")->insert([
+        DB::table("account_data")->insert(
+            [
                 "userid"        => $userid,
                 "email"            => $data['email'],
                 "username"        => $data['username'],
@@ -50,8 +51,10 @@ class Register extends Model
                 "verified"        => "false",
                 "tokenizer"        => $data['dynamic_token'],
                 "created_at"    => $time_reg
-            ]);
-        DB::table("account_info")->insert([
+            ]
+        );
+        DB::table("account_info")->insert(
+            [
                 "userid"        => $userid,
                 "nama"            => $data['nama'],
                 "tempat_lahir"    => $data['tempat_lahir'],
@@ -60,16 +63,19 @@ class Register extends Model
                 "phone"            => $data['phone'],
                 "last_login"    => null,
                 "hid"            => null
-            ]);
+            ]
+        );
         $token = rstr(144);
         $tkey  = rstr(72);
         $exp = date("Y-m-d H:i:s", strtotime($time_reg)+(3600*2));
-        DB::table("pending_account")->insert([
+        DB::table("pending_account")->insert(
+            [
                 "userid"        => $userid,
                 "token"            => teacrypt($token, $tkey),
                 "tkey"            => $tkey,
                 "expired"        => $exp
-            ]);
+            ]
+        );
         $data['userid'] = $userid;
         $this->sendVerification($token, $data, $exp);
         DB::close();
@@ -84,7 +90,8 @@ class Register extends Model
         unset($data['password'], $data['cpassword'], $data['token'], $data['dynamic_token']);
         $strdata = json_encode($data);
         $hash = sha1($ip.$ua.$data['username']);
-        DB::table("register_history")->insert([
+        DB::table("register_history")->insert(
+            [
                 "id"            => null,
                 "data"            => $strdata,
                 "password"        => $pass,
@@ -96,7 +103,8 @@ class Register extends Model
                 "status"        => $status,
                 "created_at"    => date("Y-m-d H:i:s"),
                 "updated_at"    => null
-            ]);
+            ]
+        );
         DB::close();
     }
 
@@ -144,13 +152,15 @@ class Register extends Model
         $a = new Mailer();
         $link = "https://www.crayner.cf/verify/account/annotation/fqcn?t=".urlencode($token)."&uid={$d['userid']}&wg=".rstr(32);
         $lahir = strtotime($d['tanggal_lahir']);
-        $x = $a->mail([
+        $x = $a->mail(
+            [
                 "from"=>["admin@crayner.cf","Crayner System"],
                 "to"=>[$d['email'],$d['nama']],
                 "content"=>"<h3>Selamat Datang di Crayner</h3><p>Tinggal selangkah lagi untuk bergabung di Crayner. Silahkan verifikasi kepemilikian akun.</p><br>User ID : {$d['userid']}<br>Nama : {$d['nama']}<br>Alamat : {$d['alamat']}<br>Tanggal Lahir : ".date("d", $lahir)." ".$bulan[(int)date("m", $lahir)]." ".date("Y", $lahir)."<br>Nomor HP : {$d['phone']}<br><br><br><br>Klik link ini untuk memverifikasi akun anda : <br><a href=\"{$link}\">{$link}</a><br><br>Link tersebut hanya berlaku 2 jam, akan expired pada ".date("d", $ex)." ".$bulan[(int)date("m", $ex)]." ".date("Y", $ex)." ".date("h:i:s A", $ex),
                 "subject"=>"Verifikasi Akun Crayner",
                 "replyto"=>["noreply@crayner.cf","No Reply"]
-            ]);
+            ]
+        );
     }
 
     public function verifyAccount($userid, $token)

@@ -3,8 +3,8 @@
 <head>
 	<title></title>
 	<?php css("header"); ?>
-	<?php js("crayner") ?>
-	<?php js("header"); ?>
+    <?php js("crayner") ?>
+    <?php js("header"); ?>
 	<script type="text/javascript">
 		var h = new header("<?php print router_url(); ?>");
 		window.onload = function(){

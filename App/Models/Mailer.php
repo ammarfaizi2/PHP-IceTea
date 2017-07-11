@@ -30,7 +30,7 @@ class Mailer extends Model
         $mail->SMTPDebug = 0;
 
         //Ask for HTML-friendly debug output
-        #$mail->Debugoutput = 'html';
+        // $mail->Debugoutput = 'html';
 
         //Set the hostname of the mail server
         $mail->Host = $a['host'];
