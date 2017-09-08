@@ -2,4 +2,9 @@
 
 require __DIR__."/../autoload.php";
 
-IceTea::run();
+
+try {
+	IceTea::run();	
+} catch (Exception $e) {
+	var_dump($e->getMessage());
+}

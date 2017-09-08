@@ -4,7 +4,7 @@ namespace System;
 
 use Closure;
 use System\Hub\Singleton;
-use System\Exceptions\MethodNotAllowedException;
+use System\Exceptions\Http\MethodNotAllowedException;
 
 /**
  * @author Ammar Faizi <ammarfaizi2@gmail.com>
@@ -42,7 +42,7 @@ class Router
 				return self::__run($action[$_SERVER['REQUEST_METHOD']]);	
 			} else {
 				http_response_code(402);
-				throw new MethodNotAllowedException("Error Processing Request", 1);
+				throw new MethodNotAllowedException("Method not allowed!", 1);
 				return true;
 			}
 		}

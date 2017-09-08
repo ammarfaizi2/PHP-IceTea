@@ -1,6 +1,6 @@
 <?php
 
 
-Route::get("/", function(){
+Route::post("/", function(){
 	echo "Hello World!";
 });
