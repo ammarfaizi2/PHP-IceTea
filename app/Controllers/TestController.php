@@ -6,6 +6,6 @@ class TestController
 {
 	public function index($param)
 	{
-		var_dump($param);
+		view("welcome");
 	}
 }

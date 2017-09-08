@@ -27,3 +27,5 @@ function ___load_class($class)
 spl_autoload_register("___load_class");
 
 require __DIR__."/app/Routes/web.php";
+require __DIR__."/src/Helpers/system_helper.php";
+require __DIR__."/src/Helpers/secondary_helper.php";
