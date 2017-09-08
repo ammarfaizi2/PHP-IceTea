@@ -30,7 +30,7 @@ class Router
     }
 
     /**
-     * @param string 		 $key
+     * @param string         $key
      * @param string|Closure $action
      * @return bool
      */
@@ -51,7 +51,7 @@ class Router
 
     /**
      * @param string|Closure $action
-     * @param array			 $param
+     * @param array          $param
      * @return bool
      */
     private static function __run($action, $param = null)
@@ -78,9 +78,9 @@ class Router
     }
 
     /**
-     * @param string			$route
-     * @param string|Closure	$action
-     * @param string 			$method
+     * @param string            $route
+     * @param string|Closure    $action
+     * @param string            $method
      */
     public static function addRoute($route, $action, $method)
     {
@@ -88,9 +88,9 @@ class Router
     }
 
     /**
-     * @param string			$route
-     * @param string|Closure	$action
-     * @param string 			$method
+     * @param string            $route
+     * @param string|Closure    $action
+     * @param string            $method
      */
     private function __addRoute($route, $action, $method)
     {
