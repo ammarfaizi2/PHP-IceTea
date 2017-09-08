@@ -106,6 +106,6 @@ class Router
 		do {
 			$a = str_replace("//", "/", $a, $n);
 		} while ($n);
-		$this->uri = rtrim($a, "/");
+		$this->uri = "/".trim($a, "/");
 	}
 }

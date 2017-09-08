@@ -1,6 +1,6 @@
 <?php
 
 
-Route::get("/aasdf", function(){
+Route::get("/", function(){
 	echo "Hello World!";
 });
