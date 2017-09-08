@@ -3,6 +3,7 @@
 namespace System;
 
 use Closure;
+use Exception;
 use System\Hub\Singleton;
 use System\Exceptions\Http\MethodNotAllowedException;
 
@@ -67,15 +68,18 @@ class Router
 		        			$action[$_SERVER['REQUEST_METHOD']]($param);
 		        		} else {
 		        			$act = explode("@", $action[$_SERVER['REQUEST_METHOD']]);
-		        			$app = "\\Controllers\\".$act[0];
-		        			if (class_exists($app)) {
+		        			$app = "\\App\\Controllers\\".$act[0];
+		        			if (file_exists(BASEPATH."/app/Controllers/".$act[0].".php") and class_exists($app)) {
 		        				$app = new $app;
 		        				if (is_callable([$app, $act[1]])) {
 		        					$app->{$act[1]}($param);
 		        				} else {
-		        					echo "404";
+                                    throw new Exception("Not callable method ".$act[1]);
+                                    
 		        				}
-		        			}
+		        			} else {
+                                throw new Exception("Controller \"".$app."\" not found!");
+                            }
 		        		}
 		        		return true;
 	        		} else {

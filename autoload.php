@@ -3,7 +3,7 @@
  * IceTea Framework Autoload.
  */
 
-
+define("BASEPATH", __DIR__);
 
 
 /**
@@ -16,13 +16,9 @@ require __DIR__."/config.php";
  */
 function ___load_class($class)
 {
-    $map = [
-        "Models" => "app",
-        "Controllers" => "app"
-    ];
     $a = explode("\\", $class, 2);
-    if (count($a)>1 && isset($map[$a[0]])) {
-        require __DIR__."/".$map[$a[0]]."/".str_replace("\\", "/", $class).".php";
+    if ($a[0] === "App") {
+        require __DIR__."/app/".str_replace("\\", "/", $a[1]).".php";
     } else {
         require __DIR__."/src/".str_replace("\\", "/", $class).".php";
     }
