@@ -14,8 +14,10 @@ class IceTea
     {
         foreach (Router::loadRoutes() as $key => $route) {
             if (Router::action($key, $route)) {
+            	die();
                 break;
             }
         }
+        echo "123";
     }
 }

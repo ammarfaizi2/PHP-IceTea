@@ -1,6 +1,5 @@
 <?php
 
-use Closure;
 use System\Router;
 use System\Hub\Singleton;
 

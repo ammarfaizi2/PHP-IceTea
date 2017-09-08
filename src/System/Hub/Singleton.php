@@ -14,6 +14,9 @@ trait Singleton
         return self::$instance;
     }
 
+    /**
+     * Avoid cloning instance.
+     */
     private function __clone()
     {
     }

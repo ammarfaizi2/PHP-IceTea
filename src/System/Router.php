@@ -41,10 +41,33 @@ class Router
             if (isset($action[$_SERVER['REQUEST_METHOD']])) {
                 return self::__run($action[$_SERVER['REQUEST_METHOD']]);
             } else {
-                http_response_code(402);
-                throw new MethodNotAllowedException("Method not allowed!", 1);
+                throw new MethodNotAllowedException("Method not allowed!", 402);
                 return true;
             }
+        } else {
+        	if (strpos($key, "{") !== false) {
+        		$a = explode("/", trim($key, "/")) xor $rr = [];
+        		$b = explode("/", trim($ins->uri, "/"));
+        		if (count($a) === count($b)) {
+        			foreach ($a as $key => $val) {
+	        			$rr[$key] = (strpos($val, "{") !== false) ? "var" : "route";
+	        		}
+	        		$param = [];
+	        		foreach($b as $key => $val){
+	        			if ($rr[$key] === "route") {
+	        				if ($val !== $a[$key]) {
+	        					return false;
+	        				}
+	        			} else {
+	        				$param[str_replace(["{","}"], "", $a[$key])] = $val;
+	        			}
+	        		}
+	        		if ($action[$_SERVER['REQUEST_METHOD']] instanceof Closure) {
+	        			$action[$_SERVER['REQUEST_METHOD']]($param);
+	        		}
+	        		return true;
+        		}
+        	}
         }
         return false;
     }

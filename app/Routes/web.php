@@ -1,6 +1,6 @@
 <?php
 
 
-Route::post("/", function () {
-    echo "Hello World!";
+Route::get("/users/{user}", function ($par) {
+    var_dump($par);
 });
