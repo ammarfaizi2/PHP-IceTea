@@ -10,12 +10,12 @@ use System\Router;
 
 class IceTea
 {
-	public static function run()
-	{
-		foreach(Router::loadRoutes() as $key => $route){
-			if (Router::action($key, $route)){
-				break;
-			}
-		}
-	}
+    public static function run()
+    {
+        foreach (Router::loadRoutes() as $key => $route) {
+            if (Router::action($key, $route)) {
+                break;
+            }
+        }
+    }
 }
