@@ -1,6 +1,4 @@
 <?php
 
 
-Route::get("/users/{user}", function ($par) {
-    var_dump($par);
-});
+Route::get("/{user}", "TestController@index");

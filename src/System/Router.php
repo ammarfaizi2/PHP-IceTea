@@ -62,10 +62,26 @@ class Router
 	        				$param[str_replace(["{","}"], "", $a[$key])] = $val;
 	        			}
 	        		}
-	        		if ($action[$_SERVER['REQUEST_METHOD']] instanceof Closure) {
-	        			$action[$_SERVER['REQUEST_METHOD']]($param);
+	        		if (isset($action[$_SERVER['REQUEST_METHOD']])) {
+	        			if ($action[$_SERVER['REQUEST_METHOD']] instanceof Closure) {
+		        			$action[$_SERVER['REQUEST_METHOD']]($param);
+		        		} else {
+		        			$act = explode("@", $action[$_SERVER['REQUEST_METHOD']]);
+		        			$app = "\\Controllers\\".$act[0];
+		        			if (class_exists($app)) {
+		        				$app = new $app;
+		        				if (is_callable([$app, $act[1]])) {
+		        					$app->{$act[1]}($param);
+		        				} else {
+		        					echo "404";
+		        				}
+		        			}
+		        		}
+		        		return true;
+	        		} else {
+	        			throw new MethodNotAllowedException("Method not allowed!", 402);
+                		return true;
 	        		}
-	        		return true;
         		}
         	}
         }
