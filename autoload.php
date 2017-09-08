@@ -29,3 +29,5 @@ function ___load_class($class)
 }
 
 spl_autoload_register("___load_class");
+
+require __DIR__."/app/Routes/web.php";

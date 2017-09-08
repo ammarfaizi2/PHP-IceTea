@@ -2,7 +2,9 @@
 
 namespace System;
 
+use Closure;
 use System\Hub\Singleton;
+use System\Exceptions\MethodNotAllowedException;
 
 /**
  * @author Ammar Faizi <ammarfaizi2@gmail.com>
@@ -14,9 +16,9 @@ class Router
 	use Singleton;
 
 	/**
-	 * @var array
+	 * @var string
 	 */
-	private $uri = [];
+	private $uri;
 
 	/**
 	 * @var array
@@ -28,11 +30,51 @@ class Router
 	}
 
 	/**
+	 * @param string 		 $key
+	 * @param string|Closure $action
+	 * @return bool
+	 */
+	public static function action($key, $action)
+	{
+		$ins = self::getInstance();
+		if ($key === $ins->uri) {
+			if (isset($action[$_SERVER['REQUEST_METHOD']])) {
+				return self::__run($action[$_SERVER['REQUEST_METHOD']]);	
+			} else {
+				http_response_code(402);
+				throw new MethodNotAllowedException("Error Processing Request", 1);
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * @param string|Closure $action
+	 * @param array			 $param
+	 * @return bool
+	 */
+	private static function __run($action, $param = null)
+	{
+		if ($action instanceof Closure) {
+			return $action();
+		} else {
+			$a = explode("@", $param);
+			$app = "\\Controllers\\".$a[0];
+			$app = new $app(...$param);
+			$app->{$a[1]}();
+		}
+		return true;
+	}
+
+	/**
 	 * Load all routes.
 	 */
 	public static function loadRoutes()
 	{
-		return self::getInstance()->routes;
+		$ins = self::getInstance();
+		$ins->getUri();
+		return $ins->routes;
 	}
 
 	/**
@@ -60,6 +102,10 @@ class Router
 	 */
 	private function getUri()
 	{
-		$this->uri = explode("/", $_SERVER['REQUEST_URI']);
+		$a = $_SERVER['REQUEST_URI'];
+		do {
+			$a = str_replace("//", "/", $a, $n);
+		} while ($n);
+		$this->uri = rtrim($a, "/");
 	}
 }
