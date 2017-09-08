@@ -17,7 +17,7 @@ require __DIR__."/config.php";
 function ___load_class($class)
 {
 	$map = [
-		"Models" => "app"
+		"Models" => "app",
 		"Controllers" => "app"
 	];
 	$a = explode("\\", $class, 2);
@@ -27,6 +27,5 @@ function ___load_class($class)
 		require __DIR__."/src/".str_replace("\\", "/", $class).".php";
 	}
 }
-
 
 spl_autoload_register("___load_class");
