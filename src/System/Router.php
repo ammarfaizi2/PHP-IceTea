@@ -97,15 +97,24 @@ class Router
      * @param array          $param
      * @return bool
      */
-    private static function __run($action, $param = null)
+    private static function __run($action, $param = [null])
     {
         if ($action instanceof Closure) {
             return $action();
-        } else {
-            $a = explode("@", $param);
-            $app = "\\Controllers\\".$a[0];
-            $app = new $app(...$param);
-            $app->{$a[1]}();
+        } else {            
+            $act = explode("@", $action);
+            $app = "\\App\\Controllers\\".$act[0];
+            if (file_exists(BASEPATH."/app/Controllers/".$act[0].".php") and class_exists($app)) {
+                $app = new $app;
+                if (is_callable([$app, $act[1]])) {
+                    $app->{$act[1]}($param);
+                } else {
+                    throw new Exception("Not callable method ".$act[1]);
+                    
+                }
+            } else {
+                throw new Exception("Controller \"".$app."\" not found!");
+            }
         }
         return true;
     }

@@ -4,9 +4,10 @@ function view($___view, $___var = null)
 {
 	if (is_array($___var)) {
 		foreach ($___var as $___k => $___v) {
-			$$k = $___v;
+			$$___k = $___v;
 		}
 	}
+	unset($___v, $___var, $___v);
 	require BASEPATH."/app/Views/".$___view.".php";
 }
 
@@ -17,3 +18,4 @@ function dd()
 		print "\n\n";
 	}
 }
+

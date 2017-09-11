@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Lorem ipsum</title>
+	<title><?php print $title; ?></title>
 </head>
 <body>
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu urna nisl. Vivamus massa tortor, luctus ut purus in, pulvinar tempor mi. Proin eget libero nec dolor vehicula eleifend. Cras efficitur urna et quam maximus lacinia. Ut quis ex finibus, aliquet nunc non, aliquam ipsum. Pellentesque at tincidunt eros. Nulla ac augue at metus dictum porttitor. Nullam purus odio, luctus rutrum nulla eu, euismod dictum felis.
