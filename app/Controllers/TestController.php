@@ -16,7 +16,7 @@ class TestController
 
 	public function testEncrypt()
 	{
-		print "encrypted = "; print var_dump($dec = encice("Hello World !"))."<br>";
-		print "decrypted = ";var_dump(decice($dec));
+		print "encrypted = "; print var_dump($dec = encice("Hello World !", "ammar"))."<br>";
+		print "decrypted = ";var_dump(decice($dec, "ammar"));
 	}
 }
