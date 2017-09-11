@@ -6,7 +6,7 @@
  */
 
 /**
- * @param int 	 $n
+ * @param int    $n
  * @param string $c
  */
 function rstr($n = 32, $c = null)
@@ -23,7 +23,7 @@ function rstr($n = 32, $c = null)
 /**
  * @param string $str
  * @param string $key
- * @param bool	 $no_base64
+ * @param bool   $no_base64
  */
 function encice($str, $key = "icetea", $salt = null, $no_base64 = false)
 {
@@ -46,7 +46,7 @@ function encice($str, $key = "icetea", $salt = null, $no_base64 = false)
 /**
  * @param string $str
  * @param string $key
- * @param bool	 $no_base64
+ * @param bool   $no_base64
  */
 function decice($str, $key = "icetea", $no_base64 = false)
 {
