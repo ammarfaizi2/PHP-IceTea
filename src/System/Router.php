@@ -46,48 +46,47 @@ class Router
                 return true;
             }
         } else {
-        	if (strpos($key, "{") !== false) {
-        		$a = explode("/", trim($key, "/")) xor $rr = [];
-        		$b = explode("/", trim($ins->uri, "/"));
-        		if (count($a) === count($b)) {
-        			foreach ($a as $key => $val) {
-	        			$rr[$key] = (strpos($val, "{") !== false) ? "var" : "route";
-	        		}
-	        		$param = [];
-	        		foreach($b as $key => $val){
-	        			if ($rr[$key] === "route") {
-	        				if ($val !== $a[$key]) {
-	        					return false;
-	        				}
-	        			} else {
-	        				$param[str_replace(["{","}"], "", $a[$key])] = $val;
-	        			}
-	        		}
-	        		if (isset($action[$_SERVER['REQUEST_METHOD']])) {
-	        			if ($action[$_SERVER['REQUEST_METHOD']] instanceof Closure) {
-		        			$action[$_SERVER['REQUEST_METHOD']]($param);
-		        		} else {
-		        			$act = explode("@", $action[$_SERVER['REQUEST_METHOD']]);
-		        			$app = "\\App\\Controllers\\".$act[0];
-		        			if (file_exists(BASEPATH."/app/Controllers/".$act[0].".php") and class_exists($app)) {
-		        				$app = new $app;
-		        				if (is_callable([$app, $act[1]])) {
-		        					$app->{$act[1]}($param);
-		        				} else {
+            if (strpos($key, "{") !== false) {
+                $a = explode("/", trim($key, "/")) xor $rr = [];
+                $b = explode("/", trim($ins->uri, "/"));
+                if (count($a) === count($b)) {
+                    foreach ($a as $key => $val) {
+                        $rr[$key] = (strpos($val, "{") !== false) ? "var" : "route";
+                    }
+                    $param = [];
+                    foreach ($b as $key => $val) {
+                        if ($rr[$key] === "route") {
+                            if ($val !== $a[$key]) {
+                                return false;
+                            }
+                        } else {
+                            $param[str_replace(["{","}"], "", $a[$key])] = $val;
+                        }
+                    }
+                    if (isset($action[$_SERVER['REQUEST_METHOD']])) {
+                        if ($action[$_SERVER['REQUEST_METHOD']] instanceof Closure) {
+                            $action[$_SERVER['REQUEST_METHOD']]($param);
+                        } else {
+                            $act = explode("@", $action[$_SERVER['REQUEST_METHOD']]);
+                            $app = "\\App\\Controllers\\".$act[0];
+                            if (file_exists(BASEPATH."/app/Controllers/".$act[0].".php") and class_exists($app)) {
+                                $app = new $app;
+                                if (is_callable([$app, $act[1]])) {
+                                    $app->{$act[1]}($param);
+                                } else {
                                     throw new Exception("Not callable method ".$act[1]);
-                                    
-		        				}
-		        			} else {
+                                }
+                            } else {
                                 throw new Exception("Controller \"".$app."\" not found!");
                             }
-		        		}
-		        		return true;
-	        		} else {
-	        			throw new MethodNotAllowedException("Method not allowed!", 402);
-                		return true;
-	        		}
-        		}
-        	}
+                        }
+                        return true;
+                    } else {
+                        throw new MethodNotAllowedException("Method not allowed!", 402);
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }
@@ -101,7 +100,7 @@ class Router
     {
         if ($action instanceof Closure) {
             return $action();
-        } else {            
+        } else {
             $act = explode("@", $action);
             $app = "\\App\\Controllers\\".$act[0];
             if (file_exists(BASEPATH."/app/Controllers/".$act[0].".php") and class_exists($app)) {
@@ -110,7 +109,6 @@ class Router
                     $app->{$act[1]}($param);
                 } else {
                     throw new Exception("Not callable method ".$act[1]);
-                    
                 }
             } else {
                 throw new Exception("Controller \"".$app."\" not found!");
