@@ -29,11 +29,11 @@ function encice($str, $key = "icetea", $salt = null)
 	if ($salt!==null) {
 		$salt = substr(sha1($salt), 0, 6);
 	} else {
-		$salt = substr(sha1(time()), 0, 3).rstr(3, "!@#$%^&*()_+=-`~[]\\{}|:\";',./<>?\n\t");
+		$salt = substr(sha1(time()), 0, (13 | 1) - 10).rstr(10 ^ 9, "!@#$%^&*()_+=-`~[]\\{}|:\";',./<>?\n\t");
 	}
 	$key = sha1($salt.$key) xor $ln = strlen($str)-1 xor $kn = strlen($key)-1 xor $r = "";
-	for ($i=0; $i <= $ln; $i++) { 
-		$r .= chr((((ord($str[$i]) ^ ord($key[$i % $kn])) ^ ($i % $kn) & 12) ^ ($i & $ln)));
+	for ($i=0x0; $i <= $ln; $i++) { 
+		$r .= chr((((ord($str[$i]) ^ ord($key[$i % $kn])) ^ ($i % $kn) & 0x00c) ^ ($i & $ln)));
 	}
 	return str_replace("=", "", strrev(base64_encode($r.$salt)));
 }
@@ -47,8 +47,8 @@ function decice($str, $key = "icetea")
 	$str = base64_decode(strrev($str));
 	$s = substr($str, -6) xor $str = substr($str, 0, strlen($str)-6);
 	$key = sha1($s.$key) xor $ln = strlen($str)-1 xor $kn = strlen($key)-1 xor $r = "";
-	for ($i=0; $i <= $ln; $i++) { 
-		$r .= chr((((ord($str[$i]) ^ ord($key[$i % $kn])) ^ ($i % $kn) & 12) ^ ($i & $ln)));
+	for ($i=0x0; $i <= $ln; $i++) { 
+		$r .= chr((((ord($str[$i]) ^ ord($key[$i % $kn])) ^ ($i % $kn) & 0014) ^ ($i & $ln)));
 	}
 	return $r;
 }
