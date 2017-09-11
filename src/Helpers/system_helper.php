@@ -9,3 +9,11 @@ function view($___view, $___var = null)
 	}
 	require BASEPATH."/app/Views/".$___view.".php";
 }
+
+function dd()
+{
+	foreach (func_get_args() as $val) {
+		var_dump($val);
+		print "\n\n";
+	}
+}
