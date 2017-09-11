@@ -16,5 +16,5 @@ define("DBNAME", "iceeta");
 /**
  * Base URL.
  */
-$baseurl = "http".(isset($_SERVER['HTTPS']) ? "s" : "")."://".$_SERVER['HTTP_HOST'];
+$baseurl = "http".(isset($_SERVER['HTTPS']) ? "s" : "")."://".(@$_SERVER['HTTP_HOST']);
 define("BASEURL", $baseurl);
