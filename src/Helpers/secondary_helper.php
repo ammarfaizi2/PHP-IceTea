@@ -60,3 +60,12 @@ function decice($str, $key = "icetea", $no_base64 = false)
     }
     return $r;
 }
+
+/**
+ * PDO Instance.
+ *
+ */
+function pdo()
+{
+    return DB::pdoInstance();
+}
