@@ -12,6 +12,7 @@ define("DBHOST", "localhost");
 define("DBUSER", "debian-sys-maint");
 define("DBPASS", "");
 define("DBNAME", "iceeta");
+define("DBPORT", "3306");
 
 /**
  * Base URL.

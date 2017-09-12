@@ -4,8 +4,10 @@ namespace System\Database;
 
 use PDO;
 use System\Hub\Singleton;
+use System\Contracts\Database\QueryBuilder;
+use System\Foundation\Database\DatabaseFactory;
 
-class DB extends DatabaseFactory
+class DB extends DatabaseFactory implements QueryBuilder
 {
 	use Singleton;
 	
@@ -17,7 +19,7 @@ class DB extends DatabaseFactory
 
 	public function __construct()
 	{
-		$this->pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME, DBUSER, DBPASS);
+		$this->pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME.";port=".DBPORT, DBUSER, DBPASS);
 	}
 
 	public static function __callStatic($a, $b)
