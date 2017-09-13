@@ -7,7 +7,7 @@ use System\Router;
  * @license MIT
  */
 
-class IceTea
+final class IceTea
 {
     public static function run()
     {

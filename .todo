@@ -6,4 +6,7 @@
     <note priority="high" time="1505141101">
         Create model loader
     </note>
+    <note priority="medium" time="1505212992">
+        Create console handler
+    </note>
 </todo>

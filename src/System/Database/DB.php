@@ -9,21 +9,21 @@ use System\Foundation\Database\DatabaseFactory;
 
 class DB extends DatabaseFactory implements QueryBuilder
 {
-	use Singleton;
-	
-	/**
-	 * @var PDO
-	 */
-	private $pdo;
+    use Singleton;
+    
+    /**
+     * @var PDO
+     */
+    private $pdo;
 
 
-	public function __construct()
-	{
-		$this->pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME.";port=".DBPORT, DBUSER, DBPASS);
-	}
+    public function __construct()
+    {
+        $this->pdo = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME.";port=".DBPORT, DBUSER, DBPASS);
+    }
 
-	public static function __callStatic($a, $b)
-	{
-		return self::getInstance()->pdo->{$a}(...$b);
-	}
+    public static function __callStatic($a, $b)
+    {
+        return self::getInstance()->pdo->{$a}(...$b);
+    }
 }

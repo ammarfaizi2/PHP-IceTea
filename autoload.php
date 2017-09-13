@@ -1,9 +1,4 @@
 <?php
-/**
- * IceTea Framework Autoload.
- */
-
-
 define("BASEPATH", __DIR__);
 
 /**
@@ -14,8 +9,9 @@ require __DIR__."/config.php";
 /**
  * Load helpers.
  */
-require __DIR__."/src/Helpers/system_helper.php";
-require __DIR__."/src/Helpers/secondary_helper.php";
+require __DIR__."/src/Helpers/rstr.php";
+require __DIR__."/src/Helpers/system.php";
+require __DIR__."/src/Helpers/encryption.php";
 
 /**
  * Class loader.
@@ -29,10 +25,12 @@ function ___load_class($class)
         require __DIR__."/src/".str_replace("\\", "/", $class).".php";
     }
 }
+
 spl_autoload_register("___load_class");
 
 /**
  * Load routes.
  */
 require __DIR__."/app/Routes/web.php";
+System\Router::apiFlag();
 require __DIR__."/app/Routes/api.php";

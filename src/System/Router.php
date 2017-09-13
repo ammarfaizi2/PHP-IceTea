@@ -26,8 +26,18 @@ class Router
      */
     private $routes = [];
 
+    /**
+     * @var bool
+     */
+    private $apiFlag = false;
+
     public function __construct()
     {
+    }
+
+    public static function apiFlag()
+    {
+        self::getInstance()->apiFlag = true;
     }
 
     /**
@@ -38,6 +48,9 @@ class Router
     public static function action($key, $action)
     {
         $ins = self::getInstance();
+        if (substr($ins->uri, 1, $len = strlen(BASEROUTER)) === BASEROUTER) {
+            $ins->uri = substr($ins->uri, $len + 1);
+        }
         if ($key === $ins->uri) {
             if (isset($action[$_SERVER['REQUEST_METHOD']])) {
                 return self::__run($action[$_SERVER['REQUEST_METHOD']]);

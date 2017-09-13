@@ -8,7 +8,7 @@ use System\Hub\Singleton;
  * @license MIT
  */
 
-class Route
+final class Route
 {
     use Singleton;
 

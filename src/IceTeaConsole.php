@@ -2,25 +2,17 @@
 
 use Console\Input\ArgvInput;
 
-class IceTeaConsole
+final class IceTeaConsole
 {
     public static function run()
     {
-    	$app = new ArgvInput();
-    	if ($app->execute()) {
-    		$cmd = "\\Console\\Commands\\".$app->command;
-	    	$cmd = new $cmd;
-	    	$cmd->input($app->getInput());
-	    	if ($cmd->execute()) {
-	    		print $cmd->result();
-	    		do {
-	    			$cmd->input($app->getInput());
-	    			$r = $cmd->execute();
-	    			$cmd->result();
-	    		} while ($r);
-	    	} else {
-	    		die($cmd->result());
-	    	}
-    	}
+        $app = new ArgvInput();
+        if ($app->execute()) {
+            $cmd = $app->getCommand();
+            $cmd = new $cmd;
+            $cmd->input($app->getParam());
+            $cmd->execute();
+            die($cmd->result());
+        }
     }
 }

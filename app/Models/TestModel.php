@@ -1,7 +1,14 @@
 <?php
 
+/**
+ * IceTea Framework
+ */
+
 namespace App\Models;
 
-class TestModel
+use System\Database\DB;
+use Handler\IceTeaModel;
+
+class TestModel extends IceTeaModel
 {
 }

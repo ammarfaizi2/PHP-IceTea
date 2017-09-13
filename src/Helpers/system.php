@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @author Ammar Faizi <ammarfaizi2@gmail.com>
+ * @license MIT
+ */
+
 function view($___view, $___var = null)
 {
     if (is_array($___var)) {
