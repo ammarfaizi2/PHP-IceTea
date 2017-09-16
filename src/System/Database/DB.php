@@ -76,7 +76,10 @@ class DB extends DatabaseFactory implements QueryBuilder
         $this->showErrorQuery = true;
         try {
             $this->pdo = new \PDO(
-                DB_DRIVER.":host=".DB_HOST.";port=".DB_PORT.";dbname=".DB_NAME, DB_USER, DB_PASS, [
+                DB_DRIVER.":host=".DB_HOST.";port=".DB_PORT.";dbname=".DB_NAME,
+                DB_USER,
+                DB_PASS,
+                [
                     \PDO::ATTR_PERSISTENT => false
                 ]
             );
@@ -266,8 +269,7 @@ class DB extends DatabaseFactory implements QueryBuilder
         $self = self::getInstance();
 
         if (array_key_exists(0, $array)) :
-            
-            foreach ($array as $a):
+            foreach ($array as $a) :
                 $make = [
                     'parameter' => str_replace(".", "_", $a[0]),
                     'column'    => $a[0],
@@ -276,29 +278,36 @@ class DB extends DatabaseFactory implements QueryBuilder
                 ];
 
 
-        $where = $self->makeWhere(
-                    $make['parameter'], $make['column'], $make['operator'], $make['value']
+                $where = $self->makeWhere(
+                    $make['parameter'],
+                    $make['column'],
+                    $make['operator'],
+                    $make['value']
                 );
 
-        $whereData = $self->makeOptionWhere(
-                    $make['parameter'], $make['column'], $make['operator'], $make['value']
+                $whereData = $self->makeOptionWhere(
+                    $make['parameter'],
+                    $make['column'],
+                    $make['operator'],
+                    $make['value']
                 );
 
-        array_push($self->optionWhere, $type.$where);
+                array_push($self->optionWhere, $type.$where);
 
-        $self->optionWhereData = array_merge(
-                    $self->optionWhereData, [":where_{$make['parameter']}" => $whereData]
+                $self->optionWhereData = array_merge(
+                    $self->optionWhereData,
+                    [":where_{$make['parameter']}" => $whereData]
                 );
-        endforeach; else:
+            endforeach;
+        else :
+            foreach ($array as $a => $v) :
+                $param     = str_replace(".", "_", $a);
+                $where     = $self->makeWhere($param, $a, '=', $v);
+                $whereData = $self->makeOptionWhere($param, $a, '=', $v);
 
-                foreach ($array as $a => $v):
-                    $param     = str_replace(".", "_", $a);
-        $where     = $self->makeWhere($param, $a, '=', $v);
-        $whereData = $self->makeOptionWhere($param, $a, '=', $v);
-
-        array_push($self->optionWhere, $type.$where);
-        $self->optionWhereData = array_merge($self->optionWhereData, [":where_{$param}" => $whereData]);
-        endforeach;
+                array_push($self->optionWhere, $type.$where);
+                $self->optionWhereData = array_merge($self->optionWhereData, [":where_{$param}" => $whereData]);
+            endforeach;
 
         endif;
 
