@@ -24,4 +24,8 @@ trait Singleton
     private function __sleep()
     {
     }
+
+    private function __wakeup()
+    {
+    }
 }
