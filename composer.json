@@ -9,6 +9,15 @@
     "require": {
         "phpunit/phpunit": "^6.3"
     },
+    "autoload": {
+        "psr-0": {
+            "":"src/",
+            "App":"app/",
+            "Console":"src/Console/",
+            "System":"src/System/",
+            "Handler":"src/Handler/"
+        }
+    },
     "autoload-dev": {
         "psr-0": {
             "tests":"tests/"
