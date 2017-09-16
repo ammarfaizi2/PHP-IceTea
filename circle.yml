@@ -16,4 +16,4 @@ dependencies:
     - php icetea
 test: 
   override: 
-- phpunit
+    - phpunit
