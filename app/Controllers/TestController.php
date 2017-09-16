@@ -10,7 +10,7 @@ use Handler\IceTeaController;
 
 class TestController extends IceTeaController
 {
-	public function index($param)
+    public function index($param)
     {
         view("welcome", ["title"=>"Lorem ipsum"]);
     }

@@ -4,7 +4,7 @@ namespace Handler;
 
 class IceTeaModel
 {
-	public function __construct()
-	{
-	}
+    public function __construct()
+    {
+    }
 }

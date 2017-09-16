@@ -4,5 +4,5 @@ namespace System\Foundation\Database;
 
 abstract class DatabaseFactory
 {
-	private $pdo;
+    private $pdo;
 }
