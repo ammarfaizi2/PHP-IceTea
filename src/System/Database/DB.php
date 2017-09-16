@@ -11,7 +11,7 @@ use System\Foundation\Database\DatabaseFactory;
  * @author arbiyanto <arbiyantowijaya17@gmail.com>
  */
 
-class DB extends DatabaseFactory
+class DB extends DatabaseFactory implements QueryBuilder
 {
     use Singleton;
 
