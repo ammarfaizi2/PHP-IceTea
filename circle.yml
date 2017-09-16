@@ -10,8 +10,6 @@ machine:
 dependencies: 
   override: 
     - composer install --prefer-source --no-interaction -vvv
-  #pre: 
-    #- printf "\n" | pecl install mongo 
   post: 
     - php icetea
     - php icetea
