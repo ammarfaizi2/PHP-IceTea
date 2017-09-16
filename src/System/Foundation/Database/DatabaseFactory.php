@@ -2,6 +2,7 @@
 
 namespace System\Foundation\Database;
 
-class DatabaseFactory
+abstract class DatabaseFactory
 {
+	private $pdo;
 }
