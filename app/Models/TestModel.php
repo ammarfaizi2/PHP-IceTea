@@ -12,3 +12,4 @@ use Handler\IceTeaModel;
 class TestModel extends IceTeaModel
 {
 }
+
