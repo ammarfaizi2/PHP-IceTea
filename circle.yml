@@ -12,8 +12,6 @@ dependencies:
     - composer install --prefer-source --no-interaction -vvv
   post: 
     - php icetea
-    - php icetea
-    - php icetea
 test: 
   override: 
     - phpunit
