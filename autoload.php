@@ -9,9 +9,9 @@ require __DIR__."/config.php";
 /**
  * Load helpers.
  */
-require __DIR__."/src/Helpers/rstr.php";
-require __DIR__."/src/Helpers/system.php";
-require __DIR__."/src/Helpers/encryption.php";
+require __DIR__."/src/sys.vendor/helpers/rstr.php";
+require __DIR__."/src/sys.vendor/helpers/system.php";
+require __DIR__."/src/sys.vendor/helpers/encryption.php";
 
 /**
  * Class loader.
@@ -19,7 +19,7 @@ require __DIR__."/src/Helpers/encryption.php";
 function ___load_class($class)
 {
     $a = explode("\\", $class, 2);
-    if ($a[0] === "App") {
+    if ($a[0] == "App") {
         require __DIR__."/app/".str_replace("\\", "/", $a[1]).".php";
     } else {
         require __DIR__."/src/".str_replace("\\", "/", $class).".php";
