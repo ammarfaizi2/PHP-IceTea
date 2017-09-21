@@ -1,6 +1,6 @@
 <?php
 
-namespace Console\Exception;
+namespace Console\Exceptions;
 
 use Exception;
 
