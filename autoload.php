@@ -1,5 +1,4 @@
 <?php
-define("BASEPATH", __DIR__);
 
 /**
  * Load config file.

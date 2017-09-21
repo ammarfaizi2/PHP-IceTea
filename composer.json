@@ -23,6 +23,7 @@
             "tests":"tests/"
         },
         "files": [
+            "config.php",
             "src/sys.vendor/helpers/rstr.php",
             "src/sys.vendor/helpers/encryption.php",
             "src/sys.vendor/helpers/system.php"

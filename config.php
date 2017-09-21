@@ -1,5 +1,7 @@
 <?php
 
+define("BASEPATH", __DIR__);
+
 /**
  * IceTea Framework.
  */
