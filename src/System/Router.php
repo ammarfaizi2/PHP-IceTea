@@ -48,9 +48,6 @@ class Router
     public static function action($key, $action)
     {
         $ins = self::getInstance();
-        if (substr($ins->uri, 1, $len = strlen(BASEROUTER)) === BASEROUTER) {
-            $ins->uri = substr($ins->uri, $len + 1);
-        }
         if ($key === $ins->uri) {
             if (isset($action[$_SERVER['REQUEST_METHOD']])) {
                 return self::__run($action[$_SERVER['REQUEST_METHOD']]);
@@ -165,7 +162,13 @@ class Router
      */
     private function getUri()
     {
-        $a = $_SERVER['REQUEST_URI'];
+        if (empty(ROUTER)) {
+            $a = explode($_SERVER['DOCUMENT_ROOT'], $_SERVER['SCRIPT_FILENAME']);
+            isset($a[1]) and ($a = explode($a[1], $_SERVER['REQUEST_URI']) xor (isset($a[1]) and $a = $a[1] or $a = "/"));
+        } else {
+            $a = explode($b = substr($_SERVER['SCRIPT_FILENAME'], strlen($_SERVER['DOCUMENT_ROOT'])), $_SERVER['REQUEST_URI']);
+            $a = implode("/", $a);
+        }
         do {
             $a = str_replace("//", "/", $a, $n);
         } while ($n);
