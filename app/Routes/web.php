@@ -17,7 +17,7 @@ Route::get("/users", function(){
 });
 
 Route::get("/users/{nama_user}", function($par){
-	echo $par['nama_user'];
+	var_dump($par);
 });
 
 Route::get("/test_model", "ContohController@testModel");
