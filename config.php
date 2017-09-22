@@ -1,5 +1,6 @@
 <?php
 
+ini_set("display_errors", true);
 define("BASEPATH", __DIR__);
 
 /**
@@ -13,7 +14,7 @@ define("BASEPATH", __DIR__);
 define("DBHOST", "localhost");
 define("DBUSER", "debian-sys-maint");
 define("DBPASS", "");
-define("DBNAME", "iceeta");
+define("DBNAME", "icetea");
 define("DBPORT", "3306");
 
 /**
@@ -22,4 +23,4 @@ define("DBPORT", "3306");
 $baseurl = "http".(isset($_SERVER['HTTPS']) ? "s" : "")."://".(@$_SERVER['HTTP_HOST']);
 define("BASEURL", $baseurl);
 
-define("BASEROUTER", "index.php");
+define("ROUTER", "");
