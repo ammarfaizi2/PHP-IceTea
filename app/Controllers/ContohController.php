@@ -6,13 +6,20 @@
 
 namespace App\Controllers;
 
+use App\Models\ContohModel;
 use Handler\IceTeaController;
 
-class TestController extends IceTeaController
+class ContohController extends IceTeaController
 {
     public function index($param)
     {
         view("welcome", ["title"=>"Lorem ipsum"]);
+    }
+
+    public function testModel()
+    {
+        $model = new ContohModel();
+        $model->test();
     }
 
     public function testRandomString()
@@ -20,7 +27,7 @@ class TestController extends IceTeaController
         print rstr(100);
     }
 
-    public function testEncrypt()
+    public function testEncryption()
     {
         $a = rstr(32, "a");
         for ($i=0; $i < 1; $i++) {

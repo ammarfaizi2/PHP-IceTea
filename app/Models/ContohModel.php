@@ -9,6 +9,10 @@ namespace App\Models;
 use System\Database\DB;
 use Handler\IceTeaModel;
 
-class TestModel extends IceTeaModel
+class ContohModel extends IceTeaModel
 {
+	public function test()
+	{
+		echo "TestModel sukses!";
+	}
 }
