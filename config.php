@@ -1,12 +1,11 @@
 <?php
 
-ini_set("display_errors", true);
-define("BASEPATH", __DIR__);
-
 /**
  * IceTea Framework.
  */
 
+ini_set("display_errors", true);
+define("BASEPATH", __DIR__);
 
 /**
  * Database.
