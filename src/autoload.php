@@ -1,11 +1,15 @@
 <?php
 
-/**
- * Load config file.
- */
-defined("BASEPATH") or require __DIR__."/../config.php";
+require __DIR__."/sys.vendor/init.map";
 
-if (! file_exists(BASEPATH."/vendor/autoload.php")) {
+/**
+ * If running without composer.
+ */
+if (! file_exists(__DIR__."/../vendor/autoload.php")) {
+	/**
+	 * Load config.
+	 */
+	require __DIR__."/../config.php";
 	/**
 	 * Load helpers.
 	 */
@@ -25,11 +29,8 @@ if (! file_exists(BASEPATH."/vendor/autoload.php")) {
 	    }
 	}
 	spl_autoload_register("___load_class");
+} else {
+	require __DIR__."/../vendor/autoload.php";
 }
 
-/**
- * Load routes.
- */
-require BASEPATH."/app/Routes/web.php";
-System\Router::apiFlag();
-require BASEPATH."/app/Routes/api.php";
+__icetea_start();

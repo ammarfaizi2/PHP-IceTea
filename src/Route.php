@@ -58,6 +58,6 @@ final class Route
      */
     private function set_route($route, $action, $method = "GET")
     {
-        Router::addRoute($route, $action, $method);
+        Router::addRoute("/".ltrim($route, "/"), $action, $method);
     }
 }

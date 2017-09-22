@@ -21,6 +21,6 @@ define("DBPORT", "3306");
  * Base URL.
  */
 $baseurl = "http".(isset($_SERVER['HTTPS']) ? "s" : "")."://".(@$_SERVER['HTTP_HOST']);
-define("BASEURL", $baseurl);
 
-define("ROUTER", "");
+define("BASEURL", $baseurl);
+define("ROUTER_FILE", false);

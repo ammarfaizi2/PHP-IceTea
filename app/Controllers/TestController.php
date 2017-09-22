@@ -17,7 +17,7 @@ class TestController extends IceTeaController
 
     public function testRandomString()
     {
-        print rstr(100, "__.");
+        print rstr(100);
     }
 
     public function testEncrypt()

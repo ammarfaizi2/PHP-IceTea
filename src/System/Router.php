@@ -162,9 +162,14 @@ class Router
      */
     private function getUri()
     {
-        if (empty(ROUTER)) {
+        if (!ROUTER_FILE) {
             $a = explode($_SERVER['DOCUMENT_ROOT'], $_SERVER['SCRIPT_FILENAME']);
-            isset($a[1]) and ($a = explode($a[1], $_SERVER['REQUEST_URI']) xor (isset($a[1]) and $a = $a[1] or $a = "/"));
+            $a = explode("/", end($a), -1);
+            if (isset($a[1])) {
+                $a = explode(end($a), $_SERVER['REQUEST_URI']) xor (isset($a[1]) and $a = $a[1] or $a = "/");
+            } else {
+                $a = $_SERVER['REQUEST_URI'];
+            }
         } else {
             $a = explode($b = substr($_SERVER['SCRIPT_FILENAME'], strlen($_SERVER['DOCUMENT_ROOT'])), $_SERVER['REQUEST_URI']);
             $a = implode("/", $a);

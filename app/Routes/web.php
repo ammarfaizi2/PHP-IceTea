@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Pengaturan router.
+ */
+
 Route::get("/", "TestController@index");
-Route::get("/rr", "TestController@testRandomString");
-Route::get("/ec", "TestController@testEncrypt");
+Route::get("/test-random-string", "TestController@testRandomString");
+Route::get("/test-encryption", "TestController@testEncrypt");
