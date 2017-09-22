@@ -1,5 +1,6 @@
-/icedev
 *.tmp
 *.lock
+/icedev
 /vendor/
 /.php_cs.cache
+/composer.phar
