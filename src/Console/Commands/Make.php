@@ -3,6 +3,7 @@
 namespace Console\Commands;
 
 use Console\ConsoleCommand;
+use Console\Colors\Color as Cl;
 
 /**
  * @author Ammar Faizi <ammarfaizi2@gmail.com>
@@ -27,7 +28,7 @@ class Make extends ConsoleCommand
     public function input($param)
     {
         if (!isset($param[0])) {
-            # code...
+            // code...
         } else {
             $this->what = strtolower($param[0]);
             array_shift($param);
@@ -39,10 +40,10 @@ class Make extends ConsoleCommand
     {
         switch ($this->what) {
             case 'controller':
-                    $this->make_controller(...$this->param);
+                $this->make_controller(...$this->param);
                 break;
             case 'model':
-                    $this->make_model(...$this->param);
+                $this->make_model(...$this->param);
                 break;
 
             default:
@@ -69,6 +70,11 @@ class Make extends ConsoleCommand
             $a = decice(file_get_contents($ice), "icetea framework", true);
             $a = str_replace(["{{~~Name~~}}", "{{~~Namespace~~}}", "{{~~NOW~~}}"], [$class, $namespace, date("Y-m-d H:i:s")], $a);
             file_put_contents($apppath, $a);
+            if (file_exists($apppath)) {
+                print Cl::clr("Controller created successfully.", "green")."\n";
+            }
+        } else {
+            print Cl::clr("Controller already exists!", null, "red")."\n";
         }
     }
 
@@ -91,6 +97,11 @@ class Make extends ConsoleCommand
             $a = decice(file_get_contents($ice), "icetea framework", true);
             $a = str_replace(["{{~~Name~~}}", "{{~~Namespace~~}}", "{{~~NOW~~}}"], [$class, $namespace, date("Y-m-d H:i:s")], $a);
             file_put_contents($apppath, $a);
+            if (file_exists($apppath)) {
+                print Cl::clr("Model created successfully.", "green")."\n";
+            }
+        } else {
+            print Cl::clr("Model already exists!", null, "red")."\n";
         }
     }
 

@@ -13,7 +13,7 @@ function view($___view, $___var = null)
         }
     }
     unset($___v, $___var, $___v);
-    require BASEPATH."/app/Views/".$___view.".php";
+    include BASEPATH."/app/Views/".$___view.".php";
 }
 
 function dd()
@@ -22,4 +22,9 @@ function dd()
         var_dump($val);
         print "\n\n";
     }
+}
+
+function _i(&$a)
+{
+    return $a;
 }

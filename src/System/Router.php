@@ -48,6 +48,8 @@ class Router
     public static function action($key, $action)
     {
         $ins = self::getInstance();
+        $ins->uri = explode("?", $ins->uri, 2);
+        $ins->uri = $ins->uri[0];
         if ($key === $ins->uri) {
             if (isset($action[$_SERVER['REQUEST_METHOD']])) {
                 return self::__run($action[$_SERVER['REQUEST_METHOD']]);
@@ -76,6 +78,7 @@ class Router
                     if (isset($action[$_SERVER['REQUEST_METHOD']])) {
                         if ($action[$_SERVER['REQUEST_METHOD']] instanceof Closure) {
                             $action[$_SERVER['REQUEST_METHOD']]($param);
+                            return true;
                         } else {
                             $act = explode("@", $action[$_SERVER['REQUEST_METHOD']]);
                             $app = "\\App\\Controllers\\".$act[0];
@@ -109,7 +112,8 @@ class Router
     private static function __run($action, $param = [null])
     {
         if ($action instanceof Closure) {
-            return $action();
+            $action();
+            return true;
         } else {
             $act = explode("@", $action);
             $app = "\\App\\Controllers\\".$act[0];
@@ -138,9 +142,9 @@ class Router
     }
 
     /**
-     * @param string            $route
-     * @param string|Closure    $action
-     * @param string            $method
+     * @param string         $route
+     * @param string|Closure $action
+     * @param string         $method
      */
     public static function addRoute($route, $action, $method)
     {
@@ -148,9 +152,9 @@ class Router
     }
 
     /**
-     * @param string            $route
-     * @param string|Closure    $action
-     * @param string            $method
+     * @param string         $route
+     * @param string|Closure $action
+     * @param string         $method
      */
     private function __addRoute($route, $action, $method)
     {
@@ -162,7 +166,7 @@ class Router
      */
     private function getUri()
     {
-        if (!ROUTER_FILE) {
+        if (!\Config::get("router_file", "index.php")) {
             $a = explode($_SERVER['DOCUMENT_ROOT'], $_SERVER['SCRIPT_FILENAME']);
             $a = explode("/", end($a), -1);
             if (isset($a[1])) {

@@ -3,7 +3,14 @@
 function __icetea_start()
 {
     defined("BASEPATH") or trigger_error("Konstanta BASEPATH belum terdefinisi!");
-    require BASEPATH."/app/Routes/web.php";
+    include BASEPATH."/app/Routes/web.php";
     System\Router::apiFlag();
-    require BASEPATH."/app/Routes/api.php";
+    include BASEPATH."/app/Routes/api.php";
+    if (is_dir(BASEPATH."/storage/init")) {
+        $scan = scandir(BASEPATH."/storage/init");
+        unset($scan[0], $scan[1]);
+        foreach ($scan as $val) {
+            require BASEPATH."/storage/init/".$val;
+        }
+    }
 }
