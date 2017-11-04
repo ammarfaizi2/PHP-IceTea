@@ -1,9 +1,2 @@
-*.tmp
-*.lock
-/icedev
+/composer.lock
 /vendor/
-/.php_cs.cache
-/composer.phar
-/.phpintel/
-/config.php
-/qwe
