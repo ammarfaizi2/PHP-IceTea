@@ -24,6 +24,5 @@ Apabila anda tertarik untuk berkontribusi pada pembuatan framework ini, kami san
 
 
 <a href="https://github.com/ammarfaizi2">Ammar Faizi</a>
-
 Join grup telegram :
-<a href="https://t.me/joinchat/DoZ0OUNEBOWfoL1KyzTV5w">https://t.me/joinchat/DoZ0OUNEBOWfoL1KyzTV5w</a>
+<a href="https://t.me/TeaInside">https://t.me/TeaInside</a>
