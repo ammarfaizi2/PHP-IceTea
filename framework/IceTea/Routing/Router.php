@@ -111,9 +111,7 @@ class Router
         $route = explode("/", $route);
         if (count($route) === count($this->uri)) {
             foreach ($route as $key => $val) {
-                if (substr($val, 0, 1) === "{" &&
-                    substr($val, -1) === "}"
-                ) {
+                if (substr($val, 0, 1) === "{" && substr($val, -1) === "}") {
                     RouteBinding::bind(substr($val, 1, -1), $this->uri[$key]);
                 } else {
                     if ($val !== $this->uri[$key]) {
