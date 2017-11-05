@@ -4,7 +4,12 @@ namespace IceTea\Routing;
 
 use Closure;
 use IceTea\Hub\Singleton;
+use IceTea\Exceptions\Http\MethodNotAllowedException;
 
+/**
+ * @author Ammar Faizi <ammarfaizi2@gmail.com>
+ * @license MIT
+ */
 class Router
 {
 	use Singleton;

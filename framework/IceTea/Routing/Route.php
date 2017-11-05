@@ -4,6 +4,10 @@ namespace IceTea\Routing;
 
 use IceTea\Routing\RouteCollector as Collector;
 
+/**
+ * @author Ammar Faizi <ammarfaizi2@gmail.com>
+ * @license MIT
+ */
 class Route
 {
 	/**

@@ -2,7 +2,11 @@
 
 namespace IceTea\View;
 
-class CacheHandler
+/**
+ * @author Ammar Faizi <ammarfaizi2@gmail.com>
+ * @license MIT
+ */
+final class CacheHandler
 {
 	/**
 	 * sha1 hash file.

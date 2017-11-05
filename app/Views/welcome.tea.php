@@ -1,3 +1,3 @@
 <?php
 
-echo "welcome aaa eee ddd eee";
+echo microtime(true) - ICETEA_START;

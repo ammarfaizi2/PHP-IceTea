@@ -22,7 +22,7 @@ trait Singleton
 	/**
 	 * Prevent cloning instance.
 	 */
-	private function __clone()
+	final private function __clone()
 	{
 	}
 }

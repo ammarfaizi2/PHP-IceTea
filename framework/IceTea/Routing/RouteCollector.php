@@ -4,6 +4,10 @@ namespace IceTea\Routing;
 
 use IceTea\Hub\Singleton;
 
+/**
+ * @author Ammar Faizi <ammarfaizi2@gmail.com>
+ * @license MIT
+ */
 class RouteCollector
 {
 	use Singleton;
