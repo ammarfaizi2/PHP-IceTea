@@ -2,4 +2,5 @@
 <?php
 
 require __DIR__."/framework/icetea.php";
-require __DIR__."/framework/init/console.php";
+$app = require __DIR__."/framework/init/console.php";
+$app->terminate();
