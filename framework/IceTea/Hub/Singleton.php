@@ -24,5 +24,6 @@ trait Singleton
 	 */
 	final private function __clone()
 	{
+		throw new \Exception("Cannot clone instance with Singleton pattern.", 1);
 	}
 }

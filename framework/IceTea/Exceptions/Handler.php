@@ -16,9 +16,9 @@ class Handler
 	{
 		if ($this->e instanceof Http) {
 			http_response_code(
-				ExceptionInfo::$http[get_class($this->e)]
+				$httpCode = ExceptionInfo::$http[get_class($this->e)]
 			);
-			View::staticMaker(view("errors/404"));
+			View::make(view("errors/".$httpCode));
 		}
 	}
 }
