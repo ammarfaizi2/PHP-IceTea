@@ -4,7 +4,7 @@ namespace IceTea\Foundation\Providers;
 
 class RouteServiceProvider
 {
-	protected $namespace = 'App\Http\Controllers';
+    protected $namespace = 'App\Http\Controllers';
 
     public function boot()
     {
@@ -12,6 +12,6 @@ class RouteServiceProvider
 
     public function getControllerNamespace()
     {
-    	return $this->namespace;
+        return $this->namespace;
     }
 }

@@ -8,44 +8,44 @@ use IceTea\Exceptions\Handler as InternalExceptionHandler;
 
 class Handler
 {
-	protected $dontReport;
+    protected $dontReport;
 
-	protected $exception;
+    protected $exception;
 
-	protected $name;
+    protected $name;
 
-	public function __construct(Exception $e)
-	{
-		$this->exception = $e;
-		$this->name = get_class($this->exception);
-	}
+    public function __construct(Exception $e)
+    {
+        $this->exception = $e;
+        $this->name = get_class($this->exception);
+    }
 
-	public function report()
-	{
-		$this->buildReportContext();
+    public function report()
+    {
+        $this->buildReportContext();
 
-		if (! $this->shouldntReport()) {
-			throw $this->exception;
-		}
+        if (! $this->shouldntReport()) {
+            throw $this->exception;
+        }
 
-		if ($this->isInternalException()) {
-			$handler = new InternalExceptionHandler($this->exception);
-			$handler->report();
-		}
-	}
+        if ($this->isInternalException()) {
+            $handler = new InternalExceptionHandler($this->exception);
+            $handler->report();
+        }
+    }
 
-	protected function shouldntReport()
-	{
-		return in_array($this->name, $this->dontReport);
-	}
+    protected function shouldntReport()
+    {
+        return in_array($this->name, $this->dontReport);
+    }
 
-	protected function buildReportContext()
-	{
-		$this->dontReport = array_merge(InternalExceptionList::$list, $this->dontReport);
-	}
+    protected function buildReportContext()
+    {
+        $this->dontReport = array_merge(InternalExceptionList::$list, $this->dontReport);
+    }
 
-	protected function isInternalException()
-	{
-		return in_array($this->name, InternalExceptionList::$list);
-	}
+    protected function isInternalException()
+    {
+        return in_array($this->name, InternalExceptionList::$list);
+    }
 }
