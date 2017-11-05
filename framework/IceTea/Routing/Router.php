@@ -14,6 +14,10 @@ class Router
 {
 	use Singleton;
 
+	private $uri;
+
+	private $isEndPointWithFile = false;
+
 	public function __construct()
 	{
 		$this->uri = $_SERVER['REQUEST_URI'];
@@ -21,13 +25,18 @@ class Router
 
 	public function fire()
 	{
+		$func = $this->urlGenerator();
 		foreach(RouteCollector::getInstance()->getRoutes() as $route => $val) {
-			if ($this->isRouteMatch($route)) {				
-				if (isset($val[$_SERVER['REQUEST_METHOD']])) {
+			if ($this->{$func}($route)) {	
+				$reqMethod = $_SERVER['REQUEST_METHOD'];
+				if (
+					isset($val[$reqMethod]) or
+					(isset($val[true]) and $reqMethod = true)
+				) {
 					if (
-						$val[$_SERVER['REQUEST_METHOD']] instanceof Closure
+						$val[$reqMethod] instanceof Closure
 					) {
-						return $val[$_SERVER['REQUEST_METHOD']]();
+						return $val[$reqMethod]();
 					} else {
 						
 					}
@@ -39,8 +48,20 @@ class Router
 		return false;
 	}
 
-	private function isRouteMatch($route)
+	private function urlGenerator()
 	{
-		return $this->uri === $route;
+		$this->uri = explode("?", $this->uri);
+		if (($c = count($this->uri)) > 1) unset($this->uri[$c - 1]);
+		$this->uri = implode("/", $this->uri);
+		do {
+			$this->uri = str_replace("//", "/", $this->uri, $n);
+		} while ($n);
+		$this->uri = "/".trim($this->uri, "/");
+		$endpointFile = $_SERVER["SCRIPT_NAME"];
+		$endpointFile = explode("/", $endpointFile);
+		$file = $endpointFile[$c = count($endpointFile) - 1];
+		unset($endpointFile[$c]);
+		$endpointFile = implode("/", $endpointFile);
+		var_dump($this->uri);
 	}
 }

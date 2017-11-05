@@ -2,6 +2,6 @@
 
 use IceTea\Routing\Route;
 
-Route::get("/", function() {
+Route::any("/", function() {
 	return view('welcome');
 });
