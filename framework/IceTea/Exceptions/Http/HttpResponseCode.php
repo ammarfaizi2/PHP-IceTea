@@ -9,7 +9,7 @@ class HttpResponseCode extends ExceptionInfo
 {
 	public static $code = [
 		AbsoluteException::class => 500,
-		NotFoundException::class => 404,
+		NotFoundHttpException::class => 404,
 		MethodNotAllowedException::class => 405,
 	];
 }

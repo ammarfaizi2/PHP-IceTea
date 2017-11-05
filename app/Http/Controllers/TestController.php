@@ -8,6 +8,6 @@ class TestController extends Controller
 {
 	public function index()
 	{
-		echo microtime(true) - ICETEA_START;
+		echo microtime(true) - ICETEA_START . PHP_EOL;
 	}
 }

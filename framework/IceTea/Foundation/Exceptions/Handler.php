@@ -3,32 +3,49 @@
 namespace IceTea\Foundation\Exceptions;
 
 use Exception;
+use IceTea\Exceptions\InternalExceptionList;
+use IceTea\Exceptions\Handler as InternalExceptionHandler;
 
 class Handler
 {
+	protected $dontReport;
+
 	protected $exception;
 
-	final public function __construct(Exception $e)
+	protected $name;
+
+	public function __construct(Exception $e)
 	{
 		$this->exception = $e;
+		$this->name = get_class($this->exception);
 	}
 
-	final public function reconstruct(Exception $e)
+	public function report()
 	{
+		$this->buildReportContext();
+
+		if (! $this->shouldntReport()) {
+			throw $this->exception;
+		}
+
+		if ($this->isInternalException()) {
+			$handler = new InternalExceptionHandler($this->exception);
+			$handler->report();
+		}
 	}
 
-	final public function handle()
+	protected function shouldntReport()
 	{
-		return $this->report($this->exception);
+		return in_array($this->name, $this->dontReport);
 	}
 
-	public function report(Exception $e)
+	protected function buildReportContext()
 	{
-		return $e;
+		$this->dontReport = array_merge(InternalExceptionList::$list, $this->dontReport);
 	}
 
-	protected function shouldntReport(Exception $e)
+	protected function isInternalException()
 	{
-		return in_array(get_class($e), $this->dontReport);
+		return in_array($this->name, InternalExceptionList::$list);
 	}
 }

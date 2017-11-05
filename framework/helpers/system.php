@@ -30,3 +30,10 @@ if (! function_exists("basepath")) {
         return rtrim(realpath(__DIR__."/../../")."/".$file, "/");
     }
 }
+
+if (! function_exists("assets")) {
+    function assets($assetsFile = "")
+    {
+        return trim(\IceTea\Utils\Config::get("assets")."/".$assetsFile, "/");
+    }
+}

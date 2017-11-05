@@ -5,7 +5,7 @@ namespace IceTea\Routing;
 use Closure;
 use IceTea\Utils\Config;
 use IceTea\Hub\Singleton;
-use IceTea\Foundation\Http\NotFoundFoundation;
+use IceTea\Exceptions\Http\NotFoundHttpException;
 use IceTea\Exceptions\Http\MethodNotAllowedException;
 
 /**
@@ -75,7 +75,7 @@ class Router
                 }
             }
         }
-        return new NotFoundFoundation();
+        throw new NotFoundHttpException("Not found");
     }
 
     private function urlGenerator()

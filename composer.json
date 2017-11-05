@@ -1,7 +1,11 @@
 {
     "name": "ammarfaizi2/icetea",
     "description": "IceTea PHP Framework",
-    "keywords": ["framework", "php", "icetea"],
+    "keywords": [
+        "framework",
+        "php",
+        "icetea"
+    ],
     "type": "project",
     "license": "MIT",
     "authors": [
