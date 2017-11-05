@@ -3,6 +3,7 @@
 namespace IceTea\Routing;
 
 use Closure;
+use IceTea\Utils\Config;
 use IceTea\Hub\Singleton;
 use IceTea\Exceptions\Http\MethodNotAllowedException;
 
@@ -62,6 +63,7 @@ class Router
 		$file = $endpointFile[$c = count($endpointFile) - 1];
 		unset($endpointFile[$c]);
 		$endpointFile = implode("/", $endpointFile);
-		var_dump($this->uri);
+		$c = Config::get('router_file');
+		var_dump($c);
 	}
 }
