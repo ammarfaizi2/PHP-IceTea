@@ -1,2 +1,4 @@
-/composer.lock
+/.env
+*.tmp
+*.lock
 /vendor/
