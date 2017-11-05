@@ -1,11 +1,11 @@
 <?php
 
 if (defined("__COMPOSER_AUTOLOAD_DIR__")) {
+    $whoops = new \Whoops\Run;
+    $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+    $whoops->register();
     function ___IceTeaErrorHandler()
     {
-        $whoops = new \Whoops\Run;
-        $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
-        $whoops->register();
     }
 } else {
     function ___IceTeaErrorHandler($errno, $errstr, $errfile, $errline)
