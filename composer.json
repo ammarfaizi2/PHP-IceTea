@@ -23,6 +23,11 @@
             "IceTea\\": "framework/IceTea/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "tests\\": "tests/"
+        }
+    },
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
