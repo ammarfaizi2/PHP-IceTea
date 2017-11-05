@@ -5,6 +5,7 @@ namespace IceTea\Routing;
 use Closure;
 use IceTea\Utils\Config;
 use IceTea\Hub\Singleton;
+use IceTea\Foundation\Http\NotFoundFoundation;
 use IceTea\Exceptions\Http\MethodNotAllowedException;
 
 /**
@@ -15,20 +16,34 @@ class Router
 {
 	use Singleton;
 
+	/**
+	 * @var array|string
+	 */
 	private $uri;
 
+	/**
+	 * @var bool
+	 */
 	private $isEndPointWithFile = false;
 
+	/**
+	 * Constructor.
+	 */
 	public function __construct()
 	{
 		$this->uri = $_SERVER['REQUEST_URI'];
 	}
 
+	/**
+	 * Fire.
+	 *
+	 * @return mixed
+	 */
 	public function fire()
 	{
 		$func = $this->urlGenerator();
 		foreach(RouteCollector::getInstance()->getRoutes() as $route => $val) {
-			if ($this->{$func}($route)) {	
+			if ($this->isMatch($route)) {	
 				$reqMethod = $_SERVER['REQUEST_METHOD'];
 				if (
 					isset($val[$reqMethod]) or
@@ -37,16 +52,15 @@ class Router
 					if (
 						$val[$reqMethod] instanceof Closure
 					) {
-						return $val[$reqMethod]();
+						return $val[$reqMethod](RouteBinding::getBindedValue());
 					} else {
-						
 					}
 				} else {
 					throw new MethodNotAllowedException("Method not allowed", 1);
 				}
 			}
 		}
-		return false;
+		return new NotFoundFoundation();
 	}
 
 	private function urlGenerator()
@@ -58,12 +72,41 @@ class Router
 			$this->uri = str_replace("//", "/", $this->uri, $n);
 		} while ($n);
 		$this->uri = "/".trim($this->uri, "/");
-		$endpointFile = $_SERVER["SCRIPT_NAME"];
-		$endpointFile = explode("/", $endpointFile);
-		$file = $endpointFile[$c = count($endpointFile) - 1];
-		unset($endpointFile[$c]);
-		$endpointFile = implode("/", $endpointFile);
-		$c = Config::get('router_file');
-		var_dump($c);
+		if ($routerFile = Config::get("router_path")) {
+			if (substr($this->uri, 1, strlen($routerFile)) === $routerFile ) {
+				$this->uri = explode($routerFile, $this->uri, 2);
+				$this->uri = empty($this->uri[1]) ? ["/"] : explode("/", $this->uri[1]);
+			} else {
+				$this->uri = explode("/", $this->uri);
+			}
+		} else {
+		}
+	}
+
+	private function isMatch($route)
+	{
+		do {
+			$route = str_replace("//", "/", $route, $n);
+		} while ($n);
+		$route = explode("/", $route);
+		if (count($route) === count($this->uri)) {
+			foreach ($route as $key => $val) {
+				if (
+					substr($val, 0, 1) === "{" && 
+					substr($val, -1) === "}"
+				) {
+					RouteBinding::bind(substr($val, 1, -1), $this->uri[$key]);
+				} else {
+					if ($val !== $this->uri[$key]) {
+						RouteBinding::destroy();
+						return false;
+					}
+				}
+			}
+		} else {
+			RouteBinding::destroy();
+			return false;
+		}
+		return true;
 	}
 }
