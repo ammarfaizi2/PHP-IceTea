@@ -11,37 +11,37 @@ use App\Providers\RouteServiceProvider;
  */
 class RouteCollector
 {
-	use Singleton;
+    use Singleton;
 
-	/**
-	 * Routes
-	 *
-	 * @var array
-	 */
-	private $routes = [];
+    /**
+     * Routes
+     *
+     * @var array
+     */
+    private $routes = [];
 
 
-	public function __construct()
-	{
-	}
+    public function __construct()
+    {
+    }
 
-	public static function collect($route, $action, $method)
-	{
-		$ins = self::getInstance();
-		$ins->routes[$route][$method] = $action;
-	}
+    public static function collect($route, $action, $method)
+    {
+        $ins = self::getInstance();
+        $ins->routes[$route][$method] = $action;
+    }
 
-	public static function loadRoutes()
-	{
-		$app = new RouteServiceProvider();
-		$app->boot();
-		$app->map();
-	}
+    public static function loadRoutes()
+    {
+        $app = new RouteServiceProvider();
+        $app->boot();
+        $app->map();
+    }
 
-	public static function getRoutes()
-	{
-		return self::getInstance()->routes;
-	}
+    public static function getRoutes()
+    {
+        return self::getInstance()->routes;
+    }
 }
 
 /**
@@ -50,6 +50,6 @@ class RouteCollector
  */
 function includer($file)
 {
-	//use IceTea\Routing\Route;
-	require $file;
+    //use IceTea\Routing\Route;
+    require $file;
 }

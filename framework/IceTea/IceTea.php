@@ -8,19 +8,19 @@ namespace IceTea;
  */
 class IceTea
 {
-	/**
-	 * Environtment
-	 *
-	 * @var array
-	 */
-	private $environtment = [];
+    /**
+     * Environtment
+     *
+     * @var array
+     */
+    private $environtment = [];
 
-	public function __construct()
-	{
-	}
+    public function __construct()
+    {
+    }
 
-	public function build()
-	{
-		
-	}
+    public function build()
+    {
+        
+    }
 }

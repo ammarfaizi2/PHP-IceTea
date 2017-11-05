@@ -12,28 +12,28 @@ use IceTea\Foundation\Http\NotFoundFoundation;
 
 final class Web
 {
-	public function __construct()
-	{
+    public function __construct()
+    {
 
-	}
+    }
 
-	public function routeHandle()
-	{
-		RouteCollector::loadRoutes();
-		$route = new Router();
-		$action = $route->fire();
-		RouteBinding::destroy();
-		var_dump($action);
-		if ($action instanceof NotFoundFoundation) {
-			throw new NotFoundException("Page not found", 1);
-		}
-		if ($action instanceof ViewFoundation) {
-			View::make($action);
-		}
-	}
+    public function routeHandle()
+    {
+        RouteCollector::loadRoutes();
+        $route = new Router();
+        $action = $route->fire();
+        RouteBinding::destroy();
+        var_dump($action);
+        if ($action instanceof NotFoundFoundation) {
+            throw new NotFoundException("Page not found", 1);
+        }
+        if ($action instanceof ViewFoundation) {
+            View::make($action);
+        }
+    }
 
-	public function terminate()
-	{
+    public function terminate()
+    {
 
-	}
+    }
 }

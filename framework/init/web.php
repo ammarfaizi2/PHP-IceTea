@@ -3,9 +3,9 @@
 $app = new IceTea\Web\Web();
 
 try {
-	$app->routeHandle();	
+    $app->routeHandle();
 } catch (Exception $e) {
-	$app = new \IceTea\Exceptions\Handler($e);
+    $app = new \IceTea\Exceptions\Handler($e);
 } finally {
 }
 

@@ -7,25 +7,25 @@ use IceTea\Contracts\Container\ObjectContainer as ObjectContainerContract;
 
 class ObjectContainer implements ObjectContainerContract
 {
-	/**
-	 * An object name.
-	 *
-	 * @var string
-	 */
-	private $objectName;
+    /**
+     * An object name.
+     *
+     * @var string
+     */
+    private $objectName;
 
-	/**
-	 * Constructor.
-	 *
-	 * @param string $objectName
-	 */
-	public function __construct($objectName)
-	{
-		$this->objectName = $objectName;
-	}
+    /**
+     * Constructor.
+     *
+     * @param string $objectName
+     */
+    public function __construct($objectName)
+    {
+        $this->objectName = $objectName;
+    }
 
-	public function buildClass()
-	{
-		return new ReleflectionClass($this->objectName);
-	}
+    public function buildClass()
+    {
+        return new ReleflectionClass($this->objectName);
+    }
 }
