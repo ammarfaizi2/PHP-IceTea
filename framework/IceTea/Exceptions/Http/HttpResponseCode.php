@@ -1,0 +1,15 @@
+<?php
+
+namespace IceTea\Exceptions\Http;
+
+use IceTea\Exceptions\ExceptionInfo;
+use IceTea\Exceptions\AbsoluteException;
+
+class HttpResponseCode extends ExceptionInfo
+{
+	public static $code = [
+		AbsoluteException::class => 500,
+		NotFoundException::class => 404,
+		MethodNotAllowedException::class => 405,
+	];
+}

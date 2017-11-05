@@ -45,18 +45,16 @@ class Router
         foreach (RouteCollector::getInstance()->getRoutes() as $route => $val) {
             if ($this->isMatch($route)) {
                 $reqMethod = $_SERVER['REQUEST_METHOD'];
-                if (isset($val[$reqMethod]) or
-                    (isset($val[true]) and $reqMethod = true)
-                ) {
-                    if ($val[$reqMethod] instanceof Closure
-                    ) {
+                if (isset($val[$reqMethod]) or (isset($val[true]) and $reqMethod = true)) {
+                    if ($val[$reqMethod] instanceof Closure) {
                         return $val[$reqMethod](RouteBinding::getBindedValue());
                     } else {
                         $a = explode("@", $val[$reqMethod]);
                         if (count($a) != 2) {
                             throw new InvalidArgumentException("Invalid route", 1);
                         } else {
-                            $controller = "\\App\\Controllers\\".$a[0];
+                            $provider = RouteCollector::getProviderInstance();
+                            $controller = $provider->getControllerNamespace()."\\".$a[0];
                             if (class_exists($controller)) {
                                 $controller = new $controller();
                                 if (is_callable([$controller, $a[1]])) {
@@ -68,8 +66,7 @@ class Router
                                 }
                                 var_dump(123);
                             } else {
-                                throw new Exception("Class {$controller} does not exists.", 1);
-                                
+                                throw new \Exception("Class {$controller} does not exists.", 1);
                             }
                         }
                     }

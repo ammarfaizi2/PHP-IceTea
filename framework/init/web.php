@@ -1,5 +1,9 @@
 <?php
 
+require __DIR__."/error_handler/web.php";
+
+set_error_handler("___IceTeaErrorHandler");
+echo $aaaa;
 $app = new IceTea\Web\Web();
 
 try {

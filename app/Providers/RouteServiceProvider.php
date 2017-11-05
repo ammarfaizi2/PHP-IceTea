@@ -6,6 +6,8 @@ use IceTea\Foundation\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
+	protected $namespace = 'App\Http\Controllers';
+
 	public function boot()
 	{
 		parent::boot();

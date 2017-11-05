@@ -14,7 +14,7 @@ Route::get("/", function() {
 	return view('welcome');
 });
 
-Route::get("/test", "TestController@index");
+Route::get("/test", "TestController@indexa");
 
 
 Route::get("/profile/{user}", function($a){	
