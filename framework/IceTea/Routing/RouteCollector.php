@@ -3,6 +3,7 @@
 namespace IceTea\Routing;
 
 use IceTea\Hub\Singleton;
+use App\Providers\RouteServiceProvider;
 
 /**
  * @author Ammar Faizi <ammarfaizi2@gmail.com>
@@ -32,7 +33,9 @@ class RouteCollector
 
 	public static function loadRoutes()
 	{
-		includer(basepath("routes/web.php"));
+		$app = new RouteServiceProvider();
+		$app->boot();
+		$app->map();
 	}
 
 	public static function getRoutes()
@@ -47,5 +50,6 @@ class RouteCollector
  */
 function includer($file)
 {
+	//use IceTea\Routing\Route;
 	require $file;
 }

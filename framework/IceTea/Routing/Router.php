@@ -54,6 +54,26 @@ class Router
 					) {
 						return $val[$reqMethod](RouteBinding::getBindedValue());
 					} else {
+						$a = explode("@", $val[$reqMethod]);
+						if (count($a) != 2) {
+							throw new InvalidArgumentException("Invalid route", 1);
+						} else {
+							$controller = "\\App\\Controllers\\".$a[0];
+							if (class_exists($controller)) {
+								$controller = new $controller();
+								if (is_callable([$controller, $a[1]])) {
+									return $controller->{$a[1]}(
+										RouteBinding::getBindedValue()
+									);
+								} else {
+									throw new \Exception("Function {$a[1]} does not exists.", 1);
+								}
+								var_dump(123);
+							} else {
+								throw new Exception("Class {$controller} does not exists.", 1);
+								
+							}
+						}
 					}
 				} else {
 					throw new MethodNotAllowedException("Method not allowed", 1);

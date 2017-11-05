@@ -23,6 +23,7 @@ final class Web
 		$route = new Router();
 		$action = $route->fire();
 		RouteBinding::destroy();
+		var_dump($action);
 		if ($action instanceof NotFoundFoundation) {
 			throw new NotFoundException("Page not found", 1);
 		}
