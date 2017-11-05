@@ -1,16 +1,6 @@
 #!/usr/bin/env php
 <?php
-$key = "ammar";
-print "key = " . $key . PHP_EOL;
-print "string length = ".($strlen = strlen($key)) . PHP_EOL 
-. PHP_EOL;
-$i = $strlen - 1;
-foreach (str_split($key) as $char) {
-	$ord = ord($char);
-	print  "{$i}*ord({$char}) = {$i}*{$ord} = ".($ord*($i--)). PHP_EOL;
-}
 
-/*require __DIR__."/framework/icetea.php";
+require __DIR__."/framework/icetea.php";
 $app = require __DIR__."/framework/init/console.php";
 $app->terminate();
-*/
