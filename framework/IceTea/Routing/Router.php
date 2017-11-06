@@ -80,7 +80,7 @@ class Router
     private function urlGenerator()
     {
         $a = explode($_SERVER['SCRIPT_NAME'], $_SERVER['PHP_SELF'], 2);
-        $this->uri = isset($a[1]) ? explode("/", $a[1]) : "/";
+        $this->uri = empty($a[1]) ? ["", ""] : explode("/", $a[1]);
     }   
 
     private function isMatch($route)
