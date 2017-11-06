@@ -9,6 +9,5 @@ return [
 		"port"	 => env("DB_PORT", "3306"),
 		"dbname" => env("DB_DATABASE", "")
 	],
-	"router_path" => env("ROUTER_PATH"),
 	"assets" => env("APP_URL")."assets"
 ];
