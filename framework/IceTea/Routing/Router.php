@@ -31,7 +31,6 @@ class Router
      */
     public function __construct()
     {
-        $this->uri = $_SERVER['REQUEST_URI'];
     }
 
     /**
@@ -41,7 +40,7 @@ class Router
      */
     public function fire()
     {
-        $func = $this->urlGenerator();
+        $this->urlGenerator();
         foreach (RouteCollector::getInstance()->getRoutes() as $route => $val) {
             if ($this->isMatch($route)) {
                 $reqMethod = $_SERVER['REQUEST_METHOD'];
@@ -80,25 +79,9 @@ class Router
 
     private function urlGenerator()
     {
-        $this->uri = explode("?", $this->uri);
-        if (($c = count($this->uri)) > 1) {
-            unset($this->uri[$c - 1]);
-        }
-        $this->uri = implode("/", $this->uri);
-        do {
-            $this->uri = str_replace("//", "/", $this->uri, $n);
-        } while ($n);
-        $this->uri = "/".trim($this->uri, "/");
-        if ($routerFile = Config::get("router_path")) {
-            if (substr($this->uri, 1, strlen($routerFile)) === $routerFile) {
-                $this->uri = explode($routerFile, $this->uri, 2);
-                $this->uri = empty($this->uri[1]) ? ["/"] : explode("/", $this->uri[1]);
-            } else {
-                $this->uri = explode("/", $this->uri);
-            }
-        } else {
-        }
-    }
+        $a = explode($_SERVER['SCRIPT_NAME'], $_SERVER['PHP_SELF'], 2);
+        $this->uri = isset($a[1]) ? explode("/", $a[1]) : "/";
+    }   
 
     private function isMatch($route)
     {
