@@ -61,11 +61,11 @@ class Router
                                         RouteBinding::getBindedValue()
                                     );
                                 } else {
-                                    throw new \Exception("Function {$a[1]} does not exists.", 1);
+                                    throw new \Exception("Method {$a[1]} does not exists.", 1);
                                 }
                                 var_dump(123);
                             } else {
-                                throw new \Exception("Class {$controller} does not exists.", 1);
+                                throw new \Exception("Controller {$controller} does not exists.", 1);
                             }
                         }
                     }
