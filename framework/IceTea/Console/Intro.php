@@ -2,6 +2,8 @@
 
 namespace IceTea\Console;
 
+use IceTea\Console\Intro\AvailableCommand;
+
 final class Intro
 {
 
@@ -12,6 +14,7 @@ final class Intro
 		$this->show  = $this->frameworkVersion();
 		$this->show .= PHP_EOL . $this->usageInfo();
 		$this->show .= PHP_EOL . $this->optionInfo();
+		$this->show .= PHP_EOL . $this->avaiableCommand();
 	}
 
 	public function show()
@@ -42,5 +45,12 @@ final class Intro
       ".Color::clr("--env[=ENV]", "green")."       The environment the command should run under
   ".Color::clr("-v|vv|vvv, --verbose", "green")."  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug" .
   PHP_EOL;
+	}
+
+	private function avaiableCommand()
+	{
+		$st = new AvailableCommand();
+		$st->buildContext();
+		return $st;
 	}
 }
