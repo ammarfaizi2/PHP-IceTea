@@ -60,6 +60,10 @@ class Controller extends Make
         $b = $a;
         unset($b[count($b) - 1]);
         $this->namespace = implode("\\", $b);
+        do {
+            $this->namespace = str_replace("\\\\", "\\", $this->namespace, $n);
+        } while ($n);
+        $this->namespace = implode("\\", $b);
         if ($a[0] === "App") {
             $a[0] = strtolower($a[0]);
         }
