@@ -60,19 +60,34 @@ class Command extends Input implements InputContract
                                        ];
             }
         } else {
-            $this->result['parameter'][] = [
+             if (
+                !isset($this->result['cmd'])
+                && isset(InternalRoutes::$routes['normal'][$ex[0]])
+            ) {
+                $this->result['cmd'] = [
+                                        'action' => InternalRoutes::$routes['normal'][$ex[0]],
+                                        'type'   => 'colon-separated',
+                                        'offset' => $offset,
+                                       ];
+            } else {
+                $this->result['parameter'][] = [
                                             'data'   => $context,
                                             'type'   => $this->typeGenerator($offset),
                                             'offset' => $offset,
                                            ];
-        }//end if
+            }
+        }
 
     }//end parseContext()
 
 
     private function typeGenerator($offset)
     {
-        return $offset === ($this->result['cmd']['offset'] + 1) ? 'name' : 'parameter';
+        if (isset($this->result['cmd'])) {
+            return $offset === ($this->result['cmd']['offset'] + 1) ? 'name' : 'parameter';
+        } else {
+            return 'normal';
+        }
 
     }//end typeGenerator()
 

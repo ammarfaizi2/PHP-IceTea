@@ -7,7 +7,7 @@ final class InternalRoutes
 
     public static $routes = [
 			'normal' => [
-				'serve'
+				'serve' =>  \IceTea\Console\Command\Serve::class
 			],
 			'colon-separated' => [
 				'make' => [
