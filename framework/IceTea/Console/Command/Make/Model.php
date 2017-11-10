@@ -49,7 +49,7 @@ class Model extends Make
 
     private function getNamespace()
     {
-        $this->namespace = "App\\";
+        $this->namespace = "App";
     }
 
     private function makeAbsoluteNamespace()
