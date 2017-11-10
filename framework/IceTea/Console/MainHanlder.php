@@ -2,11 +2,7 @@
 
 namespace IceTea\Console;
 
-/**
- * @author Ammar Faizi <ammarfaizi2@gmail.com>
- * @license MIT
- */
-class Input
+final class MainHandler
 {
 
 

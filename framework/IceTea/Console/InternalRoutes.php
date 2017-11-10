@@ -2,14 +2,16 @@
 
 namespace IceTea\Console;
 
-use ArrayAccess;
-
-class InternalRoutes implements ArrayAccess
+final class InternalRoutes
 {
-	use Singleton;
 
-	public function __construct()
-	{
-		
-	}
-}
+    public static $routes = [
+                             'normal'          => ['serve'],
+                             'colon-separated' => [
+                                                   'make' => [
+                                                              'model'      => \IceTea\Console\Command\Make\Model::class,
+                                                              'controller' => \IceTea\Console\Command\Make\Controller::class,
+                                                             ],
+                                                  ],
+                            ];
+}//end class

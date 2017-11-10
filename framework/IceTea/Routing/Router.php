@@ -26,12 +26,15 @@ class Router
      */
     private $isEndPointWithFile = false;
 
+
     /**
      * Constructor.
      */
     public function __construct()
     {
-    }
+
+    }//end __construct()
+
 
     /**
      * Fire.
@@ -48,12 +51,12 @@ class Router
                     if ($val[$reqMethod] instanceof Closure) {
                         return $val[$reqMethod](RouteBinding::getBindedValue());
                     } else {
-                        $a = explode("@", $val[$reqMethod], 2);
+                        $a = explode('@', $val[$reqMethod], 2);
                         if (count($a) < 2) {
-                            throw new \InvalidArgumentException("Invalid route", 1);
+                            throw new \InvalidArgumentException('Invalid route', 1);
                         } else {
-                            $provider = RouteCollector::getProviderInstance();
-                            $controller = $provider->getControllerNamespace()."\\".$a[0];
+                            $provider   = RouteCollector::getProviderInstance();
+                            $controller = $provider->getControllerNamespace().'\\'.$a[0];
                             if (class_exists($controller)) {
                                 $controller = new $controller();
                                 return $controller->{$a[1]}(
@@ -66,28 +69,33 @@ class Router
                         }
                     }
                 } else {
-                    throw new MethodNotAllowedException("Method not allowed", 1);
-                }
-            }
-        }
-        throw new NotFoundHttpException("Not found");
-    }
+                    throw new MethodNotAllowedException('Method not allowed', 1);
+                }//end if
+            }//end if
+        }//end foreach
+
+        throw new NotFoundHttpException('Not found');
+
+    }//end fire()
+
 
     private function urlGenerator()
     {
-        $a = explode($_SERVER['SCRIPT_NAME'], $_SERVER['PHP_SELF'], 2);
-        $this->uri = empty($a[1]) ? ["", ""] : explode("/", $a[1]);
-    }   
+        $a         = explode($_SERVER['SCRIPT_NAME'], $_SERVER['PHP_SELF'], 2);
+        $this->uri = empty($a[1]) ? ['', ''] : explode('/', $a[1]);
+
+    }//end urlGenerator()
+
 
     private function isMatch($route)
     {
         do {
-            $route = str_replace("//", "/", $route, $n);
+            $route = str_replace('//', '/', $route, $n);
         } while ($n);
-        $route = explode("/", $route);
+        $route = explode('/', $route);
         if (count($route) === count($this->uri)) {
             foreach ($route as $key => $val) {
-                if (substr($val, 0, 1) === "{" && substr($val, -1) === "}") {
+                if (substr($val, 0, 1) === '{' && substr($val, -1) === '}') {
                     RouteBinding::bind(substr($val, 1, -1), $this->uri[$key]);
                 } else {
                     if ($val !== $this->uri[$key]) {
@@ -100,6 +108,10 @@ class Router
             RouteBinding::destroy();
             return false;
         }
+
         return true;
-    }
-}
+
+    }//end isMatch()
+
+
+}//end class

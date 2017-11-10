@@ -10,11 +10,12 @@ use ArrayAccess;
  */
 class BindedValue implements ArrayAccess
 {
-   
+
     /**
      * @var array
      */
     private $container = [];
+
 
     /**
      * Constructor.
@@ -24,7 +25,9 @@ class BindedValue implements ArrayAccess
     public function __construct($data)
     {
         $this->container = $data;
-    }
+
+    }//end __construct()
+
 
     /**
      * Return data into array.
@@ -34,11 +37,13 @@ class BindedValue implements ArrayAccess
     public function toArray()
     {
         return (array) $this->container;
-    }
+
+    }//end toArray()
+
 
     /**
-     * @param string|int $offset
-     * @param any        $value
+     * @param integer $offset
+     * @param any     $value
      * @return void
      */
     public function offsetSet($offset, $value)
@@ -48,34 +53,42 @@ class BindedValue implements ArrayAccess
         } else {
             $this->container[$offset] = $value;
         }
-    }
+
+    }//end offsetSet()
+
 
     /**
-     * @param string|int $offset 
-     * @return bool
+     * @param integer $offset
+     * @return boolean
      */
     public function offsetExists($offset)
     {
         return isset($this->container[$offset]);
-    }
+
+    }//end offsetExists()
+
 
     /**
-     * @param string|int $offset
+     * @param integer $offset
      * @return void
      */
     public function offsetUnset($offset)
     {
         unset($this->container[$offset]);
-    }
+
+    }//end offsetUnset()
+
 
     /**
-     * @param string|int $offset
-     * @return bool|null
+     * @param integer $offset
+     * @return boolean|null
      */
     public function offsetGet($offset)
     {
         return isset($this->container[$offset]) ? $this->container[$offset] : null;
-    }
+
+    }//end offsetGet()
+
 
     /**
      * When instance throw in var_dump.
@@ -85,5 +98,8 @@ class BindedValue implements ArrayAccess
     public function __debugInfo()
     {
         return $this->container;
-    }
-}
+
+    }//end __debugInfo()
+
+
+}//end class

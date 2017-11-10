@@ -16,9 +16,13 @@ use IceTea\Foundation\Exceptions\Handler\HttpExceptionHandler;
 
 final class Web
 {
+
+
     public function __construct()
     {
-    }
+
+    }//end __construct()
+
 
     public function routeHandle()
     {
@@ -29,16 +33,23 @@ final class Web
         } catch (Exception $e) {
             $action = new ExceptionHandler($e);
         }
+
         RouteBinding::destroy();
         if ($action instanceof ViewFoundation) {
             View::make($action);
-        } elseif ($action instanceof ExceptionHandler) {
+        } else if ($action instanceof ExceptionHandler) {
             $action->report();
         }
+
         RouteCollector::destroy();
-    }
+
+    }//end routeHandle()
+
 
     public function terminate()
     {
-    }
-}
+
+    }//end terminate()
+
+
+}//end class

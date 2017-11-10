@@ -6,13 +6,14 @@ use IceTea\View\View;
 
 class TeaCompiler
 {
-   
+
     /**
      * View instance.
      *
      * @var \Icetea\View\View
      */
     private $view;
+
 
     /**
      * Constructor.
@@ -22,10 +23,14 @@ class TeaCompiler
     public function __construct(View $view)
     {
         $this->view = $view;
-    }
+
+    }//end __construct()
+
 
     public function compile()
     {
-        
-    }
-}
+
+    }//end compile()
+
+
+}//end class

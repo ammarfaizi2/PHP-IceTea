@@ -30,7 +30,9 @@ class RouteCollector
 
     public function __construct()
     {
-    }
+
+    }//end __construct()
+
 
     /**
      * Collect route.
@@ -41,7 +43,9 @@ class RouteCollector
     {
         $ins = self::getInstance();
         $ins->routes[$route][$method] = $action;
-    }
+
+    }//end collect()
+
 
     /**
      * Load routes.
@@ -55,7 +59,9 @@ class RouteCollector
         $app->boot();
         $app->map();
         $ins->providerInstance = $app;
-    }
+
+    }//end loadRoutes()
+
 
     /**
      * Get routes.
@@ -65,7 +71,9 @@ class RouteCollector
     public static function getRoutes()
     {
         return self::getInstance()->routes;
-    }
+
+    }//end getRoutes()
+
 
     /**
      * Get provider instance.
@@ -75,15 +83,19 @@ class RouteCollector
     public static function getProviderInstance()
     {
         return self::getInstance()->providerInstance;
-    }
+
+    }//end getProviderInstance()
+
 
     /**
      * Prevent garbage collector.
-     *
      */
     public static function destroy()
     {
         $ins = self::getInstance();
         unset($ins->providerInstance, $ins->routes);
-    }
-}
+
+    }//end destroy()
+
+
+}//end class

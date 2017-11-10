@@ -8,6 +8,7 @@ namespace IceTea;
  */
 class IceTea
 {
+
     /**
      * Environtment
      *
@@ -15,12 +16,17 @@ class IceTea
      */
     private $environtment = [];
 
+
     public function __construct()
     {
-    }
+
+    }//end __construct()
+
 
     public function build()
     {
-        
-    }
-}
+
+    }//end build()
+
+
+}//end class

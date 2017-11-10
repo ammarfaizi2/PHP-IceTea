@@ -1,10 +1,12 @@
 <?php
 
-if (defined("__COMPOSER_AUTOLOAD_DIR__")) {
+if (defined('__COMPOSER_AUTOLOAD_DIR__')) {
     $whoops = new \Whoops\Run;
     $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
     $whoops->register();
 } else {
+
+
     function ___IceTeaErrorHandler($errno, $errstr, $errfile, $errline)
     {
         if (!(error_reporting() & $errno)) {
@@ -17,26 +19,30 @@ if (defined("__COMPOSER_AUTOLOAD_DIR__")) {
             case E_USER_ERROR:
                 echo "<b>My ERROR</b> [$errno] $errstr<br />\n";
                 echo "  Fatal error on line $errline in file $errfile";
-                echo ", PHP " . PHP_VERSION . " (" . PHP_OS . ")<br />\n";
+                echo ', PHP '.PHP_VERSION.' ('.PHP_OS.")<br />\n";
                 echo "Aborting...<br />\n";
-                exit(1);
+            exit(1);
+
             break;
 
             case E_USER_WARNING:
                 echo "<b>My WARNING</b> [$errno] $errstr<br />\n";
-                break;
+            break;
 
             case E_USER_NOTICE:
                 echo "<b>My NOTICE</b> [$errno] $errstr<br />\n";
-                break;
+            break;
 
             default:
                 echo "Unknown error type: [$errno] $errstr<br />\n";
-                break;
-        }
+            break;
+        }//end switch
 
-        /* Don't execute PHP internal error handler */
+        // Don't execute PHP internal error handler
         return true;
-    }
-    set_error_handler("___IceTeaErrorHandler");
-}
+
+    }//end ___IceTeaErrorHandler()
+
+
+    set_error_handler('___IceTeaErrorHandler');
+}//end if

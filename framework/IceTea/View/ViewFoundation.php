@@ -6,6 +6,7 @@ use InvalidArgumentException;
 
 final class ViewFoundation
 {
+
     /**
      *
      */
@@ -16,9 +17,11 @@ final class ViewFoundation
 
     public function __construct($view, $variable)
     {
-        $this->name = $view;
+        $this->name     = $view;
         $this->variable = $variable;
-    }
+
+    }//end __construct()
+
 
     public function getViewFile()
     {
@@ -27,20 +30,28 @@ final class ViewFoundation
         } else {
             throw new InvalidArgumentException("View [$this->name] not found.");
         }
-    }
+
+    }//end getViewFile()
+
 
     public function getViewFileName()
     {
         return $this->view;
-    }
+
+    }//end getViewFileName()
+
 
     private function findViewFile()
     {
-        
-    }
+
+    }//end findViewFile()
+
 
     public function getVariables()
     {
         return $this->variable;
-    }
-}
+
+    }//end getVariables()
+
+
+}//end class

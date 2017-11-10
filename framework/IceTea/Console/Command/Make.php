@@ -1,12 +1,14 @@
 <?php
 
-namespace IceTea\Console;
+namespace IceTea\Console\Command;
+
+use IceTea\Foundation\ConsoleCommand;
 
 /**
  * @author Ammar Faizi <ammarfaizi2@gmail.com>
  * @license MIT
  */
-class Input
+class Make extends ConsoleCommand
 {
 
 
