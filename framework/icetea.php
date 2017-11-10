@@ -1,8 +1,8 @@
 <?php
 
 if (file_exists(__DIR__."/../vendor/autoload.php")) {
-    define("__COMPOSER_AUTOLOAD_DIR__", realpath(__DIR__."/../vendor/autoload.php"));
-    require __COMPOSER_AUTOLOAD_DIR__;
+    define("__COMPOSER_AUTOLOAD__", realpath(__DIR__."/../vendor/autoload.php"));
+    require __COMPOSER_AUTOLOAD__;
 } else {
     function ___loadClass($class)
     {

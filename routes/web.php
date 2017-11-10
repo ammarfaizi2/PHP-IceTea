@@ -14,7 +14,7 @@ Route::get("/", function() {
 	return view('welcome');
 });
 
-Route::get("/test", "TestController@index");
+Route::get("/test", "TestController@index@");
 
 
 Route::get("/profile/{user}", function($a){	
@@ -22,4 +22,9 @@ Route::get("/profile/{user}", function($a){
 	 * http://localhost/profile/ammarfaizi2
 	 */
 	echo $a['user']; // ammarfaizi2
+});
+
+
+Route::get("/aaa", function () {
+	return view("aaa");
 });

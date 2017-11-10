@@ -4,9 +4,6 @@ if (defined("__COMPOSER_AUTOLOAD_DIR__")) {
     $whoops = new \Whoops\Run;
     $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
     $whoops->register();
-    function ___IceTeaErrorHandler()
-    {
-    }
 } else {
     function ___IceTeaErrorHandler($errno, $errstr, $errfile, $errline)
     {
@@ -41,4 +38,5 @@ if (defined("__COMPOSER_AUTOLOAD_DIR__")) {
         /* Don't execute PHP internal error handler */
         return true;
     }
+    set_error_handler("___IceTeaErrorHandler");
 }

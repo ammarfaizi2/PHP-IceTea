@@ -8,12 +8,26 @@ use IceTea\Exceptions\Handler as InternalExceptionHandler;
 
 class Handler
 {
-    protected $dontReport;
+    /**
+     * @var array
+     */
+    protected $dontReport = [];
 
+    /**
+     * @var \Exception
+     */
     protected $exception;
 
+    /**
+     * @var string
+     */
     protected $name;
 
+    /**
+     * Constructor.
+     *
+     * @param \Exception $e
+     */
     public function __construct(Exception $e)
     {
         $this->exception = $e;

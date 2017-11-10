@@ -48,24 +48,20 @@ class Router
                     if ($val[$reqMethod] instanceof Closure) {
                         return $val[$reqMethod](RouteBinding::getBindedValue());
                     } else {
-                        $a = explode("@", $val[$reqMethod]);
-                        if (count($a) != 2) {
-                            throw new InvalidArgumentException("Invalid route", 1);
+                        $a = explode("@", $val[$reqMethod], 2);
+                        if (count($a) < 2) {
+                            throw new \InvalidArgumentException("Invalid route", 1);
                         } else {
                             $provider = RouteCollector::getProviderInstance();
                             $controller = $provider->getControllerNamespace()."\\".$a[0];
                             if (class_exists($controller)) {
                                 $controller = new $controller();
-                                if (is_callable([$controller, $a[1]])) {
-                                    return $controller->{$a[1]}(
+                                return $controller->{$a[1]}(
                                         RouteBinding::getBindedValue()
                                     );
-                                } else {
-                                    throw new \Exception("Method {$a[1]} does not exists.", 1);
-                                }
                                 var_dump(123);
                             } else {
-                                throw new \Exception("Controller {$controller} does not exists.", 1);
+                                throw new \Exception("Class {$controller} does not exist", 1);
                             }
                         }
                     }
