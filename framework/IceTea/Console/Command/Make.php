@@ -17,5 +17,15 @@ class Make extends ConsoleCommand
 
     }//end __construct()
 
+    public function buildContext()
+    {
+
+    }
+
+    public function run()
+    {
+    	
+    }
+
 
 }//end class

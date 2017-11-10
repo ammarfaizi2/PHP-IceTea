@@ -2,6 +2,8 @@
 
 namespace IceTea\Console\Command\Make;
 
+use IceTea\Console\Command\Make;
+
 /**
  * @author Ammar Faizi <ammarfaizi2@gmail.com>
  * @license MIT
