@@ -76,9 +76,9 @@ class Controller extends Make
 	public function run()
 	{
         $file = $this->path.$this->name.".php";
-        if (file_exists($file) && !$this->isForced()) {
+        if (!file_exists($file) || $this->isForced()) {
             $handle     = fopen($stub = __DIR__."/stubs/controller.php.stub", "r");
-            $handle2    = fopen($file "w");
+            $handle2    = fopen($file, "w");
             fwrite($handle2, 
                 $this->stubCreateContext(fread($handle, filesize($stub)))
             );
@@ -86,15 +86,34 @@ class Controller extends Make
             fclose($handle2);
             if (file_exists($file)) {
                 // success
-                print Color::clr("Controller created successfully.", "green");
+                print Color::clr("Controller created successfully.", "green") . PHP_EOL;
             } else {
                 // failed
-                print Color::clr("Controller already exists!", "gray", "red");
+                
             }
         } else {
-
+            print Color::clr("Controller already exists!", "dark_grey", "red") . PHP_EOL;            
         }
 	}
+
+    private function isForced()
+    {
+        if (isset($this->run['arguments'])) {
+            foreach ($this->run['arguments'] as $k => $v) {
+                if ($v['data'] === "f") {
+                    return true;
+                }
+            }
+        }
+        if (isset($this->run['optional-arguments'])) {
+            foreach ($this->run['optional-arguments'] as $k => $v) {
+                if ($v['data'] === "--force") {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     private function stubCreateContext($str)
     {

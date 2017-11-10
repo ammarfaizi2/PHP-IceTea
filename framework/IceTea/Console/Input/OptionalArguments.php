@@ -42,13 +42,13 @@ class OptionalArguments extends Input implements InputContract
         if (substr($context, 0, 2) === '--') {
             $context = explode('=', $context, 2);
             if (count($context) === 2) {
-                $this->result['optional-arguments'] = [
+                $this->result['optional-arguments'][] = [
                                                        'data'    => $context[0],
                                                        'offset'  => $offset,
                                                        'content' => $context[1],
                                                       ];
             } else {
-                $this->result['optional-arguments'] = [
+                $this->result['optional-arguments'][] = [
                                                        'data'    => $context[0],
                                                        'offset'  => $offset,
                                                        'content' => null,
