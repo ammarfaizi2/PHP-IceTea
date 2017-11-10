@@ -11,5 +11,7 @@ final class MainHandler
 
     }//end __construct()
 
-
+    public function __invoke()
+    {
+    }
 }//end class
