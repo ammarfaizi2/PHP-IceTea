@@ -2,6 +2,7 @@
 
 namespace IceTea\Console\Command\Make;
 
+use IceTea\Console\Color;
 use IceTea\Console\Command\Make;
 use App\Providers\RouteServiceProvider;
 
@@ -74,13 +75,25 @@ class Controller extends Make
 
 	public function run()
 	{
-        $handle     = fopen($stub = __DIR__."/stubs/controller.php.stub", "r");
-        $handle2    = fopen($this->path.$this->name.".php", "w");
-        fwrite($handle2, 
-            $this->stubCreateContext(fread($handle, filesize($stub)))
-        );
-        fclose($handle);
-        fclose($handle2);
+        $file = $this->path.$this->name.".php";
+        if (file_exists($file) && !$this->isForced()) {
+            $handle     = fopen($stub = __DIR__."/stubs/controller.php.stub", "r");
+            $handle2    = fopen($file "w");
+            fwrite($handle2, 
+                $this->stubCreateContext(fread($handle, filesize($stub)))
+            );
+            fclose($handle);
+            fclose($handle2);
+            if (file_exists($file)) {
+                // success
+                print Color::clr("Controller created successfully.", "green");
+            } else {
+                // failed
+                print Color::clr("Controller already exists!", "gray", "red");
+            }
+        } else {
+
+        }
 	}
 
     private function stubCreateContext($str)
