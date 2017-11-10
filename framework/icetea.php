@@ -1,5 +1,7 @@
 <?php
 
+define("ICETEA_VERSION", "0.0.1");
+
 if (file_exists(__DIR__."/../vendor/autoload.php")) {
     define("__COMPOSER_AUTOLOAD__", realpath(__DIR__."/../vendor/autoload.php"));
     require __COMPOSER_AUTOLOAD__;
