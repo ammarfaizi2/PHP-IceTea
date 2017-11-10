@@ -20,5 +20,4 @@ class RouteServiceProvider
 
     }//end getControllerNamespace()
 
-
 }//end class

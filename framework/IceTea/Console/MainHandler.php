@@ -13,8 +13,11 @@ final class MainHandler
 
     public function __invoke()
     {
-    	$this->run['cmd']['action'] = "\\".$this->run['cmd']['action'];
-    	$console = new $this->run['cmd']['action']($this->run);
-    	$console->run();
+        if (isset($this->run['cmd']['action'])) {
+        	$this->run['cmd']['action'] = "\\".$this->run['cmd']['action'];
+        	$console = new $this->run['cmd']['action']($this->run);
+            $console->buildContext();
+        	$console->run();
+        }
     }
 }//end class

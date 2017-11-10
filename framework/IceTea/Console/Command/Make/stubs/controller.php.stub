@@ -6,7 +6,7 @@
  *	Namespace {{__NAMESPACE__}}
  */
 
-namespace App\Http\{{__NAMESPACE__}};
+namespace {{__NAMESPACE__}};
 
 use IceTea\Http\Controller;
 

@@ -19,12 +19,12 @@ class Make extends ConsoleCommand
 
     public function buildContext()
     {
-
+        throw new \Exception("Must override!", 1);
     }
 
     public function run()
     {
-    	
+        throw new \Exception("Must override!", 1);	
     }
 
 
