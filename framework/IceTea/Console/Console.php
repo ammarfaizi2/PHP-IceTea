@@ -17,6 +17,10 @@ final class Console
 
     private $run = [];
 
+    public function __construct()
+    {
+        $this->run = [];
+    }
 
     public function run()
     {

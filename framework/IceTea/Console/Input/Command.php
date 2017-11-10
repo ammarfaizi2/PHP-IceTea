@@ -15,7 +15,7 @@ class Command extends Input implements InputContract
 
     private $argv;
 
-    private $result;
+    private $result = [];
 
     private $cmd = [];
 
