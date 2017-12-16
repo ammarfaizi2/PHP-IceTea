@@ -25,7 +25,7 @@ class Model
     public function exec($sql,$data){
 
         $data = (isset($this->whereData))? array_merge($this->whereData,$data):$data;
-        $prepare = $this->pdo->prepare($sql.$this->where);
+        $prepare = $this->pdo->prepare($sql.$this->where.$this->order,$this->limit);
         $prepare->execute($data);
         $this->clean();
         return $prepare;
@@ -65,6 +65,11 @@ class Model
         $this->order = " ORDER BY {$column} {$sort}";
 		return $this;
     }
+    public function limit($limit, $offset = null) {
+		$offset = (!empty($offset)) ? 'OFFSET '.$offset : null;
+		$this->limit = " LIMIT {$limit} ".$offset;
+		return $this;
+	}
     //Get Data
     public function get(){
         $select = (isset($this->select))? $this->select : '*';
