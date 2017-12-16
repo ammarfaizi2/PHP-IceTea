@@ -2,7 +2,8 @@
 
 namespace IceTea\Support;
 
-use IceTea\Utils\convArrig;
+use IceTea\Utils\Config;
+use PDO;
 class Model
 {
     protected
@@ -13,19 +14,20 @@ class Model
         $order,
         $limit;
     public function __construct(){
+        $config = Config::get('database');
         $this->pdo = new \PDO(
-            $convArrig['driver'].":host=".$convArrig['host'].";dbname=".$convArrig['dbname'].";port=".$convArrig['port'],
-            $convArrig['user'],
-            $convArrig['pass'],
+            $config['driver'].":host=".$config['host'].";dbname=".$config['dbname'].";port=".$config['port'],
+            $config['user'],
+            $config['pass'],
             [
-                3=>2
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
             ]
         );
     }
     public function exec($sql,$data){
 
         $data = (isset($this->whereData))? array_merge($this->whereData,$data):$data;
-        $prepare = $this->pdo->prepare($sql.$this->where);
+        $prepare = $this->pdo->prepare($sql.$this->where.$this->order.$this->limit);
         $prepare->execute($data);
         $this->clean();
         return $prepare;
@@ -65,16 +67,21 @@ class Model
         $this->order = " ORDER BY {$column} {$sort}";
 		return $this;
     }
+    public function limit($limit, $offset = null) {
+		$offset = (!empty($offset)) ? 'OFFSET '.$offset : null;
+		$this->limit = " LIMIT {$limit} ".$offset;
+		return $this;
+	}
     //Get Data
     public function get(){
         $select = (isset($this->select))? $this->select : '*';
         $sql = "SELECT ".$select." FROM ".$this->table;
-        return $this->exec($sql,[])->fetchAll(5);
+        return $this->exec($sql,[])->fetchAll(PDO::FETCH_OBJ);
     }
     public function first(){
         $select = (isset($this->select))? $this->select : '*';
         $sql = "SELECT ".$select." FROM ".$this->table;
-        return $this->exec($sql,[])->fetch(5);
+        return $this->exec($sql,[])->fetch(PDO::FETCH_OBJ);
     }
 
     // Create Update Delete
