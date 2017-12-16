@@ -2,6 +2,10 @@
 
 namespace IceTea\Security\Encryption;
 
+/**
+ * @author Ammar Faizi <ammarfaizi2@gmail.com>
+ * @license MIT
+ */ 
 class IceCrypt
 {
     /**
@@ -81,6 +85,9 @@ class IceCrypt
         return $r;
     }
 
+    /**
+     * @return string
+     */
     private static function makeSalt()
     {
         $r = "";
