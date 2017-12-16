@@ -19,14 +19,10 @@ class IceTea
 
     public function __construct()
     {
-
-    }//end __construct()
+    }
 
 
     public function build()
     {
-
-    }//end build()
-
-
-}//end class
+    }
+}

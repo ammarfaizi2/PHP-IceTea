@@ -2,40 +2,56 @@
 
 namespace IceTea\View;
 
-final class View
+use IceTea\Hub\Singleton;
+use IceTea\View\ViewSkeleton;
+use IceTea\View\ViewVariables;
+use IceTea\Support\View\PosibleFile;
+use IceTea\Exceptions\ViewException;
+use IceTea\View\Compilers\TeaTemplateCompiler;
+
+class View
 {
 
+    use Singleton, PosibleFile;
 
-    public static function staticMaker()
+    /**
+     * @param string $file
+     * @param array  $variables
+     * @return \IceTea\View\ViewSkeleton
+     */
+    public static function buildView($file, $variables)
     {
+        $ins = self::getInstance();
+        return ViewSkeleton::build($ins->getRawFile($file), ViewVariables::build($variables), $file);
+    }
 
-    }//end staticMaker()
-
-
-    public static function buildView($file, $variable)
+    /**
+     * @param \IceTea\View\ViewSkeleton $skeleton
+     */
+    public static function make(ViewSkeleton $skeleton)
     {
-        return new ViewFoundation($file, $variable);
-
-    }//end buildView()
-
-
-    public static function make(ViewFoundation $view)
-    {
-        $st = new CacheHandler(
-            $view->getViewFileName(),
-            $view->getViewFile()
-        );
-        if (! $st->isCached()) {
-            $st->makeCache();
+        $compiler = new TeaTemplateCompiler($skeleton);
+        if (! $compiler->isIceTeaHasCompiledViewPerfectly()) {
+            $compiler->compile();
+            $compiler->writeMap();
+            $compiler->writeCache();
         }
+        $compiler->compact();
+    }
 
-        unset($content);
-        ___viewIsolator(
-            $st->getCacheFileName(),
-            $view->getVariables()
-        );
-
-    }//end make()
-
-
-}//end class
+    /**
+     * @param string $name
+     * @return string
+     */
+    private function getRawFile($name)
+    {
+        if ($file = $this->teaFile($name)) {
+            return file_get_contents($file);
+        } elseif ($file = $this->bladeFile($name)) {
+            return file_get_contents($file);
+        } elseif ($file = $this->phpNativeFile($name)) {
+            return file_get_contents($file);
+        }
+        throw new ViewException("View [$name] not found");
+    }
+}

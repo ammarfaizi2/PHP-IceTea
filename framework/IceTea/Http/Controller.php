@@ -9,6 +9,10 @@ class Controller extends BaseController
 {
 
 
+    public function __construct()
+    {
+    }
+
     /**
      * Handle calls to missing methods on the controller.
      *
@@ -21,7 +25,5 @@ class Controller extends BaseController
     {
         throw new BadMethodCallException("Method [{$method}] does not exist.");
 
-    }//end __call()
-
-
-}//end class
+    }
+}

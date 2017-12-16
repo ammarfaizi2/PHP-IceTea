@@ -18,15 +18,13 @@ final class Config
      */
     public function __construct()
     {
-        $cfg       = ___viewIsolator(
+        $this->cfg = ___viewIsolator(
             basepath(
-                'config/main.php',
-                ['that' => $this]
-            )
+                'config/main.php'
+            ),
+            ['that' => $this]
         );
-        $this->cfg = $cfg;
-
-    }//end __construct()
+    }
 
 
     /**
@@ -36,12 +34,10 @@ final class Config
      * @param  string $def
      * @return mixed
      */
-    public static function get($key, $def=null)
+    public static function get($key, $def = null)
     {
         $ins = self::getInstance();
         return isset($ins->cfg[$key]) ? $ins->cfg[$key] : $def;
 
-    }//end get()
-
-
-}//end class
+    }
+}
