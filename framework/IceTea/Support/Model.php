@@ -18,7 +18,7 @@ class Model
             $convArrig['user'],
             $convArrig['pass'],
             [
-                PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
             ]
         );
     }
