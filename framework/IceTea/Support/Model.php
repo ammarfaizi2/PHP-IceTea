@@ -2,7 +2,8 @@
 
 namespace IceTea\Support;
 
-use IceTea\Utils\convArrig;
+use IceTea\Utils\Config;
+use PDO;
 class Model
 {
     protected
@@ -13,10 +14,11 @@ class Model
         $order,
         $limit;
     public function __construct(){
+        $config = Config::get('database');
         $this->pdo = new \PDO(
-            $convArrig['driver'].":host=".$convArrig['host'].";dbname=".$convArrig['dbname'].";port=".$convArrig['port'],
-            $convArrig['user'],
-            $convArrig['pass'],
+            $config['driver'].":host=".$config['host'].";dbname=".$config['dbname'].";port=".$config['port'],
+            $config['user'],
+            $config['pass'],
             [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
             ]
