@@ -17,8 +17,8 @@ class Layout extends ComponentFoundation implements Component
         $tmp = explode("\n", $this->skeleton->getRaw());
         foreach ($tmp as $key => &$val) {
             $_val = trim($val);
-            if (substr($_val, 0, 8) === "@layout(" &&
-                substr($_val, -1) === ")"
+            if (substr($_val, 0, 8) === "@layout(" 
+                && substr($_val, -1) === ")"
             ) {
                 $val = "<?php require \IceTea\View\QuickMake::make('".substr($_val, 9, -2)."', 'layout');?>";
             }

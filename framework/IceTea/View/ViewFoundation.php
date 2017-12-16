@@ -52,6 +52,4 @@ final class ViewFoundation
         return $this->variable;
 
     }//end getVariables()
-
-
 }//end class

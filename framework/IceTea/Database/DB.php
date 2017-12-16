@@ -17,7 +17,6 @@ class DB
 
     /**
      * Constructor.
-     *
      */
     public function __construct()
     {

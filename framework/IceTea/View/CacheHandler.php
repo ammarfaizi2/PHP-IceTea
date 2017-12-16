@@ -102,6 +102,4 @@ final class CacheHandler
             file_exists($this->cacheFile);
 
     }//end isCached()
-
-
 }//end class

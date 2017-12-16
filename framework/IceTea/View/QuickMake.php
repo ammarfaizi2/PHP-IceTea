@@ -13,12 +13,12 @@ class QuickMake
     public static function make($name, $type)
     {
         switch ($type) {
-            case 'layout':
-                return self::probablility('layouts/'.$name);
+        case 'layout':
+            return self::probablility('layouts/'.$name);
                 break;
             
-            default:
-                break;
+        default:
+            break;
         }
     }
 
