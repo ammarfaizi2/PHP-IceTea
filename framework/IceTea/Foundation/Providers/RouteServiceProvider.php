@@ -11,13 +11,12 @@ class RouteServiceProvider
     public function boot()
     {
 
-    }//end boot()
+    }
 
 
     public function getControllerNamespace()
     {
         return $this->namespace;
 
-    }//end getControllerNamespace()
-
-}//end class
+    }
+}

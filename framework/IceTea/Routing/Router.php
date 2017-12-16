@@ -33,7 +33,7 @@ class Router
     public function __construct()
     {
 
-    }//end __construct()
+    }
 
 
     /**
@@ -62,7 +62,6 @@ class Router
                                 return $controller->{$a[1]}(
                                         RouteBinding::getBindedValue()
                                     );
-                                var_dump(123);
                             } else {
                                 throw new \Exception("Class {$controller} does not exist", 1);
                             }
@@ -70,13 +69,13 @@ class Router
                     }
                 } else {
                     throw new MethodNotAllowedException('Method not allowed', 1);
-                }//end if
-            }//end if
-        }//end foreach
+                }
+            }
+        }
 
         throw new NotFoundHttpException('Not found');
 
-    }//end fire()
+    }
 
 
     private function urlGenerator()
@@ -84,7 +83,7 @@ class Router
         $a         = explode($_SERVER['SCRIPT_NAME'], $_SERVER['PHP_SELF'], 2);
         $this->uri = empty($a[1]) ? ['', ''] : explode('/', $a[1]);
 
-    }//end urlGenerator()
+    }
 
 
     private function isMatch($route)
@@ -111,7 +110,5 @@ class Router
 
         return true;
 
-    }//end isMatch()
-
-
-}//end class
+    }
+}

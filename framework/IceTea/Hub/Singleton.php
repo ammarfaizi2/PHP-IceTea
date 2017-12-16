@@ -11,7 +11,7 @@ trait Singleton
     /**
      * Get self instance staticaly.
      */
-    public static function getInstance()
+    public static function getInstance(...$param)
     {
         if (self::$__instance === null) {
             self::$__instance = new self(...$param);
@@ -19,7 +19,7 @@ trait Singleton
 
         return self::$__instance;
 
-    }//end getInstance()
+    }
 
 
     /**
@@ -29,7 +29,5 @@ trait Singleton
     {
         throw new \Exception('Cannot clone instance with Singleton pattern.', 1);
 
-    }//end __clone()
-
-
+    }
 }

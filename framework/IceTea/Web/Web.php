@@ -5,7 +5,7 @@ namespace IceTea\Web;
 use Exception;
 use IceTea\View\View;
 use IceTea\Routing\Router;
-use IceTea\View\ViewFoundation;
+use IceTea\View\ViewSkeleton;
 use IceTea\Routing\RouteBinding;
 use IceTea\Routing\RouteCollector;
 use IceTea\Exceptions\AbsoluteException;
@@ -21,7 +21,7 @@ final class Web
     public function __construct()
     {
 
-    }//end __construct()
+    }
 
 
     public function routeHandle()
@@ -35,21 +35,17 @@ final class Web
         }
 
         RouteBinding::destroy();
-        if ($action instanceof ViewFoundation) {
+        if ($action instanceof ViewSkeleton) {
             View::make($action);
-        } else if ($action instanceof ExceptionHandler) {
+        } elseif ($action instanceof ExceptionHandler) {
             $action->report();
         }
 
         RouteCollector::destroy();
-
-    }//end routeHandle()
+    }
 
 
     public function terminate()
     {
-
-    }//end terminate()
-
-
-}//end class
+    }
+}
