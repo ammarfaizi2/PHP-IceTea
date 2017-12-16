@@ -25,7 +25,7 @@ class Model
     public function exec($sql,$data){
 
         $data = (isset($this->whereData))? array_merge($this->whereData,$data):$data;
-        $prepare = $this->pdo->prepare($sql.$this->where.$this->order,$this->limit);
+        $prepare = $this->pdo->prepare($sql.$this->where.$this->order.$this->limit);
         $prepare->execute($data);
         $this->clean();
         return $prepare;
