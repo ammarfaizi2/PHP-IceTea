@@ -18,7 +18,7 @@ class Model
             $convArrig['user'],
             $convArrig['pass'],
             [
-                3=>2
+                PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION
             ]
         );
     }
@@ -74,12 +74,12 @@ class Model
     public function get(){
         $select = (isset($this->select))? $this->select : '*';
         $sql = "SELECT ".$select." FROM ".$this->table;
-        return $this->exec($sql,[])->fetchAll(5);
+        return $this->exec($sql,[])->fetchAll(PDO::FETCH_OBJ);
     }
     public function first(){
         $select = (isset($this->select))? $this->select : '*';
         $sql = "SELECT ".$select." FROM ".$this->table;
-        return $this->exec($sql,[])->fetch(5);
+        return $this->exec($sql,[])->fetch(PDO::FETCH_OBJ);
     }
 
     // Create Update Delete
