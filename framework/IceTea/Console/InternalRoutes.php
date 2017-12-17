@@ -14,6 +14,9 @@ final class InternalRoutes
                     'model'      => \IceTea\Console\Command\Make\Model::class,
                     'controller' => \IceTea\Console\Command\Make\Controller::class,
                 ],
+                'key' => [
+                    'generate'  => \IceTea\Console\Command\Key\Generate::class
+                ]
             ],
     ];
 }
