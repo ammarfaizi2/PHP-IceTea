@@ -1,0 +1,17 @@
+{
+    "name": "myicetea/icetea",
+    "description": "The MyIceTea Framework.",
+    "keywords": ["framework", "myicetea"],
+    "license": "MIT",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Ammar Faizi",
+            "email": "ammarfaizi2@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "myicetea/framework": "dev-master"
+    },
+}
