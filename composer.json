@@ -13,5 +13,5 @@
     "require": {
         "php": ">=7.0.0",
         "myicetea/framework": "dev-master"
-    },
+    }
 }
