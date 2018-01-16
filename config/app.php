@@ -8,5 +8,13 @@ return [
     'timezone' => 'UTC',
     'locale' => 'en',
     'fallback_locale' => 'en',
-    'key' => env('APP_KEY')
+    'key' => env('APP_KEY'),
+
+
+
+
+
+    'aliases' => [
+    	'Route' => EsTeh\Routing\Route::class
+    ]
 ];
