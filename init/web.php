@@ -1,11 +1,24 @@
 <?php
 
-$app = new \IceTea\Foundation\Application(
-	\IceTea\Foundation\ApplicationType::WEB_APPLICATION, 
+define('BASEPATH', realpath(__DIR__.'/..'), true);
+
+$app = new EsTeh\Foundation\Application(
 	[
-		"route" => \App\Providers\RouteServiceProvider::class
-	],
-	realpath(__DIR__ . "/..")
+		'basepath' => BASEPATH,
+		'apppath' => BASEPATH.'/app',
+		'initpath' => BASEPATH.'/init',
+		'publicpath' => BASEPATH.'/public',
+		'configpath' => BASEPATH.'/config',
+		'storagepath' => BASEPATH.'/storage'
+	]
 );
 
-$app->run();
+$app->init();
+
+$app->addProvider(
+	[
+		EsTeh\Support\Config::get('app.providers')
+	]
+);
+
+return $app;

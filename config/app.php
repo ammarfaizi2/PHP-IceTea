@@ -10,11 +10,17 @@ return [
     'fallback_locale' => 'en',
     'key' => env('APP_KEY'),
 
-
-
-
+    'providers' => [
+        App\Providers\RouteServiceProvider::class
+    ],
 
     'aliases' => [
-    	'Route' => EsTeh\Routing\Route::class
+    	'Route' => EsTeh\Routing\Route::class,
+        'DB' => EsTeh\Database\DB::class,
+
+        /**
+         * Singleton trait.
+         */
+        'Singleton' => EsTeh\Hub\Singleton::class
     ]
 ];
