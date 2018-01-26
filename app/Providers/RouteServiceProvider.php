@@ -2,11 +2,17 @@
 
 namespace App\Providers;
 
-use IceTea\Routing\Router;
-use IceTea\Support\ServiceProvider;
+use EsTeh\Routing\Router;
+use EsTeh\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
+
+	/**
+	 * @var string
+	 */
+	protected $namespace = 'App\Http\Controllers';
+
 	public function boot()
 	{
 		$this->mapWebRoutes();

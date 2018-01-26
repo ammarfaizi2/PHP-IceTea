@@ -16,9 +16,7 @@ $app = new EsTeh\Foundation\Application(
 $app->init();
 
 $app->addProvider(
-	[
-		EsTeh\Support\Config::get('app.providers')
-	]
+	EsTeh\Support\Config::get('app.providers')
 );
 
 return $app;
