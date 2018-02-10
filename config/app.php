@@ -21,7 +21,7 @@ return [
 
     'aliases' => [
         'App' => EsTeh\Foundation\Application::class,
-    	'Route' => EsTeh\Routing\Route::class,
+        'Route' => EsTeh\Routing\Route::class,
         'DB' => EsTeh\Database\DB::class,
         'Config' => EsTeh\Support\Config::class,
         'Request' => EsTeh\Foundation\Http\Request::class,
