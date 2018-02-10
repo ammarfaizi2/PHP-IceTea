@@ -11,7 +11,7 @@ class RouteServiceProvider extends ServiceProvider
 	/**
 	 * @var string
 	 */
-	protected $namespace = 'App\Http\Controllers';
+	protected $namespace = "App\\Http\\Controllers";
 
 	public function boot()
 	{
@@ -23,6 +23,6 @@ class RouteServiceProvider extends ServiceProvider
 	 */
 	private function mapWebRoutes()
 	{
-		Router::loadWebRoutes(base_path('routes/web.php'));
+		Router::loadWebRoutes(base_path("routes/web.php"));
 	}
 }
