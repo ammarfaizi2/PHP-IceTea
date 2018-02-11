@@ -1,22 +1,22 @@
 <?php
 
-define('BASEPATH', realpath(__DIR__.'/..'), true);
+define("BASEPATH", realpath(__DIR__."/.."), true);
 
 $app = new EsTeh\Foundation\Application(
     [
-        'basepath' => BASEPATH,
-        'apppath' => BASEPATH.'/app',
-        'initpath' => BASEPATH.'/init',
-        'publicpath' => BASEPATH.'/public',
-        'configpath' => BASEPATH.'/config',
-        'storagepath' => BASEPATH.'/storage'
+        "basepath" => BASEPATH,
+        "apppath" => BASEPATH."/app",
+        "initpath" => BASEPATH."/init",
+        "publicpath" => BASEPATH."/public",
+        "configpath" => BASEPATH."/config",
+        "storagepath" => BASEPATH."/storage"
     ]
 );
 
 $app->init();
 
 $app->addProvider(
-    EsTeh\Support\Config::get('app.providers')
+    EsTeh\Support\Config::get("app.providers")
 );
 
 return $app;

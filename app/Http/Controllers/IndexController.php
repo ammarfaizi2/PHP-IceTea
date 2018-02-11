@@ -9,11 +9,10 @@ class IndexController extends Controller
     public function __construct(Request $request)
     {
         parent::__construct();
-        $this->request = $request;
     }
 
-    public function index()
+    public function index(Request $r)
     {
-        var_dump($this->request);
+    	header("Content-type:text/plain");
     }
 }
