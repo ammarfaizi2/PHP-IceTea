@@ -13,6 +13,6 @@ class IndexController extends Controller
 
     public function index(Request $r)
     {
-    	header("Content-type:text/plain");
+    	
     }
 }
