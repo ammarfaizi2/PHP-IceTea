@@ -1,5 +1,5 @@
 <?php
 
-Route::get("/api", function () {
-	echo "Test API";
+Route::get("/test", function () {
+	echo 123;
 });
