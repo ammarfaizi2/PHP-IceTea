@@ -1,7 +1,10 @@
 {
     "name": "myicetea/icetea",
     "description": "The MyIceTea Framework.",
-    "keywords": ["framework", "myicetea"],
+    "keywords": [
+        "framework",
+        "myicetea"
+    ],
     "license": "MIT",
     "type": "project",
     "authors": [
