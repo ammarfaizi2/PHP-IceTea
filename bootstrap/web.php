@@ -6,7 +6,7 @@ $app = new EsTeh\Foundation\Application(
     [
         "basepath" => BASEPATH,
         "apppath" => BASEPATH."/app",
-        "initpath" => BASEPATH."/init",
+        "initpath" => BASEPATH."/bootstrap",
         "publicpath" => BASEPATH."/public",
         "configpath" => BASEPATH."/config",
         "storagepath" => BASEPATH."/storage"

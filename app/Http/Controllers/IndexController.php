@@ -13,5 +13,6 @@ class IndexController extends Controller
 
     public function index(Request $r)
     {
+    	return view("welcome");
     }
 }

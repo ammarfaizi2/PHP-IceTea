@@ -17,6 +17,8 @@ return [
     
     "key" => env("APP_KEY"),
 
+    "views_path" => base_path("resources/views"),
+
     "providers" => [
         App\Providers\RouteServiceProvider::class
     ],
@@ -27,6 +29,7 @@ return [
         "DB" => EsTeh\Database\DB::class,
         "Config" => EsTeh\Support\Config::class,
         "Request" => EsTeh\Foundation\Http\Request::class,
+        "Session" => EsTeh\Session\SessionHandler::class,
 
         /**
          * Singleton trait.
