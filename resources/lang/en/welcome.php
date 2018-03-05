@@ -1,5 +1,5 @@
 <?php
 
 return [
-	"title" => "Welcome to EsTeh Framework",
+	"title" => "Welcome to IceTea Framework",
 ];

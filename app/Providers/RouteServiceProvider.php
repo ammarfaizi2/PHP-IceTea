@@ -7,7 +7,6 @@ use EsTeh\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
-
     /**
      * @var string
      */
@@ -15,14 +14,12 @@ class RouteServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->mapWebRoutes();
     }
 
-    /**
-     * Load web routes.
-     */
-    private function mapWebRoutes()
+    public function register()
     {
-        Router::loadWebRoutes(base_path("routes/web.php"));
+    	$this->webRoutesFile = base_path("routes/web.php");
+        $this->apiRoutesFile = base_path("routes/api.php");
+        $this->loadRoutes();
     }
 }
