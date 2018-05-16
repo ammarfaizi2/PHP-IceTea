@@ -1,0 +1,14 @@
+{
+    "name": "myicetea/icetea",
+    "description": "IceTea Framework",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ammar Faizi",
+            "email": "ammarfaizi2@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
