@@ -1,1 +1,6 @@
+*.tmp
+*.swp
+*.lock
 /vendor/
+/.phpintel/
+/config.php
