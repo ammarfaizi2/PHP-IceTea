@@ -2,6 +2,10 @@
 
 namespace IceTea\Foundation\Application;
 
+use IceTea\Hub\Singleton;
+use IceTea\Routing\Router;
+use IceTea\Routing\RoutesContainer;
+
 /**
  * @author Ammar Faizi <ammarfaizi2@gmail.com>
  * @license MIT
@@ -17,9 +21,9 @@ final class Web
 	private $uri;
 
 	/**
-	 * @var array
+	 * @var \IceTea\Routing\Router
 	 */
-	private $requestHeaders = [];
+	private $router;
 
 	/**
 	 * @var string
@@ -32,14 +36,21 @@ final class Web
 	public function captureRequest()
 	{
 		$this->requestMethod	= $_SERVER["REQUEST_METHOD"];
-		$this->requestHeaders	= getallheaders();
+		$this->uri				= Router::getUri();
+		$this->singleton		= Singleton::set(
+			"routes_container", new RoutesContainer
+		);
+		Singleton::set("web", $this);
 	}
 
 	public function run()
 	{
+		$this->router = new Router($this->requestMethod, $this->uri);
+		$this->router->run();
 	}
 
 	public function sendResponse()
 	{
+		$this->router->dispatch();
 	}
 }

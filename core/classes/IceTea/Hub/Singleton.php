@@ -81,7 +81,7 @@ final class Singleton
 	public static function set($key, $instance)
 	{
 		$ins = self::getSelfInstance();
-		return $ins->register($key, $instances);
+		return $ins->register($key, $instance);
 	}
 
 	/**

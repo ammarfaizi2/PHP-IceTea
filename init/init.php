@@ -12,19 +12,11 @@ if (! defined("ICETEA_START")) {
 		require $f;
 	} else {
 
-		class iceTeaInternalAutoloaderException extends Exception
-		{
-		}
-
 		function iceTeaInternalAutoloader($class)
 		{
 			$class = str_replace("\\", "/", $class);
 			if (file_exists($f = ICETEA_PATH."/core/classes/".$class.".php")) {
 				require $f;
-			} else {
-				throw new iceTeaInternalAutoloaderException(
-					"Could not load file ".$f
-				);
 			}
 		}
 
@@ -33,14 +25,17 @@ if (! defined("ICETEA_START")) {
 
 	require ICETEA_PATH."/core/helpers.php";
 
-	$config = new \IceTea\Config\Config(ICETEA_PATH."/config");
-
 	$singleton = \IceTea\Hub\Singleton::init(
 		[
-			"db"		=> [\IceTea\Database\DB::class],
-			"config"	=> $config
+			"db" => [\IceTea\Database\DB::class]
 		]
 	);
+	$config = new \IceTea\Config\Config(ICETEA_PATH."/config");
+
+	$aliasLoader = new \IceTea\Foundation\AliasLoader($config->get(
+		"app.class_aliases"
+	));
+	$aliasLoader->load();
 
 	return $singleton;
 }

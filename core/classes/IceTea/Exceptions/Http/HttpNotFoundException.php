@@ -1,6 +1,6 @@
 <?php
 
-namespace IceTea\Exceptions;
+namespace IceTea\Exceptions\Http;
 
 use Exception;
 
@@ -9,8 +9,8 @@ use Exception;
  * @license MIT
  * @version 0.0.1
  * @since 0.0.1
- * @package \IceTea\Exceptions
+ * @package \IceTea\Exceptions\Http
  */
-class SingletonException extends Exception
+class HttpNotFoundException extends Exception
 {	
 }
