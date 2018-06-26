@@ -33,9 +33,12 @@ if (! defined("ICETEA_START")) {
 
 	require ICETEA_PATH."/core/helpers.php";
 
+	$config = new \IceTea\Config\Config(ICETEA_PATH."/config");
+
 	$singleton = \IceTea\Hub\Singleton::init(
 		[
-			"db" => [\IceTea\Database\DB::class]
+			"db"		=> [\IceTea\Database\DB::class],
+			"config"	=> $config
 		]
 	);
 

@@ -25,6 +25,9 @@ final class Singleton
 
 	/**
 	 * Constructor.
+	 *
+	 * @param array $init
+	 * @return void
 	 */
 	private function __construct($init)
 	{
