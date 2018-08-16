@@ -21,3 +21,22 @@ if (!function_exists("rstr")) {
 		return $r;
 	}
 }
+
+if (!function_exists("env")) {
+	/**
+	 * @param string $key
+	 * @param mixed  $default
+	 * @return mixed
+	 */
+	function env(string $key, $default = null)
+	{
+		if (($v = getenv($key)) !== false) {
+			if (substr($v, 0, 1) === "\"" && substr($v, -1, 1) === "\"") {
+				$v = substr($v, 1, -1);
+			}
+			return $v;
+		}
+
+		return $default;
+	}
+}

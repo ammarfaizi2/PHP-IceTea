@@ -39,6 +39,11 @@ if (!defined("ICETEA_INIT")) {
 
 	require SRC_PATH."/helpers.php";
 
+	if (defined("LOAD_DOT_ENV") && (!is_null(LOAD_DOT_ENV))) {
+		$f = new \IceTea\DotEnv\Loader(LOAD_DOT_ENV);
+		$f->load();
+	}	
+
 	if (file_exists($f = BASEPATH."/vendor/autoload.php")) {
 		require $f;
 	}
