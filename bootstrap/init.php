@@ -22,15 +22,21 @@ if (!defined("ICETEA_INIT")) {
 	function iceteaInternalClassAutoloader(string $class): void
 	{
 		$class = str_replace("\\", "/", $class);
-		if (file_exists($f = SRC_PATH."/classes/".$class.".php")) {
+		if (file_exists($f = SRC_PATH."/classes/".$class.".php") or (($f = substr($class, 0, 3)) && 0)) {
 			require $f;
 			return;
-		} else {
-			if (substr($class, 0, 3) === "Phx") {
-				if (file_exists($f = SRC_PATH."/phx/classes/".$class.".phx")) {
-					require $f;
-					return;
-				}
+		} elseif ($f === "App") {
+			if (file_exists($f = config("app.app_path")."/".substr($class, 4).".php")) {
+				require $f;
+				return;
+			} elseif (file_exists($f = config("app.app_path")."/".substr($class, 4).".phx")) {
+				require $f;
+				return;
+			}
+		} elseif ($f === "Phx") {
+			if (file_exists($f = SRC_PATH."/phx/classes/".substr($class, 4).".phx")) {
+				require $f;
+				return;
 			}
 		}
 	}
