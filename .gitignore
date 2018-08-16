@@ -3,4 +3,3 @@
 *.lock
 /vendor/
 /.phpintel/
-/config.php
